@@ -1,3 +1,4 @@
+from __future__ import annotations
 from typing import Optional, Dict, List, Any, Tuple
 import os
 import uuid
@@ -6,149 +7,6 @@ from pathlib import Path
 
 from abc import ABC, abstractmethod
 from db.sqlite_utils import SQLiteManager
-
-
-class BaseFileManager(ABC):
-    """ファイル管理の基底クラス"""
-
-    def __init__(self, base_path: str, file_type: str):
-        self.base_path = Path(base_path)
-        self.file_type = file_type
-        self.files_dir = self.base_path / file_type
-        self.thumbnails_dir = self.base_path / "thumbnails" / file_type
-        self.temp_dir = self.base_path / "temp" / file_type
-
-        # ディレクトリ作成
-        self._create_directories()
-
-    def _create_directories(self):
-        """必要なディレクトリを作成"""
-        for directory in [self.files_dir, self.thumbnails_dir, self.temp_dir]:
-            directory.mkdir(parents=True, exist_ok=True)
-
-    def calculate_hash(self, file_path: str) -> str:
-        """ファイルのSHA256ハッシュを計算"""
-        hash_sha256 = hashlib.sha256()
-        with open(file_path, "rb") as f:
-            for chunk in iter(lambda: f.read(4096), b""):
-                hash_sha256.update(chunk)
-        return hash_sha256.hexdigest()
-
-    def generate_filename(self, original_name: str) -> str:
-        """新しいファイル名を生成（重複防止）"""
-        file_extension = Path(original_name).suffix.lower()
-        return f"{uuid.uuid4().hex}{file_extension}"
-
-    def get_file_path(self, filename: str) -> str:
-        """ファイル名から完全パスを取得"""
-        return str(self.files_dir / filename)
-
-    def get_relative_path(self, full_path: str) -> str:
-        """完全パスから相対パスを生成"""
-        return str(Path(full_path).relative_to(self.base_path))
-
-    def delete_file(self, file_path: str, thumbnail_path: str = ""):
-        """ファイルとサムネイルを削除"""
-        try:
-            if os.path.exists(file_path):
-                os.remove(file_path)
-            if thumbnail_path and os.path.exists(thumbnail_path):
-                os.remove(thumbnail_path)
-        except Exception as e:
-            print(f"ファイル削除エラー: {e}")
-
-    @abstractmethod
-    def save_file(self, source_path: str, original_name: str) -> Tuple[str, str, Dict[str, Any]]:
-        """
-        ファイルを保存し、メタデータを返す
-        Returns: (saved_path, file_hash, metadata)
-        サブクラスで実装する
-        """
-        pass
-
-    @abstractmethod
-    def get_metadata(self, file_path: Path) -> Dict[str, Any]:
-        """
-        ファイルのメタデータを取得
-        サブクラスで実装する
-        """
-        pass
-
-
-class BaseMetadataManager(ABC):
-    """メタデータ管理の基底クラス"""
-
-    def __init__(self, db_path: str, table_name: str, schema: Dict[str, str]):
-        self.db = SQLiteManager(db_path)
-        self.table_name = table_name
-        self.schema = schema
-        self._initialize_tables()
-
-    def _initialize_tables(self):
-        """テーブル初期化"""
-        self.db.create_table(self.table_name, self.schema)
-
-    def save_metadata(self, **kwargs) -> Optional[int]:
-        """
-        メタデータを保存
-        Returns: 保存されたレコードのID、失敗時はNone
-        """
-        # スキーマに存在するフィールドのみを抽出
-        valid_data = {}
-        for key, value in kwargs.items():
-            if key in self.schema:
-                valid_data[key] = value
-
-        result = self.db.insert(self.table_name, valid_data)
-        return result
-
-    def get_by_id(self, record_id: int) -> Optional[Dict]:
-        """IDでレコードを取得"""
-        result = self.db.fetch_where(self.table_name, "id = ?", (record_id,))
-        return result[0] if result else None
-
-    def get_by_hash(self, file_hash: str) -> Optional[Dict]:
-        """ハッシュでレコードを検索（重複チェック）"""
-        result = self.db.fetch_where(self.table_name, "hash = ?", (file_hash,))
-        return result[0] if result else None
-
-    def get_by_collection(self, collection: str) -> List[Dict]:
-        """コレクションでレコードを取得"""
-        return self.db.fetch_where(self.table_name, "collection = ?", (collection,))
-
-    def update_metadata(self, record_id: int, **kwargs):
-        """メタデータを更新"""
-        # スキーマに存在するフィールドのみを抽出
-        valid_updates = {}
-        for key, value in kwargs.items():
-            if key in self.schema and key != "id":  # idは更新しない
-                valid_updates[key] = value
-
-        if valid_updates:
-            self.db.update(self.table_name, valid_updates,
-                           "id = ?", (record_id,))
-
-    def delete_metadata(self, record_id: int):
-        """メタデータを削除"""
-        self.db.delete(self.table_name, "id = ?", (record_id,))
-
-    def get_all(self) -> List[Dict]:
-        """全レコードを取得"""
-        return self.db.fetch_all(self.table_name)
-
-    def search(self, condition: str, params: tuple) -> List[Dict]:
-        """条件検索"""
-        return self.db.fetch_where(self.table_name, condition, params)
-
-    @abstractmethod
-    def get_specific_fields(self, record_id: int) -> Optional[Dict]:
-        """
-        サブクラス固有のフィールド取得
-        サブクラスで実装する
-        """
-        pass
-
-
 
 class BaseStorage(ABC):
     """ストレージ管理の基底クラス"""
@@ -291,3 +149,143 @@ class BaseStorage(ABC):
             "collections": len(collections),
             "collection_names": collections
         }
+class BaseFileManager(ABC):
+    """ファイル管理の基底クラス"""
+
+    def __init__(self, base_path: str, file_type: str):
+        self.base_path = Path(base_path)
+        self.file_type = file_type
+        self.files_dir = self.base_path / file_type
+        self.thumbnails_dir = self.base_path / "thumbnails" / file_type
+        self.temp_dir = self.base_path / "temp" / file_type
+
+        # ディレクトリ作成
+        self._create_directories()
+
+    def _create_directories(self):
+        """必要なディレクトリを作成"""
+        for directory in [self.files_dir, self.thumbnails_dir, self.temp_dir]:
+            directory.mkdir(parents=True, exist_ok=True)
+
+    def calculate_hash(self, file_path: str) -> str:
+        """ファイルのSHA256ハッシュを計算"""
+        hash_sha256 = hashlib.sha256()
+        with open(file_path, "rb") as f:
+            for chunk in iter(lambda: f.read(4096), b""):
+                hash_sha256.update(chunk)
+        return hash_sha256.hexdigest()
+
+    def generate_filename(self, original_name: str) -> str:
+        """新しいファイル名を生成（重複防止）"""
+        file_extension = Path(original_name).suffix.lower()
+        return f"{uuid.uuid4().hex}{file_extension}"
+
+    def get_file_path(self, filename: str) -> str:
+        """ファイル名から完全パスを取得"""
+        return str(self.files_dir / filename)
+
+    def get_relative_path(self, full_path: str) -> str:
+        """完全パスから相対パスを生成"""
+        return str(Path(full_path).relative_to(self.base_path))
+
+    def delete_file(self, file_path: str, thumbnail_path: str = ""):
+        """ファイルとサムネイルを削除"""
+        try:
+            if os.path.exists(file_path):
+                os.remove(file_path)
+            if thumbnail_path and os.path.exists(thumbnail_path):
+                os.remove(thumbnail_path)
+        except Exception as e:
+            print(f"ファイル削除エラー: {e}")
+
+    @abstractmethod
+    def save_file(self, source_path: str, original_name: str) -> Tuple[str, str, Dict[str, Any]]:
+        """
+        ファイルを保存し、メタデータを返す
+        Returns: (saved_path, file_hash, metadata)
+        サブクラスで実装する
+        """
+        pass
+
+    @abstractmethod
+    def get_metadata(self, file_path: Path) -> Dict[str, Any]:
+        """
+        ファイルのメタデータを取得
+        サブクラスで実装する
+        """
+        pass
+
+
+class BaseMetadataManager(ABC):
+    """メタデータ管理の基底クラス"""
+
+    def __init__(self, db_path: str, table_name: str, schema: Dict[str, str]):
+        self.db = SQLiteManager(db_path)
+        self.table_name = table_name
+        self.schema = schema
+        self._initialize_tables()
+
+    def _initialize_tables(self):
+        """テーブル初期化"""
+        self.db.create_table(self.table_name, self.schema)
+
+    def save_metadata(self, **kwargs) -> Optional[int]:
+        """
+        メタデータを保存
+        Returns: 保存されたレコードのID、失敗時はNone
+        """
+        # スキーマに存在するフィールドのみを抽出
+        valid_data = {}
+        for key, value in kwargs.items():
+            if key in self.schema:
+                valid_data[key] = value
+
+        result = self.db.insert(self.table_name, valid_data)
+        return result
+
+    def get_by_id(self, record_id: int) -> Optional[Dict]:
+        """IDでレコードを取得"""
+        result = self.db.fetch_where(self.table_name, "id = ?", (record_id,))
+        return result[0] if result else None
+
+    def get_by_hash(self, file_hash: str) -> Optional[Dict]:
+        """ハッシュでレコードを検索（重複チェック）"""
+        result = self.db.fetch_where(self.table_name, "hash = ?", (file_hash,))
+        return result[0] if result else None
+
+    def get_by_collection(self, collection: str) -> List[Dict]:
+        """コレクションでレコードを取得"""
+        return self.db.fetch_where(self.table_name, "collection = ?", (collection,))
+
+    def update_metadata(self, record_id: int, **kwargs):
+        """メタデータを更新"""
+        # スキーマに存在するフィールドのみを抽出
+        valid_updates = {}
+        for key, value in kwargs.items():
+            if key in self.schema and key != "id":  # idは更新しない
+                valid_updates[key] = value
+
+        if valid_updates:
+            self.db.update(self.table_name, valid_updates,
+                           "id = ?", (record_id,))
+
+    def delete_metadata(self, record_id: int):
+        """メタデータを削除"""
+        self.db.delete(self.table_name, "id = ?", (record_id,))
+
+    def get_all(self) -> List[Dict]:
+        """全レコードを取得"""
+        return self.db.fetch_all(self.table_name)
+
+    def search(self, condition: str, params: tuple) -> List[Dict]:
+        """条件検索"""
+        return self.db.fetch_where(self.table_name, condition, params)
+
+    @abstractmethod
+    def get_specific_fields(self, record_id: int) -> Optional[Dict]:
+        """
+        サブクラス固有のフィールド取得
+        サブクラスで実装する
+        """
+        pass
+

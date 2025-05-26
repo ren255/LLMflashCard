@@ -1,11 +1,18 @@
 # %%
 # from db.sqlite_utils import SQLiteManager
-# import db
+import sys
+from pathlib import Path
+
+sys.path.append(str(Path(__file__).parent.parent))
+
 import random
 
 import db
 
-testDB = db.SQLiteManager("my_database.db")
+from path import projectPath, storagePath
+
+
+testDB = db.SQLiteManager(storagePath + "db\\test.sqlite")
 
 table_schema = {
     "id": "INTEGER PRIMARY KEY AUTOINCREMENT",
@@ -17,7 +24,7 @@ testDB.create_table("users", table_schema)
 
 
 # データ挿入
-testDB.insert("users", {"name": "Peter", "age": random.randint(10, 80)})
+testDB.insert("users", {"name": "girl", "age": random.randint(10, 80)})
 
 # データ取得
 all_users = testDB.fetch_all("users")

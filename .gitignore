@@ -1,1 +1,4 @@
 /.VSCodeCounter
+/tests/__pycache__
+/db/__pycache__
+/resources/db

@@ -4,6 +4,7 @@ from .interface_utils import DBManagerInterface
 
 class SQLiteManager(DBManagerInterface):
     def __init__(self, db_path: str):
+        db_path = db_path.replace("\\", "/")  # Windowsパスのスラッシュを正規化
         self.db_path = db_path
         self.conn = sqlite3.connect(self.db_path)
         self.conn.row_factory = sqlite3.Row

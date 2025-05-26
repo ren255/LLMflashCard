@@ -1,0 +1,36 @@
+# python -m pip install --upgrade pip && pip install -r requirements.txt
+# pip install -r requirements.txt
+
+# 画像処理
+opencv-python
+pillow
+matplotlib
+numpy
+# scikit-image
+# scipy
+# mahotas
+# simpleitk
+# pgmagick
+# simplecv
+# torch
+# torchvision
+
+# GUI
+customtkinter
+
+# LLM・LangChain
+langchain
+openai
+requests
+# llama-index
+# huggingface-hub
+# transformers
+# sentence-transformers
+# chromadb
+# faiss-cpu
+# pinecone-client
+# tiktoken
+# pydantic
+
+# math
+pandas

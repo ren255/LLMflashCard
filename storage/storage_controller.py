@@ -1,6 +1,7 @@
 import os
 from pathlib import Path
 from typing import Dict, Any
+from pathlib import Path
 
 from .image_managers import ImageStorage
 from .flashcard_managers import FlashcardStorage
@@ -22,9 +23,14 @@ class StorageController:
         },
     }
 
-    def __init__(self, base_path: str):
+    def __init__(self, base_path: Path):
         """StorageControllerの初期化"""
-        self.base_path = Path(base_path)
+        self.base_path = base_path
+        
+        if not (self.base_path.is_absolute() and self.base_path.exists() and self.base_path.is_dir()):
+            log.error("invalid path")
+            raise OSError("invalid path")
+        
         self.db_dir = self.base_path / "db"
         
         # 辞書でパスとストレージインスタンスを管理
@@ -39,10 +45,10 @@ class StorageController:
         # 各ファイルタイプの情報を辞書に保存
         for file_type, info in self.FILETYPE_INFO.items():
             # データベースパス
-            self.db_paths[file_type] = str(self.db_dir / f"{file_type}s.db")
+            self.db_paths[file_type] = Path(self.db_dir / f"{file_type}s.db")
             
             # ストレージパス（各ファイルタイプごとに直接配置）
-            self.storage_paths[file_type] = str(self.base_path / file_type)
+            self.storage_paths[file_type] = Path(self.base_path / file_type)
             
             # ストレージインスタンスは遅延初期化のためNoneで初期化
             self._storage_instances[file_type] = None
@@ -95,6 +101,7 @@ class StorageController:
         """ストレージインスタンスを取得（遅延初期化）"""
         if file_type not in self.FILETYPE_INFO:
             log.error(f"未対応のファイルタイプ: {file_type}")
+            raise ValueError("Unsupported file type")
         
         if self._storage_instances[file_type] is None:
             info = self.FILETYPE_INFO[file_type]

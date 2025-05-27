@@ -161,7 +161,7 @@ class BaseMetadataManager(ABC):
     """メタデータ管理の基底クラス"""
 
     def __init__(self, db_path: str, table_name: str, schema: Dict[str, str]):
-        self.db = SQLiteManager(db_path)
+        self.db = SQLiteManager(Path(db_path))
         self.table_name = table_name
         self.schema = schema
         self._initialize_tables()

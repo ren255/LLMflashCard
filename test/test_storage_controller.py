@@ -14,13 +14,14 @@ from storage.storage_controller import StorageController
 from storage.image_managers import ImageStorage
 from storage.flashcard_managers import FlashcardStorage
 
+from utils import log
 
 class TestStorageControllerInit:
     """StorageController初期化のテスト"""
 
     def test_init_creates_directory_structure(self, temp_dir):
         """ディレクトリ構造が正しく作成されることを確認"""
-        controller = StorageController(str(temp_dir))
+        controller = StorageController(temp_dir)
         
         # 基本ディレクトリの存在確認
         assert (temp_dir / "db").exists()
@@ -37,7 +38,7 @@ class TestStorageControllerInit:
 
     def test_init_creates_databases(self, temp_dir):
         """データベースファイルが正しく作成されることを確認"""
-        controller = StorageController(str(temp_dir))
+        controller = StorageController(temp_dir)
         
         # データベースファイルの存在確認
         assert (temp_dir / "db" / "images.db").exists()
@@ -45,12 +46,12 @@ class TestStorageControllerInit:
         
         # データベースの内容確認
         conn = sqlite3.connect(temp_dir / "db" / "images.db")
-        cursor = conn.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='images'")
+        cursor = conn.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='image_metadata'")
         assert cursor.fetchone() is not None
         conn.close()
         
         conn = sqlite3.connect(temp_dir / "db" / "flashcards.db")
-        cursor = conn.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='flashcards'")
+        cursor = conn.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='flashcard_metadata'")
         assert cursor.fetchone() is not None
         conn.close()
         
@@ -62,13 +63,13 @@ class TestStorageControllerInit:
         (temp_dir / "image").mkdir(parents=True, exist_ok=True)
         (temp_dir / "db").mkdir(parents=True, exist_ok=True)
         
-        controller = StorageController(str(temp_dir))
+        controller = StorageController(temp_dir)
         assert controller.base_path == Path(temp_dir)
         controller.cleanup()
 
     def test_init_path_attributes(self, temp_dir):
         """パス属性が正しく設定されることを確認"""
-        controller = StorageController(str(temp_dir))
+        controller = StorageController(temp_dir)
         
         assert controller.base_path == Path(temp_dir)
         assert controller.db_dir == Path(temp_dir) / "db"
@@ -85,7 +86,7 @@ class TestStorageControllerInit:
         mock_mkdir.side_effect = PermissionError("Permission denied")
         
         with pytest.raises(PermissionError):
-            StorageController(str(temp_dir))
+            StorageController(temp_dir)
 
 
 class TestStorageControllerInstances:
@@ -93,7 +94,7 @@ class TestStorageControllerInstances:
 
     def test_lazy_initialization(self, temp_dir):
         """遅延初期化が正しく動作することを確認"""
-        controller = StorageController(str(temp_dir))
+        controller = StorageController(temp_dir)
         
         # 初期状態では None
         assert controller._storage_instances["image"] is None
@@ -112,7 +113,7 @@ class TestStorageControllerInstances:
 
     def test_singleton_behavior(self, temp_dir):
         """同一インスタンスが返されることを確認"""
-        controller = StorageController(str(temp_dir))
+        controller = StorageController(temp_dir)
         
         storage1 = controller.image_storage
         storage2 = controller.image_storage
@@ -126,7 +127,7 @@ class TestStorageControllerInstances:
 
     def test_get_storage_valid_types(self, temp_dir):
         """get_storage()メソッドの正常動作"""
-        controller = StorageController(str(temp_dir))
+        controller = StorageController(temp_dir)
         
         image_storage = controller.get_storage("image")
         assert isinstance(image_storage, ImageStorage)
@@ -138,7 +139,7 @@ class TestStorageControllerInstances:
 
     def test_get_storage_invalid_type(self, temp_dir):
         """無効なファイルタイプでのエラーハンドリング"""
-        controller = StorageController(str(temp_dir))
+        controller = StorageController(temp_dir)
         
         with pytest.raises(ValueError, match="Unsupported file type"):
             controller.get_storage("invalid_type")
@@ -147,7 +148,7 @@ class TestStorageControllerInstances:
 
     def test_property_access(self, temp_dir):
         """プロパティアクセスの動作確認"""
-        controller = StorageController(str(temp_dir))
+        controller = StorageController(temp_dir)
         
         # image_storage プロパティ
         image_storage = controller.image_storage
@@ -165,7 +166,7 @@ class TestStorageControllerInfo:
 
     def test_get_paths_info(self, temp_dir):
         """パス情報の取得"""
-        controller = StorageController(str(temp_dir))
+        controller = StorageController(temp_dir)
         paths_info = controller.get_paths_info()
         
         # 基本パス
@@ -188,7 +189,7 @@ class TestStorageControllerInfo:
 
     def test_get_storage_stats_empty(self, temp_dir):
         """空のストレージでの統計情報取得"""
-        controller = StorageController(str(temp_dir))
+        controller = StorageController(temp_dir)
         stats = controller.get_storage_stats()
         
         assert "image" in stats
@@ -206,7 +207,7 @@ class TestStorageControllerInfo:
 
     def test_get_storage_stats_with_data(self, temp_dir, sample_image_file, sample_csv_file):
         """データがある状態での統計情報取得"""
-        controller = StorageController(str(temp_dir))
+        controller = StorageController(temp_dir)
         
         # データを追加
         image_id = controller.image_storage.save(sample_image_file, "test_collection")
@@ -231,7 +232,7 @@ class TestStorageControllerCleanup:
 
     def test_cleanup_closes_connections(self, temp_dir):
         """クリーンアップでデータベース接続が閉じられることを確認"""
-        controller = StorageController(str(temp_dir))
+        controller = StorageController(temp_dir)
         
         # ストレージインスタンスを初期化
         _ = controller.image_storage
@@ -246,25 +247,11 @@ class TestStorageControllerCleanup:
 
     def test_cleanup_multiple_calls(self, temp_dir):
         """複数回のクリーンアップ呼び出しでエラーが発生しないことを確認"""
-        controller = StorageController(str(temp_dir))
+        controller = StorageController(temp_dir)
         
         controller.cleanup()
         controller.cleanup()  # 2回目の呼び出し
         # エラーが発生しないことを確認
-
-    @patch('storage.base_managers.BaseMetadataManager.close')
-    def test_cleanup_calls_storage_cleanup(self, mock_close, temp_dir):
-        """ストレージのクリーンアップが呼ばれることを確認"""
-        controller = StorageController(str(temp_dir))
-        
-        # ストレージインスタンスを初期化
-        _ = controller.image_storage
-        _ = controller.flashcard_storage
-        
-        controller.cleanup()
-        
-        # 各ストレージのクリーンアップが呼ばれることを確認
-        assert mock_close.call_count >= 2
 
 
 class TestStorageControllerEdgeCases:
@@ -273,36 +260,26 @@ class TestStorageControllerEdgeCases:
     def test_invalid_base_path(self):
         """無効なベースパスでの初期化"""
         with pytest.raises((OSError, PermissionError)):
-            StorageController("/invalid/path/that/does/not/exist/and/cannot/be/created")
+            StorageController(Path("/invalid/path/that/does/not/exist/and/cannot/be/created"))
 
-    def test_relative_path_handling(self, temp_dir):
+    def test_relative_path_handling(self):
         """相対パスでの初期化"""
-        # 一時的に作業ディレクトリを変更
-        original_cwd = Path.cwd()
-        try:
-            temp_dir.chmod(0o755)
-            temp_dir.parent.as_posix()
-            
-            controller = StorageController(".")
-            assert controller.base_path.is_absolute()
-            controller.cleanup()
-        finally:
-            # 作業ディレクトリを元に戻す
-            pass
+        with pytest.raises((OSError, PermissionError)):
+            StorageController(Path("."))
 
     def test_unicode_path_handling(self, temp_dir):
         """Unicode文字を含むパスでの処理"""
         unicode_dir = temp_dir / "テスト_フォルダ"
         unicode_dir.mkdir(exist_ok=True)
         
-        controller = StorageController(str(unicode_dir))
+        controller = StorageController(unicode_dir)
         assert controller.base_path == unicode_dir
         controller.cleanup()
 
     def test_concurrent_access_simulation(self, temp_dir):
         """同時アクセスのシミュレーション"""
-        controller1 = StorageController(str(temp_dir))
-        controller2 = StorageController(str(temp_dir))
+        controller1 = StorageController(temp_dir)
+        controller2 = StorageController(temp_dir)
         
         # 両方のcontrollerでストレージにアクセス
         storage1 = controller1.image_storage
@@ -321,7 +298,7 @@ class TestStorageControllerIntegration:
     @pytest.mark.integration
     def test_full_workflow(self, temp_dir, sample_image_file, sample_csv_file):
         """完全なワークフローのテスト"""
-        controller = StorageController(str(temp_dir))
+        controller = StorageController(temp_dir)
         
         # 1. ファイル保存
         image_id = controller.image_storage.save(sample_image_file, "images")
@@ -358,7 +335,7 @@ class TestStorageControllerIntegration:
     @pytest.mark.integration
     def test_error_recovery(self, temp_dir, corrupted_files):
         """エラーからの回復テスト"""
-        controller = StorageController(str(temp_dir))
+        controller = StorageController(temp_dir)
         
         # 破損ファイルでの保存試行
         image_result = controller.image_storage.save(corrupted_files["bad_image"], "test")

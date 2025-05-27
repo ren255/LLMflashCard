@@ -1,0 +1,92 @@
+LLMflashCard
+├── .git
+├── .pytest_cache
+├── .venv
+├── .VSCodeCounter
+├── db
+│   ├── __pycache__
+│   ├── __init__.py
+│   ├── interface_utils.py
+│   ├── models.py
+│   └── sqlite_utils.py
+├── gui
+│   └── __init__.py
+├── image_processing
+│   └── __init__.py
+├── llm
+│   └── __init__.py
+├── logic
+│   └── __init__.py
+├── resources
+│   ├── db
+│   │   ├── flashcards.db
+│   │   ├── images.db
+│   │   ├── my_database.db
+│   │   ├── test.db
+│   │   └── test.sqlite
+│   ├── flashcard
+│   ├── image
+│   │   └── 477f563689e745089dad3e4798091bc0.png
+│   ├── temp
+│   │   ├── flashcard
+│   │   └── image
+│   ├── tempSave
+│   ├── thumbnails
+│   │   ├── flashcard
+│   │   └── image
+│   │       └── thumb_477f563689e745089dad3e4798091bc0.png
+│   └── upload
+├── storage
+│   ├── __pycache__
+│   ├── __init__.py
+│   ├── base_managers.py
+│   ├── file_manager.py
+│   ├── flashcard_managers.py
+│   ├── image_managers.py
+│   └── storage_controller.py
+├── test
+│   ├── fixtures
+│   │   ├── test_csvs
+│   │   │   ├── basic_flashcards_utf8.csv
+│   │   │   ├── japanese_flashcards_cp932.csv
+│   │   │   ├── japanese_flashcards_sjis.csv
+│   │   │   ├── japanese_flashcards_utf8.csv
+│   │   │   ├── large_flashcards.csv
+│   │   │   ├── many_columns.csv
+│   │   │   ├── minimal_2columns.csv
+│   │   │   ├── special_chars_comma.csv
+│   │   │   ├── special_chars_semicolon.csv
+│   │   │   ├── special_chars_tab.tsv
+│   │   │   ├── unicode_special.csv
+│   │   │   └── with_nulls.csv
+│   │   ├── test_databases
+│   │   └── test_images
+│   │       ├── corrupted.jpg
+│   │       ├── empty.png
+│   │       ├── large_banner.png
+│   │       ├── large_photo.jpg
+│   │       ├── medium_landscape.jpg
+│   │       ├── medium_portrait.png
+│   │       ├── medium_square.jpg
+│   │       ├── pattern_checker.png
+│   │       ├── pattern_gradient.jpg
+│   │       ├── small_blue.png
+│   │       ├── small_green.webp
+│   │       ├── small_red.jpg
+│   │       ├── tall_poster.png
+│   │       └── wide_banner.jpg
+│   ├── make_testdata.py
+│   ├── pytest.ini
+│   ├── StorageTest.md
+│   └── test_db.py
+├── tests
+│   ├── __pycache__
+│   ├── calss.dio
+│   ├── db.try.py
+│   ├── LLMflashCard_tree.txt
+│   ├── path.py
+│   └── tree.py
+├── .gitignore
+├── main.py
+├── my_database.db
+└── requirements.txt

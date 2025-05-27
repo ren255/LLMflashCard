@@ -2,10 +2,10 @@ import sqlite3
 from typing import Any, List, Tuple, Dict
 from .interface_utils import DBManagerInterface
 from utils import log
+from pathlib import Path
 
 class SQLiteManager(DBManagerInterface):
-    def __init__(self, db_path: str):
-        db_path = db_path.replace("\\", "/")  # Windowsパスのスラッシュを正規化
+    def __init__(self, db_path: Path):
         self.db_path = db_path
         try:
             self.conn = sqlite3.connect(self.db_path)

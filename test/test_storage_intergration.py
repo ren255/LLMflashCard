@@ -31,10 +31,10 @@ class TestStorageIntegration:
         """各テストの前後でテスト環境をセットアップ・クリーンアップ"""
         # テスト用一時ディレクトリ作成
         self.test_base_path = Path(tempfile.mkdtemp(prefix="storage_test_"))
-        self.controller = StorageController(str(self.test_base_path))
+        self.controller = StorageController(self.test_base_path)
         
         # テストデータのパス（fixturesディレクトリ）
-        self.fixtures_path = Path(__file__).parent / "fixtures"
+        self.fixtures_path = Path(__file__).parent / "_fixtures"
         self.test_images_path = self.fixtures_path / "test_images"
         self.test_csvs_path = self.fixtures_path / "test_csvs"
         self.bulk_path = self.fixtures_path / "bulk"
@@ -386,7 +386,7 @@ class TestStorageIntegration:
         self.controller.cleanup()
         
         # 新しいインスタンス作成時に既存データにアクセス可能か確認
-        new_controller = StorageController(str(self.test_base_path))
+        new_controller = StorageController(self.test_base_path)
         
         if record_id:
             # データが永続化されているか確認

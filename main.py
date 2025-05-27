@@ -15,7 +15,7 @@ def main_example():
     """main.pyでの使用例"""
     
     # StorageController初期化（自動でディレクトリ・DB作成）
-    storage_controller = StorageController("./resources")
+    storage_controller = StorageController(Path("./resources").resolve())
     
     # パス情報確認
     paths = storage_controller.get_paths_info()

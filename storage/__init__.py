@@ -1,11 +1,22 @@
-from .base_managers import BaseFileManager, BaseMetadataManager, BaseStorage
-from .image_managers import ImageFileManager, ImageMetadataManager, ImageStorage
-from .flashcard_managers import CSVFileManager, FlashcardMetadataManager, FlashcardStorage
-from .storage_setup import StorageManager
+from .file_manager import FileManager
+from .base_managers import BaseMetadataManager, BaseStorage
+from .image_managers import  ImageStorage, ImageMetadataManager
+from .flashcard_managers import FlashcardStorage, FlashcardMetadataManager
+from .storage_controller import StorageController
 
 __all__ = [
-    'BaseFileManager', 'BaseMetadataManager', 'BaseStorage',
-    'ImageFileManager', 'ImageMetadataManager', 'ImageStorage',
-    'CSVFileManager', 'FlashcardMetadataManager', 'FlashcardStorage',
-    'StorageManager'
+    # file maneger
+    'FileManager',
+
+    # Base classes
+    'BaseStorage','BaseMetadataManager', 
+    
+    # Image management
+    'ImageStorage','ImageMetadataManager',
+    
+    # Flashcard management
+    'FlashcardStorage','FlashcardMetadataManager', 
+    
+    # Main controller
+    'StorageController'
 ]

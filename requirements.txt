@@ -1,6 +1,20 @@
 # python -m pip install --upgrade pip && pip install -r requirements.txt
 # pip install -r requirements.txt
 
+# math
+pandas>=1.5.0
+numpy>=1.24.0
+
+# GUI
+customtkinter
+
+# test
+pytest>=7.0.0
+pytest-cov>=4.0.0
+pytest-mock>=3.10.0
+pytest-xdist>=3.0.0  # 並列テスト実行
+psutil>=5.9.0  # メモリ使用量測定用
+
 # 画像処理
 opencv-python
 pillow
@@ -15,9 +29,6 @@ numpy
 # torch
 # torchvision
 
-# GUI
-customtkinter
-
 # LLM・LangChain
 langchain
 openai
@@ -31,6 +42,3 @@ requests
 # pinecone-client
 # tiktoken
 # pydantic
-
-# math
-pandas

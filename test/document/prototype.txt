@@ -1,0 +1,465 @@
+# Storage Module API Reference & Prototypes
+
+このドキュメントは、`storage/`モジュールの全クラス・メソッドのプロトタイプと仕様を記載しています。テスト作成時はこのドキュメントのみを参照してください。
+
+## 1. StorageController - 統合管理クラス
+
+```python
+class StorageController:
+    """ストレージ管理の統合クラス - main.pyから呼ばれる"""
+    
+    # クラス変数
+    FILETYPE_INFO = {
+        "image": {
+            "schema": IMAGE_SCHEMA,
+            "storage_class": ImageStorage,
+        },
+        "flashcard": {
+            "schema": FLASHCARD_SCHEMA,
+            "storage_class": FlashcardStorage,
+        },
+    }
+    
+    def __init__(self, base_path: str):
+        """StorageControllerの初期化
+        Args:
+            base_path: リソースのベースパス（例: "resources"）
+        
+        Creates:
+            - self.base_path: Path(base_path)
+            - self.db_dir: base_path/db
+            - self.db_paths: {file_type: db_file_path}
+            - self.storage_paths: {file_type: storage_dir_path}
+            - self._storage_instances: {file_type: None} (遅延初期化)
+        """
+    
+    @property
+    def image_storage(self) -> ImageStorage:
+        """画像ストレージのインスタンスを取得"""
+    
+    @property
+    def flashcard_storage(self) -> FlashcardStorage:
+        """フラッシュカードストレージのインスタンスを取得"""
+    
+    def get_storage(self, file_type: str):
+        """任意のファイルタイプのストレージを取得
+        Args:
+            file_type: "image" or "flashcard"
+        Raises:
+            ValueError: 未対応のファイルタイプの場合
+        """
+    
+    def get_paths_info(self) -> Dict[str, Any]:
+        """パス情報を取得
+        Returns:
+            - base_path, db_dir, temp_dir, thumbnails_dir
+            - {file_type}_db_path, {file_type}_storage_path, etc.
+        """
+    
+    def get_storage_stats(self) -> Dict[str, Any]:
+        """全ストレージの統計情報を取得
+        Returns:
+            - 各ファイルタイプの統計 + total_files, total_size
+        """
+    
+    def cleanup(self):
+        """リソースのクリーンアップ - データベース接続を閉じる"""
+```
+
+**ディレクトリ構造**: `base_path/{image,flashcard,temp,thumbnails,db}/`
+
+---
+
+## 2. FileManager - ファイル操作クラス
+
+```python
+class FileManager:
+    """共通のファイル管理クラス,filetypeごとに作成される"""
+    
+    def __init__(self, paths: Dict[str, str], thumbnail_size=(200,200)):
+        """FileManagerを初期化
+        Args:
+            paths: {
+                "base_path": str,
+                "storage_path": str,
+                "thumbnails_path": str,
+                "temp_path": str
+            }
+            thumbnail_size: サムネイルサイズ (width, height)
+        """
+    
+    def save_file(self, source_path: Path) -> Path | None:
+        """ファイルを保存し、保存先パスを返す
+        Args:
+            source_path: 元ファイルのパス
+        Returns:
+            保存先のPath（失敗時はNone）
+        """
+    
+    def calculate_hash(self, file_path: Path) -> str:
+        """ファイルのSHA256ハッシュをバイナリから計算"""
+    
+    def generate_filename(self, file_extension: str) -> str:
+        """新しいファイル名を生成（重複防止）
+        Returns:
+            UUID4ベースのファイル名
+        """
+    
+    def create_thumbnail(self, image_path: Path) -> Path | None:
+        """サムネイル作成
+        Args:
+            image_path: 画像ファイルのパス
+        Returns:
+            サムネイルのパス（失敗時はNone）
+        Notes:
+            - RGBA→RGB変換対応
+            - JPEG形式で保存
+        """
+    
+    def get_file_path(self, filename: str) -> str:
+        """ファイル名から完全パスを取得"""
+    
+    def get_relative_path(self, full_path: str) -> str:
+        """完全パスから相対パスを生成"""
+    
+    def delete_file(self, file_path: str, thumbnail_path: str = ""):
+        """ファイルとサムネイルを削除"""
+    
+    def move_from_temp(self, temp_filename: str) -> str:
+        """一時ディレクトリからメインディレクトリにファイルを移動
+        Returns:
+            移動先パス（失敗時は空文字列）
+        """
+    
+    def save_to_temp(self, source_path: str) -> str:
+        """ファイルを一時ディレクトリに保存"""
+    
+    def get_paths_info(self) -> Dict[str, str]:
+        """パス情報を取得"""
+```
+
+---
+
+## 3. BaseStorage - ストレージ基底クラス
+
+```python
+class BaseStorage(ABC):
+    """ストレージ管理の基底クラス"""
+    
+    def __init__(self, file_type: str, paths: Dict[str, str]):
+        """初期化
+        Args:
+            file_type: ファイルタイプ名
+            paths: パス辞書
+        Creates:
+            - self.fileMgr: FileManager
+            - self.metadataMgr: BaseMetadataManager
+        """
+    
+    @abstractmethod
+    def _create_file_manager(self) -> FileManager:
+        """ファイルマネージャーを作成（サブクラスで実装）"""
+    
+    @abstractmethod
+    def _create_metadata_manager(self) -> BaseMetadataManager:
+        """メタデータマネージャーを作成（サブクラスで実装）"""
+    
+    @abstractmethod
+    def save(self, source_path: Path, collection: str = "", **kwargs) -> int | None:
+        """ファイルを保存（サブクラスで実装）
+        Returns:
+            record_id（エラー時None）
+        """
+    
+    def save_file(self, source_path: Path, collection: str = "", **kwargs) -> int | None:
+        """ファイルを保存（重複チェック付き）
+        - ハッシュ計算による重複チェック
+        - サムネイル作成
+        - メタデータ保存
+        Returns:
+            record_id（重複・エラー時None）
+        """
+    
+    def get(self, record_id: int) -> Optional[Dict]:
+        """レコード情報を取得（full_path付き）"""
+    
+    def delete(self, record_id: int) -> bool:
+        """ファイルを完全削除（ファイル+サムネイル+メタデータ）"""
+    
+    def get_all(self) -> List[Dict]:
+        """全レコードを取得（full_path付き）"""
+    
+    def get_by_collection(self, collection: str) -> List[Dict]:
+        """コレクション別に取得"""
+    
+    def update_metadata(self, record_id: int, **kwargs):
+        """メタデータを更新"""
+    
+    def search(self, condition: str, params: tuple) -> List[Dict]:
+        """条件検索"""
+    
+    def get_collections(self) -> List[str]:
+        """すべてのコレクション名を取得（ソート済み）"""
+    
+    def get_stats(self) -> Dict[str, Any]:
+        """統計情報を取得
+        Returns:
+            - total_files, total_size, collections, collection_names
+        """
+```
+
+---
+
+## 4. BaseMetadataManager - メタデータ管理基底クラス
+
+```python
+class BaseMetadataManager(ABC):
+    """メタデータ管理の基底クラス"""
+    
+    def __init__(self, db_path: str, table_name: str, schema: Dict[str, str]):
+        """初期化
+        Args:
+            db_path: データベースファイルパス
+            table_name: テーブル名
+            schema: テーブルスキーマ定義
+        """
+    
+    def save_metadata(self, **kwargs) -> int | None:
+        """メタデータを保存
+        - スキーマに存在するフィールドのみを抽出
+        Returns:
+            保存されたレコードのID（失敗時None）
+        """
+    
+    def get_by_id(self, record_id: int) -> Optional[Dict]:
+        """IDでレコードを取得"""
+    
+    def get_by_hash(self, file_hash: str) -> Optional[Dict]:
+        """ハッシュでレコードを検索（重複チェック）"""
+    
+    def get_by_collection(self, collection: str) -> List[Dict]:
+        """コレクションでレコードを取得"""
+    
+    def update_metadata(self, record_id: int, **kwargs):
+        """メタデータを更新（スキーマ検証付き）"""
+    
+    def delete_metadata(self, record_id: int):
+        """メタデータを削除"""
+    
+    def get_all(self) -> List[Dict]:
+        """全レコードを取得"""
+    
+    def search(self, condition: str, params: tuple) -> List[Dict]:
+        """条件検索"""
+    
+    @abstractmethod
+    def get_specific_fields(self, record_id: int) -> Optional[Dict]:
+        """サブクラス固有のフィールド取得"""
+    
+    @abstractmethod
+    def get_metadata(self, file_path: Path) -> Dict[str, Any]:
+        """ファイルのメタデータを取得"""
+```
+
+---
+
+## 5. ImageStorage - 画像ストレージクラス
+
+```python
+class ImageStorage(BaseStorage):
+    """画像ストレージ管理クラス"""
+    
+    def __init__(self, file_type: str, paths: Dict[str, str]):
+        """初期化 - ImageMetadataManagerを作成"""
+    
+    def save(self, source_path: Path, collection: str = "", **kwargs) -> int | None:
+        """画像を保存（画像固有のパラメータ付き）"""
+    
+    def save_split_image(self, parent_id: int, maskid: int, region_index: int, **kwargs) -> int | None:
+        """分割画像を保存
+        Args:
+            parent_id: 親画像のID
+            maskid: マスクID
+            region_index: 分割領域のインデックス
+        """
+    
+    def get_thumbnail_path(self, record_id: int) -> Optional[str]:
+        """サムネイルパスを取得"""
+    
+    def get_image_info(self, record_id: int) -> Optional[Dict]:
+        """画像固有の詳細情報を取得"""
+    
+    def update_image_type(self, record_id: int, image_type: str):
+        """画像タイプを更新"""
+    
+    def link_mask(self, image_id: int, mask_data: str):
+        """画像にマスク情報をリンク"""
+    
+    def get_image_stats(self) -> Dict[str, Any]:
+        """画像固有の統計情報を取得
+        Returns:
+            基本統計 + formats, types, sizes統計
+        """
+    
+    def search_by_content(self, search_term: str) -> List[Dict]:
+        """ファイル名や元ファイル名で画像を検索"""
+```
+
+---
+
+## 6. ImageMetadataManager - 画像メタデータ管理
+
+```python
+class ImageMetadataManager(BaseMetadataManager):
+    """画像メタデータ管理"""
+    
+    def __init__(self, db_path: str, schema: Dict[str, str]):
+        """初期化 - テーブル名は"images"固定"""
+    
+    def get_specific_fields(self, record_id: int) -> Optional[Dict]:
+        """画像固有のフィールドを取得
+        Returns:
+            width, height, format, thumbnail_path, image_type,
+            region_index, parent_image_id, mask_image_id
+        """
+    
+    def get_metadata(self, file_path: Path) -> Dict[str, Any]:
+        """画像のメタデータを取得
+        - PIL.Imageで画像情報を取得
+        Returns:
+            width, height, format, file_size
+        """
+    
+    def get_by_type(self, image_type: str) -> List[Dict]:
+        """画像タイプで検索"""
+    
+    def get_children(self, parent_id: int) -> List[Dict]:
+        """親画像IDで子画像を検索"""
+    
+    def get_by_size_range(self, min_width: int = 0, max_width: int = 999999,
+                          min_height: int = 0, max_height: int = 999999) -> List[Dict]:
+        """サイズ範囲で画像を検索"""
+    
+    def get_by_format(self, format_name: str) -> List[Dict]:
+        """フォーマットで画像を検索"""
+```
+
+---
+
+## 7. FlashcardStorage - フラッシュカードストレージクラス
+
+```python
+class FlashcardStorage(BaseStorage):
+    """フラッシュカードストレージ管理クラス"""
+    
+    def __init__(self, file_type: str, paths: Dict[str, str]):
+        """初期化 - FlashcardMetadataManagerを作成"""
+    
+    def save(self, source_path: Path, collection: str = "", **kwargs) -> int | None:
+        """フラッシュカードを保存"""
+    
+    def get_columns(self, record_id: int) -> List[str]:
+        """CSVのカラム一覧を取得"""
+    
+    def get_csv_info(self, record_id: int) -> Optional[Dict]:
+        """CSV固有の詳細情報を取得"""
+    
+    def get_encoding_info(self, record_id: int) -> Optional[str]:
+        """ファイルエンコーディング情報を取得"""
+    
+    def update_encoding(self, record_id: int, encoding: str):
+        """エンコーディング情報を更新"""
+    
+    def get_delimiter_info(self, record_id: int) -> Optional[str]:
+        """区切り文字情報を取得"""
+    
+    def update_delimiter(self, record_id: int, delimiter: str):
+        """区切り文字を更新"""
+    
+    def get_flashcard_stats(self) -> Dict[str, Any]:
+        """フラッシュカード固有の統計情報を取得
+        Returns:
+            基本統計 + total_flashcards, encodings, delimiters, avg_rows_per_file
+        """
+    
+    def search_by_content(self, search_term: str) -> List[Dict]:
+        """ファイル名や元ファイル名でフラッシュカードを検索"""
+```
+
+---
+
+## 8. FlashcardMetadataManager - フラッシュカードメタデータ管理
+
+```python
+class FlashcardMetadataManager(BaseMetadataManager):
+    """フラッシュカードメタデータ管理"""
+    
+    def __init__(self, db_path: str, schema: Dict[str, str]):
+        """初期化 - テーブル名は"flashcards"固定"""
+    
+    def get_specific_fields(self, record_id: int) -> Optional[Dict]:
+        """フラッシュカード固有のフィールドを取得
+        Returns:
+            columns(JSON→List変換), row_count, encoding, delimiter
+        """
+    
+    def get_metadata(self, file_path: Path) -> Dict[str, Any]:
+        """CSVのメタデータを取得
+        - pandas.read_csvでCSV解析
+        - エンコーディング自動検出（utf-8→shift-jis）
+        Returns:
+            file_size, row_count, columns, encoding, delimiter
+        """
+    
+    def update_columns(self, record_id: int, columns: List[str]):
+        """カラム情報を更新（JSON形式で保存）"""
+    
+    def get_by_row_count_range(self, min_rows: int, max_rows: int) -> List[Dict]:
+        """行数範囲で検索"""
+```
+
+---
+
+## 9. データベーススキーマ定義
+
+### IMAGE_SCHEMA
+```python
+IMAGE_SCHEMA = {
+    "id": "INTEGER PRIMARY KEY AUTOINCREMENT",
+    "filename": "TEXT NOT NULL",                     # 実際のファイル名
+    "original_name": "TEXT",                         # 元のファイル名
+    "file_path": "TEXT NOT NULL",                    # 相対パス
+    "collection": "TEXT",                            # コレクション名
+    "image_type": "TEXT",                            # 画像の種類
+    "region_index": "INTEGER",                       # 分割領域の番号
+    "parent_image_id": "INTEGER",                    # 元画像のID
+    "mask_image_id": "TEXT",                         # マスク領域の座標
+    "file_size": "INTEGER",                          # ファイルサイズ
+    "width": "INTEGER",                              # 画像幅
+    "height": "INTEGER",                             # 画像高さ
+    "format": "TEXT",                                # JPEG, PNG, etc.
+    "hash": "TEXT UNIQUE",                           # ファイルハッシュ
+    "thumbnail_path": "TEXT",                        # サムネイルパス
+    "created_at": "TIMESTAMP DEFAULT CURRENT_TIMESTAMP",
+}
+```
+
+### FLASHCARD_SCHEMA
+```python
+FLASHCARD_SCHEMA = {
+    "id": "INTEGER PRIMARY KEY AUTOINCREMENT",
+    "filename": "TEXT NOT NULL",                     # 実際のファイル名
+    "original_name": "TEXT",                         # 元のファイル名
+    "file_path": "TEXT NOT NULL",                    # 相対パス
+    "collection": "TEXT",                            # コレクション名
+    "columns": "TEXT",                               # JSON形式のカラム構造
+    "row_count": "INTEGER",                          # レコード数
+    "file_size": "INTEGER",                          # ファイルサイズ
+    "encoding": "TEXT DEFAULT 'utf-8'",              # ファイルエンコーディング
+    "delimiter": "TEXT DEFAULT ','",                 # CSV区切り文字
+    "hash": "TEXT UNIQUE",                           # ファイルハッシュ
+    "created_at": "TIMESTAMP DEFAULT CURRENT_TIMESTAMP",
+    "updated_at": "TIMESTAMP DEFAULT CURRENT_TIMESTAMP",
+}
+```
+

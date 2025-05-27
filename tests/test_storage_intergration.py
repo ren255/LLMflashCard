@@ -20,6 +20,8 @@ from storage.base_managers import BaseStorage
 from storage.image_managers import ImageStorage
 from storage.flashcard_managers import FlashcardStorage
 
+from utils import LogLevel, set_global_log_level, log
+set_global_log_level(LogLevel.DEBUG)
 
 class TestStorageIntegration:
     """Storage統合テストクラス"""

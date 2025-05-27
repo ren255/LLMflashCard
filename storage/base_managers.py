@@ -1,12 +1,13 @@
 from __future__ import annotations
 from typing import Optional, Dict, List, Any, Tuple
 from pathlib import Path
+import json
 
 from abc import ABC, abstractmethod
 from db.sqlite_utils import SQLiteManager
 
 from .file_manager import FileManager
-
+from utils import log
 ##
 # @brief ストレージ管理の基底クラス
 # @details このクラスはストレージ管理の基本的な機能を提供し、サブクラスで具体的な実装を行う
@@ -48,7 +49,7 @@ class BaseStorage(ABC):
             file_hash = self.fileMgr.calculate_hash(source_path)
             existing = self.metadataMgr.get_by_hash(file_hash)
             if existing:
-                print(f"重複ファイル検出: {existing['filename']}")
+                log.error(f"重複ファイル検出: {existing['filename']}")
                 return None
 
             saved_path = self.fileMgr.save_file(source_path)
@@ -58,7 +59,7 @@ class BaseStorage(ABC):
             metadata = self.metadataMgr.get_metadata(source_path)
             thumbnail_path = self.fileMgr.create_thumbnail(saved_path)
             save_data = {
-                "filename": metadata["filename"],
+                "filename": saved_path.name,
                 "original_name": Path(source_path).name,
                 "file_path": self.paths["base_path"] / saved_path,
                 "thumbnail_path": str(thumbnail_path) if thumbnail_path else "",
@@ -69,12 +70,14 @@ class BaseStorage(ABC):
             }
 
             record_id = self.metadataMgr.save_metadata(**save_data)
+            if record_id is None:
+                log.error(f"メタデータ保存失敗")
+                return None
 
             return record_id
 
         except Exception as e:
-            print(f"ファイル保存エラー: {e}")
-            return None
+            log.error(f"ファイル保存エラー: 'source_path' : from{e}")
 
     def get(self, record_id: int) -> Optional[Dict]:
         """レコード情報を取得"""
@@ -99,7 +102,7 @@ class BaseStorage(ABC):
 
             return True
         except Exception as e:
-            print(f"削除エラー: {e}")
+            log.info(f"削除エラー: {e}")
             return False
 
     def get_all(self) -> List[Dict]:
@@ -176,6 +179,10 @@ class BaseMetadataManager(ABC):
         valid_data = {}
         for key, value in kwargs.items():
             if key in self.schema:
+                if type(value) is type(Path()):
+                    value = str(value)
+                elif type(value) is type([]):
+                    value = json.dumps(value)
                 valid_data[key] = value
 
         result = self.db.insert(self.table_name, valid_data)

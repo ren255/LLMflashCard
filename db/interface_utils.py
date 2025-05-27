@@ -57,7 +57,7 @@ class DBManagerInterface(ABC):
         pass
 
     @abstractmethod
-    def delete(self, table_name: str, condition: str, params: Tuple[Any, ...]):
+    def delete(self, table_name: str, condition: str, params: Tuple[Any, ...]) :
         """
         条件に一致するレコードを削除する。
         """

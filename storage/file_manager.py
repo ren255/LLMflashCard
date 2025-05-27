@@ -7,6 +7,8 @@ import shutil
 from PIL import Image
 from pathlib import Path
 
+from utils import log
+
 ##
 # @brief ファイル管理クラス
 # @details path辞書を受け取ってファイルの保存、削除、サムネイル作成などを行う。filetypeごとにインスタンス化される。
@@ -49,7 +51,7 @@ class FileManager():
             
             return thumbnail_path
         except Exception as e:
-            print(f"サムネイル作成エラー: {e}")
+            log.error(f"サムネイル作成エラー: {e}")
             return None
 
     def calculate_hash(self, file_path: Path) -> str:
@@ -80,7 +82,7 @@ class FileManager():
             if thumbnail_path and os.path.exists(thumbnail_path):
                 os.remove(thumbnail_path)
         except Exception as e:
-            print(f"ファイル削除エラー: {e}")
+            log.error(f"ファイル削除エラー: {e}")
 
     def save_file(self, source_path: Path) -> Path | None:
         """
@@ -104,7 +106,7 @@ class FileManager():
         try:
             temp_path = self.temp_dir / temp_filename
             if not temp_path.exists():
-                raise FileNotFoundError(f"一時ファイルが見つかりません: {temp_path}")
+                log.error(f"一時ファイルが見つかりません: {temp_path}")
             
             file_extension = temp_path.suffix.lower()
             new_filename = self.generate_filename(file_extension)
@@ -114,7 +116,7 @@ class FileManager():
             return str(final_path)
         
         except Exception as e:
-            print(f"一時ファイル移動エラー: {e}")
+            log.error(f"一時ファイル移動エラー: {e}")
             return ""
 
     def save_to_temp(self, source_path: str) -> str:
@@ -130,7 +132,7 @@ class FileManager():
             return str(temp_path)
         
         except Exception as e:
-            print(f"一時ファイル保存エラー: {e}")
+            log.error(f"一時ファイル保存エラー: {e}")
             return ""
 
     def get_paths_info(self) -> Dict[str, str]:

@@ -4,3 +4,5 @@
 /storage/__pycache__
 /resources
 /test/fixtures
+
+*.log

@@ -1,384 +1,359 @@
-"""
-Storage Module Test Data Creator
-
-このスクリプトは、storage モジュールのテスト用データファイルを作成します。
-- 画像ファイル（JPEG, PNG, WebP）
-- CSVファイル（UTF-8, Shift-JIS, 異なる区切り文字）
-- 大容量ファイル（パフォーマンステスト用）
-"""
-
-import os
-import sys
 from pathlib import Path
-from PIL import Image, ImageDraw, ImageFont
-import pandas as pd
-import numpy as np
-import random
-import string
-import json
-from typing import List, Dict, Any
+import sys
+import re
+import argparse
+import threading
+import time
+from typing import Dict, Tuple
 
+def format_size(size_bytes: int) -> str:
+    """バイト数を人間が読みやすい形式に変換"""
+    if size_bytes == 0:
+        return "0B"
+    
+    units = ['B', 'KB', 'MB', 'GB', 'TB']
+    size = float(size_bytes)
+    unit_index = 0
+    
+    while size >= 1024 and unit_index < len(units) - 1:
+        size /= 1024
+        unit_index += 1
+    
+    if unit_index == 0:
+        return f"{int(size)}B"
+    else:
+        return f"{size:.1f}{units[unit_index]}"
 
-class TestDataCreator:
-    """テストデータ作成クラス"""
+class ProgressIndicator:
+    def __init__(self, message: str = "計算中"):
+        self.message = message
+        self.running = False
+        self.thread = None
+        
+    def start(self):
+        self.running = True
+        self.thread = threading.Thread(target=self._animate)
+        self.thread.daemon = True
+        self.thread.start()
+        
+    def stop(self):
+        self.running = False
+        if self.thread:
+            self.thread.join()
+        # 進行状況表示をクリア
+        print(f"\r{' ' * 50}\r", end='', flush=True)
+        
+    def _animate(self):
+        spinner = ['⠋', '⠙', '⠹', '⠸', '⠼', '⠴', '⠦', '⠧', '⠇', '⠏']
+        i = 0
+        while self.running:
+            print(f"\r{spinner[i % len(spinner)]} {self.message}...", end='', flush=True)
+            i += 1
+            time.sleep(0.1)
 
-    def __init__(self, base_dir: str = "test/fixtures"):
-        self.base_dir = Path(base_dir)
-        self.images_dir = self.base_dir / "test_images"
-        self.csvs_dir = self.base_dir / "test_csvs"
-        self.databases_dir = self.base_dir / "test_databases"
-
-    def create_all(self):
-        """全てのテストデータを作成"""
-        print("テストデータ作成を開始します...")
-
-        self._create_directories()
-        self.create_test_images()
-        self.create_test_csvs()
-
-        print(f"\nテストデータの作成が完了しました。")
-        print(f"場所: {self.base_dir.absolute()}")
-
-    def _create_directories(self):
-        """必要なディレクトリを作成"""
-        for directory in [self.images_dir, self.csvs_dir, self.databases_dir]:
-            directory.mkdir(parents=True, exist_ok=True)
-
-    def create_test_images(self):
-        """テスト用画像ファイルを作成"""
-        print("\n画像ファイルを作成中...")
-
-        # 基本的な画像パターン
-        image_configs = [
-            # 小さい画像
-            {"name": "small_red.jpg", "size": (
-                100, 100), "color": "red", "format": "JPEG"},
-            {"name": "small_blue.png", "size": (
-                150, 150), "color": "blue", "format": "PNG"},
-            {"name": "small_green.webp", "size": (
-                120, 120), "color": "green", "format": "WebP"},
-
-            # 中サイズ画像
-            {"name": "medium_landscape.jpg", "size": (
-                800, 600), "color": "purple", "format": "JPEG"},
-            {"name": "medium_portrait.png", "size": (
-                600, 800), "color": "orange", "format": "PNG"},
-            {"name": "medium_square.jpg", "size": (
-                512, 512), "color": "yellow", "format": "JPEG"},
-
-            # 大きい画像
-            {"name": "large_photo.jpg", "size": (
-                2000, 1500), "color": "lightblue", "format": "JPEG"},
-            {"name": "large_banner.png", "size": (
-                1920, 1080), "color": "lightgreen", "format": "PNG"},
-
-            # 特殊サイズ
-            {"name": "wide_banner.jpg", "size": (
-                1600, 400), "color": "pink", "format": "JPEG"},
-            {"name": "tall_poster.png", "size": (
-                400, 1200), "color": "lightcoral", "format": "PNG"},
-        ]
-
-        for config in image_configs:
-            self._create_single_image(**config)
-
-        # パターン画像も作成
-        self._create_pattern_images()
-
-        # 破損した画像ファイル（テスト用）
-        self._create_corrupted_files()
-
-        print(f"  ✓ {len(image_configs) + 5} 個の画像ファイルを作成しました")
-
-    def _create_single_image(self, name: str, size: tuple, color: str, format: str):
-        """単一の画像ファイルを作成"""
-        img = Image.new('RGB', size, color=color)
-        draw = ImageDraw.Draw(img)
-
-        # テキストを追加
+def get_directory_size_with_progress(path: Path) -> int:
+    """ディレクトリ内のすべてのファイルサイズの合計を取得（プログレスバー付き）"""
+    progress = ProgressIndicator(f"サイズ計算中: {path.name}")
+    progress.start()
+    
+    try:
+        total_size = 0
         try:
-            # デフォルトフォントを使用
-            font_size = min(size) // 10
-            draw.text((10, 10), f"{size[0]}x{size[1]}", fill="white")
-            draw.text((10, 30), name, fill="white")
-        except:
-            # フォントが使用できない場合はテキストなしで続行
+            for item in path.rglob('*'):
+                if item.is_file():
+                    try:
+                        total_size += item.stat().st_size
+                    except (OSError, PermissionError):
+                        pass
+        except (OSError, PermissionError):
             pass
+        return total_size
+    finally:
+        progress.stop()
 
-        # 簡単な図形を追加
-        draw.rectangle([size[0]//4, size[1]//4, 3*size[0]//4, 3*size[1]//4],
-                       outline="white", width=2)
+def get_directory_size(path: Path) -> int:
+    """ディレクトリ内のすべてのファイルサイズの合計を取得"""
+    total_size = 0
+    try:
+        for item in path.rglob('*'):
+            if item.is_file():
+                try:
+                    total_size += item.stat().st_size
+                except (OSError, PermissionError):
+                    pass
+    except (OSError, PermissionError):
+        pass
+    return total_size
 
-        # 保存
-        file_path = self.images_dir / name
+def get_file_size(path: Path) -> int:
+    """ファイルサイズを取得"""
+    try:
+        return path.stat().st_size
+    except (OSError, PermissionError):
+        return 0
 
-        # JPEG品質設定
-        if format == "JPEG":
-            img.save(file_path, format=format, quality=85)
-        else:
-            img.save(file_path, format=format)
-
-    def _create_pattern_images(self):
-        """パターン画像を作成"""
-        # チェッカーボードパターン
-        size = (400, 400)
-        img = Image.new('RGB', size, 'white')
-        draw = ImageDraw.Draw(img)
-
-        checker_size = 50
-        for y in range(0, size[1], checker_size):
-            for x in range(0, size[0], checker_size):
-                if (x // checker_size + y // checker_size) % 2 == 0:
-                    draw.rectangle(
-                        [x, y, x + checker_size, y + checker_size], fill='black')
-
-        img.save(self.images_dir / "pattern_checker.png", "PNG")
-
-        # グラデーション画像
-        img = Image.new('RGB', (600, 400), 'white')
-        pixels = img.load()
-        if pixels is None:
-            raise ValueError("画像のピクセルデータを取得できません")
-
-        for y in range(400):
-            for x in range(600):
-                r = int(255 * x / 600)
-                g = int(255 * y / 400)
-                b = 128
-                pixels[x, y] = (r, g, b)
-
-        img.save(self.images_dir / "pattern_gradient.jpg", "JPEG")
-
-    def _create_corrupted_files(self):
-        """破損したファイル（テスト用）を作成"""
-        # 偽の画像ファイル（実際はテキスト）
-        fake_jpg = self.images_dir / "corrupted.jpg"
-        with open(fake_jpg, 'w') as f:
-            f.write("This is not a real image file")
-
-        # 空ファイル
-        empty_png = self.images_dir / "empty.png"
-        empty_png.touch()
-
-        print("  ✓ 破損ファイル（テスト用）を作成しました")
-
-    def create_test_csvs(self):
-        """テスト用CSVファイルを作成"""
-        print("\nCSVファイルを作成中...")
-
-        # 基本的なフラッシュカードデータ
-        self._create_basic_flashcards()
-
-        # 日本語データ（異なるエンコーディング）
-        self._create_japanese_flashcards()
-
-        # 大容量CSVファイル
-        self._create_large_csv()
-
-        # 特殊文字・区切り文字のテスト
-        self._create_special_character_csvs()
-
-        # 異なる列構成のCSV
-        self._create_various_column_csvs()
-
-        print("  ✓ CSV ファイルを作成しました")
-
-    def _create_basic_flashcards(self):
-        """基本的なフラッシュカードCSVを作成"""
-        data = {
-            'question': [
-                'What is the capital of France?',
-                'What is 2 + 2?',
-                'Who wrote "Romeo and Juliet"?',
-                'What is the largest planet?',
-                'What year did World War II end?'
-            ],
-            'answer': [
-                'Paris',
-                '4',
-                'William Shakespeare',
-                'Jupiter',
-                '1945'
-            ],
-            'category': [
-                'Geography',
-                'Mathematics',
-                'Literature',
-                'Science',
-                'History'
-            ],
-            'difficulty': [
-                'Easy',
-                'Easy',
-                'Medium',
-                'Easy',
-                'Medium'
-            ]
-        }
-
-        df = pd.DataFrame(data)
-        df.to_csv(self.csvs_dir / "basic_flashcards_utf8.csv",
-                  encoding='utf-8', index=False)
-
-    def _create_japanese_flashcards(self):
-        """日本語フラッシュカードを異なるエンコーディングで作成"""
-        data_jp = {
-            '質問': [
-                '日本の首都は？',
-                '富士山の高さは？',
-                '日本で一番大きい島は？',
-                '日本の国花は？',
-                '平安時代の都は？'
-            ],
-            '回答': [
-                '東京',
-                '3776メートル',
-                '本州',
-                '桜',
-                '平安京（京都）'
-            ],
-            'カテゴリ': [
-                '地理',
-                '地理',
-                '地理',
-                '文化',
-                '歴史'
-            ],
-            '難易度': [
-                '易しい',
-                '普通',
-                '易しい',
-                '普通',
-                '難しい'
-            ]
-        }
-
-        df_jp = pd.DataFrame(data_jp)
-
-        # UTF-8版
-        df_jp.to_csv(self.csvs_dir / "japanese_flashcards_utf8.csv",
-                     encoding='utf-8', index=False)
-
-        # Shift-JIS版
-        df_jp.to_csv(self.csvs_dir / "japanese_flashcards_sjis.csv",
-                     encoding='shift-jis', index=False)
-
-        # CP932版
+def collect_size_info(path: Path, max_files: int = 10, show_size: bool = False) -> Dict[Path, int]:
+    """サイズ情報を事前に収集"""
+    if not show_size:
+        return {}
+    
+    size_info = {}
+    
+    def collect_recursive(current_path: Path, level: int = 0):
         try:
-            df_jp.to_csv(self.csvs_dir / "japanese_flashcards_cp932.csv",
-                         encoding='cp932', index=False)
-        except:
-            print("    警告: CP932エンコーディングでの保存に失敗しました")
+            entries = list(current_path.iterdir())
+        except (OSError, PermissionError):
+            return
+        
+        # 隠しファイル・ディレクトリと__で始まるものを除外
+        filtered_entries = []
+        for entry in entries:
+            if re.match(r"^\.", entry.name) or re.match(r"^__", entry.name):
+                continue
+            filtered_entries.append(entry)
+        
+        # ファイル数制限適用
+        if len(filtered_entries) > max_files:
+            dirs = [e for e in filtered_entries if e.is_dir()]
+            files = [e for e in filtered_entries if e.is_file()]
+            
+            if len(dirs) <= max_files:
+                remaining_slots = max_files - len(dirs)
+                selected_entries = dirs + files[:remaining_slots]
+            else:
+                selected_entries = dirs[:max_files]
+            
+            filtered_entries = selected_entries
+        
+        for entry in filtered_entries:
+            if entry.is_dir():
+                size_info[entry] = get_directory_size(entry)
+                collect_recursive(entry, level + 1)
+            else:
+                size_info[entry] = get_file_size(entry)
+    
+    # ルートディレクトリのサイズ計算（プログレスバー付き）
+    if path.is_dir():
+        size_info[path] = get_directory_size_with_progress(path)
+        collect_recursive(path)
+    else:
+        size_info[path] = get_file_size(path)
+    
+    return size_info
 
-    def _create_large_csv(self):
-        """大容量CSVファイルを作成（パフォーマンステスト用）"""
-        print("  大容量CSVファイルを作成中...")
+def calculate_max_width(lines: list[str]) -> int:
+    """ツリー部分の最大幅を計算（サイズ表示のための位置決め用）"""
+    max_width = 0
+    for line in lines:
+        # サイズ情報を除いた純粋なツリー部分の幅を計算
+        tree_part = line.split(' [')[0] if ' [' in line else line
+        max_width = max(max_width, len(tree_part))
+    return max_width
 
-        # 1万行のデータを生成
-        num_rows = 10000
+def make_tree_lines(path: Path, prefix: str = "", max_files: int = 10, 
+                   size_info: Dict[Path, int] | None = None, show_size: bool = False) -> list[str]:
+    """ディレクトリツリーを1行ずつリストで返す"""
+    lines = []
+    
+    try:
+        entries = list(path.iterdir())
+    except (OSError, PermissionError):
+        return [prefix + "├── [Permission Denied]"]
+    
+    # 隠しファイル・ディレクトリと__で始まるものを除外
+    filtered_entries = []
+    for entry in entries:
+        if re.match(r"^\.", entry.name) or re.match(r"^__", entry.name):
+            continue
+        filtered_entries.append(entry)
+    
+    # ファイル数が制限を超える場合は制限する
+    if len(filtered_entries) > max_files:
+        dirs = [e for e in filtered_entries if e.is_dir()]
+        files = [e for e in filtered_entries if e.is_file()]
+        
+        if len(dirs) <= max_files:
+            remaining_slots = max_files - len(dirs)
+            selected_entries = dirs + files[:remaining_slots]
+            omitted_count = len(filtered_entries) - len(selected_entries)
+        else:
+            selected_entries = dirs[:max_files]
+            omitted_count = len(filtered_entries) - len(selected_entries)
+        
+        filtered_entries = selected_entries
+    else:
+        omitted_count = 0
+    
+    # ソート（ディレクトリ優先、その後名前順）
+    sorted_entries = sorted(filtered_entries, key=lambda x: (not x.is_dir(), x.name.lower()))
+    
+    for idx, entry in enumerate(sorted_entries):
+        is_last = (idx == len(sorted_entries) - 1) and (omitted_count == 0)
+        connector = "└── " if is_last else "├── "
+        
+        line = prefix + connector + entry.name
+        
+        # サイズ情報を追加（後で位置調整）
+        if show_size and size_info and entry in size_info:
+            size_str = f" [{format_size(size_info[entry])}]"
+            line += size_str
+        
+        lines.append(line)
+        
+        if entry.is_dir():
+            extension = "    " if is_last and omitted_count == 0 else "│   "
+            lines.extend(make_tree_lines(entry, prefix + extension, max_files, size_info, show_size))
+    
+    # 省略されたファイルがある場合の表示
+    if omitted_count > 0:
+        lines.append(prefix + f"└── ... and {omitted_count} more items")
+    
+    return lines
 
-        categories = ['Math', 'Science', 'History',
-                      'Geography', 'Literature', 'Art']
-        difficulties = ['Easy', 'Medium', 'Hard']
+def align_size_display(lines: list[str], target_width: int = 80) -> list[str]:
+    """サイズ表示を右揃えにして見やすく整列"""
+    if not lines:
+        return lines
+    
+    aligned_lines = []
+    for line in lines:
+        if ' [' in line and line.endswith(']'):
+            # ツリー部分とサイズ部分を分離
+            tree_part, size_part = line.rsplit(' [', 1)
+            size_part = '[' + size_part
+            
+            # 適切な位置に配置
+            tree_len = len(tree_part)
+            if tree_len < target_width - len(size_part) - 1:
+                spaces_needed = target_width - tree_len - len(size_part)
+                aligned_line = tree_part + ' ' * spaces_needed + size_part
+            else:
+                aligned_line = tree_part + ' ' + size_part
+            
+            aligned_lines.append(aligned_line)
+        else:
+            aligned_lines.append(line)
+    
+    return aligned_lines
 
-        data = {
-            'id': range(1, num_rows + 1),
-            'question': [f"Question {i}: " + ''.join(random.choices(string.ascii_letters + ' ', k=50))
-                         for i in range(num_rows)],
-            'answer': [f"Answer {i}: " + ''.join(random.choices(string.ascii_letters + ' ', k=30))
-                       for i in range(num_rows)],
-            'category': [random.choice(categories) for _ in range(num_rows)],
-            'difficulty': [random.choice(difficulties) for _ in range(num_rows)],
-            'score': [random.randint(0, 100) for _ in range(num_rows)],
-            'created_date': [f"2024-{random.randint(1, 12):02d}-{random.randint(1, 28):02d}"
-                             for _ in range(num_rows)]
-        }
+def print_tree(path: Path, max_files: int = 10, show_size: bool = False):
+    """ディレクトリツリーをprintする"""
+    # サイズ情報を事前収集
+    size_info = collect_size_info(path, max_files, show_size) if show_size else {}
+    
+    # ルートの表示
+    root_line = path.name
+    if show_size and path in size_info:
+        root_line += f" [{format_size(size_info[path])}]"
+    print(root_line)
+    
+    # ツリーの生成
+    tree_lines = make_tree_lines(path, max_files=max_files, size_info=size_info, show_size=show_size)
+    
+    # サイズ表示がある場合は位置を調整
+    if show_size:
+        tree_lines = align_size_display(tree_lines)
+    
+    for line in tree_lines:
+        print(line)
 
-        df = pd.DataFrame(data)
-        df.to_csv(self.csvs_dir / "large_flashcards.csv",
-                  encoding='utf-8', index=False)
+def save_tree(path: Path, out_file: Path, max_files: int = 10, show_size: bool = False):
+    """ディレクトリツリーをファイルに保存する"""
+    # サイズ情報を事前収集
+    size_info = collect_size_info(path, max_files, show_size) if show_size else {}
+    
+    # ルートの表示
+    root_line = path.name
+    if show_size and path in size_info:
+        root_line += f" [{format_size(size_info[path])}]"
+    
+    # ツリーの生成
+    tree_lines = make_tree_lines(path, max_files=max_files, size_info=size_info, show_size=show_size)
+    
+    # サイズ表示がある場合は位置を調整
+    if show_size:
+        tree_lines = align_size_display(tree_lines)
+    
+    lines = [root_line] + tree_lines
+    tree_str = "\n".join(lines)
+    
+    out_file.parent.mkdir(exist_ok=True)
+    with open(out_file, "w", encoding="utf-8") as f:
+        f.write(tree_str)
+    print(f"[INFO] ツリーを {out_file} に保存しました")
 
-        print(f"    ✓ {num_rows:,} 行の大容量CSVを作成しました")
-
-    def _create_special_character_csvs(self):
-        """特殊文字・区切り文字のテストCSVを作成"""
-        # カンマ区切り（標準）
-        data = {
-            'question': ['What is "Hello" in French?', 'Calculate: 1,000 + 2,000'],
-            'answer': ['Bonjour', '3,000'],
-            'notes': ['Contains quotes', 'Contains commas in numbers']
-        }
-        df = pd.DataFrame(data)
-        df.to_csv(self.csvs_dir / "special_chars_comma.csv",
-                  encoding='utf-8', index=False)
-
-        # セミコロン区切り
-        df.to_csv(self.csvs_dir / "special_chars_semicolon.csv",
-                  encoding='utf-8', index=False, sep=';')
-
-        # タブ区切り
-        df.to_csv(self.csvs_dir / "special_chars_tab.tsv",
-                  encoding='utf-8', index=False, sep='\t')
-
-        # 特殊文字を含むデータ
-        special_data = {
-            'question': [
-                'What is ∑(i=1 to n) i?',
-                'Translate: café, naïve, résumé',
-                'Symbol: α, β, γ, δ',
-                'Emoji test: 📚✨🎯'
-            ],
-            'answer': [
-                'n(n+1)/2',
-                'Coffee, naive, resume',
-                'Greek letters',
-                'Books, sparkles, target'
-            ]
-        }
-
-        df_special = pd.DataFrame(special_data)
-        df_special.to_csv(self.csvs_dir / "unicode_special.csv",
-                          encoding='utf-8', index=False)
-
-    def _create_various_column_csvs(self):
-        """異なる列構成のCSVを作成"""
-        # 最小構成（2列）
-        minimal = pd.DataFrame({
-            'front': ['A', 'B', 'C'],
-            'back': ['1', '2', '3']
-        })
-        minimal.to_csv(self.csvs_dir / "minimal_2columns.csv",
-                       encoding='utf-8', index=False)
-
-        # 多列構成
-        many_columns = pd.DataFrame({
-            'question': ['Q1', 'Q2'],
-            'answer': ['A1', 'A2'],
-            'category': ['Cat1', 'Cat2'],
-            'subcategory': ['Sub1', 'Sub2'],
-            'difficulty': ['Easy', 'Hard'],
-            'tags': ['tag1,tag2', 'tag3,tag4'],
-            'source': ['Book1', 'Book2'],
-            'page': [10, 20],
-            'created_by': ['User1', 'User2'],
-            'last_review': ['2024-01-01', '2024-01-02'],
-            'review_count': [5, 3],
-            'success_rate': [0.8, 0.6]
-        })
-        many_columns.to_csv(self.csvs_dir / "many_columns.csv",
-                            encoding='utf-8', index=False)
-
-        # 空のセルを含むCSV
-        with_nulls = pd.DataFrame({
-            'question': ['Q1', 'Q2', 'Q3', 'Q4'],
-            'answer': ['A1', '', 'A3', 'A4'],
-            'category': ['Cat1', 'Cat2', '', 'Cat4'],
-            'notes': ['Note1', None, 'Note3', '']
-        })
-        with_nulls.to_csv(self.csvs_dir / "with_nulls.csv",
-                          encoding='utf-8', index=False)
-
+def main():
+    parser = argparse.ArgumentParser(
+        description="ディレクトリツリーを表示・保存するツール",
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog="""
+使用例:
+  python tree.py                          # カレントディレクトリを表示・保存
+  python tree.py /path/to/dir             # 指定ディレクトリを表示・保存
+  python tree.py -s                       # 保存のみ（表示しない）
+  python tree.py -o                       # 表示のみ（保存しない）
+  python tree.py --show-size              # ファイルサイズを表示
+  python tree.py --max-files 20           # 最大表示ファイル数を20に設定
+  python tree.py --show-size --max-files 15  # サイズ表示付きで最大15ファイル
+        """
+    )
+    
+    parser.add_argument(
+        "path", 
+        nargs="?", 
+        default=".", 
+        help="対象ディレクトリのパス（デフォルト: 現在のディレクトリ）"
+    )
+    
+    parser.add_argument(
+        "-s", "--save-only",
+        action="store_true",
+        help="ファイルに保存のみ行う（画面表示しない）"
+    )
+    
+    parser.add_argument(
+        "-o", "--output-only", 
+        action="store_true",
+        help="画面表示のみ行う（ファイル保存しない）"
+    )
+    
+    parser.add_argument(
+        "--show-size",
+        action="store_true",
+        help="ファイル・ディレクトリのサイズを表示（デフォルト: 無効）"
+    )
+    
+    parser.add_argument(
+        "--max-files",
+        type=int,
+        default=10,
+        help="各ディレクトリで表示する最大ファイル数（デフォルト: 10）"
+    )
+    
+    args = parser.parse_args()
+    
+    # パスの検証
+    dir_path = Path(args.path).resolve()
+    if not dir_path.exists():
+        print(f"エラー: {dir_path} は存在しません")
+        sys.exit(1)
+    
+    # 動作の決定
+    do_save = not args.output_only
+    do_print = not args.save_only
+    
+    # 両方無効の場合は警告
+    if not do_save and not do_print:
+        print("警告: -s と -o の両方が指定されているため、何も実行されません")
+        return
+    
+    # 実行
+    if do_save:
+        out_file = Path("tests") / f"{dir_path.name}_tree.txt"
+        save_tree(dir_path, out_file, args.max_files, args.show_size)
+    
+    if do_print:
+        print_tree(dir_path, args.max_files, args.show_size)
 
 if __name__ == "__main__":
-    testgenerator = TestDataCreator()
-    testgenerator.create_all()
+    main()

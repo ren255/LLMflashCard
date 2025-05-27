@@ -9,20 +9,16 @@ from pathlib import Path
 
 ##
 # @brief ファイル管理クラス
-# @details path辞書を受け取ってファイルの保存、削除、サムネイル作成などを行う
+# @details path辞書を受け取ってファイルの保存、削除、サムネイル作成などを行う。filetypeごとにインスタンス化される。
 class FileManager():
-    def __init__(self, paths: Dict[str, str]):
+    """共通のファイル管理クラス,filetypeごとに作成される"""
+    def __init__(self, paths: Dict[str, str],thumbnail_size = (200,200)):
         """
         path辞書からFileManagerを初期化
-        
-        Args:
-            paths: パス情報の辞書
-                - "storage_path": メインファイル保存ディレクトリ
-                - "thumbnails_path": サムネイル保存ディレクトリ  
-                - "temp_path": 一時ファイルディレクトリ
-                - "base_path": ベースディレクトリ（相対パス計算用）
         """
         self.paths = paths
+        self.thumbnail_size = thumbnail_size
+        
         self.storage_dir = Path(paths["storage_path"])
         self.thumbnails_dir = Path(paths["thumbnails_path"])
         self.temp_dir = Path(paths["temp_path"])
@@ -36,9 +32,10 @@ class FileManager():
         for dir_path in [self.storage_dir, self.thumbnails_dir, self.temp_dir]:
             dir_path.mkdir(parents=True, exist_ok=True)
     
-    def create_thumbnail(self, image_path: Path, filename: str) -> str:
+    def create_thumbnail(self, image_path: Path) -> Path | None:
         """サムネイル作成"""
         try:
+            filename = image_path.name
             thumbnail_name = f"thumb_{filename}"
             thumbnail_path = self.thumbnails_dir / thumbnail_name
             
@@ -47,15 +44,15 @@ class FileManager():
                 if img.mode in ('RGBA', 'LA', 'P'):
                     img = img.convert('RGB')
                 
-                img.thumbnail((200, 200), Image.Resampling.LANCZOS)
+                img.thumbnail(self.thumbnail_size, Image.Resampling.LANCZOS)
                 img.save(thumbnail_path, "JPEG", optimize=True, quality=85)
             
-            return str(thumbnail_path)
+            return thumbnail_path
         except Exception as e:
             print(f"サムネイル作成エラー: {e}")
-            return ""
+            return None
 
-    def calculate_hash(self, file_path: str) -> str:
+    def calculate_hash(self, file_path: Path) -> str:
         """ファイルのSHA256ハッシュをバイナリから計算"""
         hash_sha256 = hashlib.sha256()
         with open(file_path, "rb") as f:
@@ -85,20 +82,20 @@ class FileManager():
         except Exception as e:
             print(f"ファイル削除エラー: {e}")
 
-    def save_file(self, source_path: str) -> str:
+    def save_file(self, source_path: Path) -> Path | None:
         """
-        ファイルを保存し、pathを返す
+        ファイルを保存し、path
         """
         try:
-            file_extension = Path(source_path).suffix.lower()
+            file_extension = source_path.suffix.lower()
             new_filename = self.generate_filename(file_extension)
             save_path = self.storage_dir / new_filename
             shutil.copy2(source_path, save_path)
-            return str(save_path)
+            
+            return save_path
         
         except Exception as e:
-            print(f"file保存エラー: {e}")
-            return ""
+            return None
 
     def move_from_temp(self, temp_filename: str) -> str:
         """

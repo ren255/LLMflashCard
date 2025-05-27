@@ -10,11 +10,14 @@ from .file_manager import FileManager
 ##
 # @brief ストレージ管理の基底クラス
 # @details このクラスはストレージ管理の基本的な機能を提供し、サブクラスで具体的な実装を行う
+
+
 class BaseStorage(ABC):
 
-    def __init__(self, db_path: str, storage_path: str):
-        self.db_path = db_path
-        self.storage_path = storage_path
+    def __init__(self, file_type: str, paths: Dict[str, str]):
+        self.file_type = file_type
+        self.paths = paths
+
         self.fileMgr = self._create_file_manager()
         self.metadataMgr = self._create_metadata_manager()
 
@@ -28,7 +31,15 @@ class BaseStorage(ABC):
         """メタデータマネージャーを作成（サブクラスで実装）"""
         pass
 
-    def save(self, source_path: str, collection: str = "", **kwargs) -> int | None:
+    @abstractmethod
+    def save(self, source_path: Path,  collection: str = "", **kwargs) -> int | None:
+        """
+        ファイルを保存（サブクラスで実装）
+        Returns: (record_id, saved_path) - record_idはエラー時None
+        """
+        pass
+
+    def save_file(self, source_path: Path, collection: str = "", **kwargs) -> int | None:
         """
         ファイルを保存（重複チェック付き）
         Returns: (record_id, saved_path) - record_idはエラー時None
@@ -41,13 +52,16 @@ class BaseStorage(ABC):
                 return None
 
             saved_path = self.fileMgr.save_file(source_path)
-            metadata = self.metadataMgr.get_metadata(Path(source_path))
-            relative_path = self.fileMgr.get_relative_path(saved_path)
+            if not saved_path:
+                return None
 
+            metadata = self.metadataMgr.get_metadata(source_path)
+            thumbnail_path = self.fileMgr.create_thumbnail(saved_path)
             save_data = {
                 "filename": metadata["filename"],
                 "original_name": Path(source_path).name,
-                "file_path": relative_path,
+                "file_path": self.paths["base_path"] / saved_path,
+                "thumbnail_path": str(thumbnail_path) if thumbnail_path else "",
                 "hash": file_hash,
                 "collection": collection,
                 **metadata,
@@ -139,6 +153,7 @@ class BaseStorage(ABC):
             "collection_names": collections
         }
 
+
 class BaseMetadataManager(ABC):
     """メタデータ管理の基底クラス"""
 
@@ -211,7 +226,7 @@ class BaseMetadataManager(ABC):
         サブクラスで実装する
         """
         pass
-    
+
     @abstractmethod
     def get_metadata(self, file_path: Path) -> Dict[str, Any]:
         """

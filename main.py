@@ -1,4 +1,6 @@
 
+from pathlib import Path
+
 from storage import StorageController
 
 # ===========================================
@@ -32,6 +34,19 @@ def main_example():
     print(f"  画像ファイル数: {stats['image']['total_files']}")
     print(f"  フラッシュカード数: {stats['flashcard']['total_files']}")
     print(f"  総ファイル数: {stats['total_files']}")
+    
+    print("------------------------------------")
+    
+    # 画像ファイルの保存例
+    
+    sorce_image_path = "C:\\Users\\renpe\\MyDocuments\\screenshot\\スクリーンショット 2025-05-26 221300.png"
+    sorce_image_path = Path(sorce_image_path)
+    
+    saved_image_path = image_storage.save_file(sorce_image_path)
+    if saved_image_path:
+        print(f"画像ファイル保存成功: {saved_image_path}")
+    else:
+        print("画像ファイル保存失敗")
     
     # クリーンアップ
     storage_controller.cleanup()

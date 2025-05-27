@@ -49,7 +49,12 @@ pip install pytest pytest-cov pytest-mock pillow pandas
 
 - **画像ファイル**: JPEG, PNG, 異なるサイズ
 - **CSVファイル**: UTF-8, Shift-JIS, 異なる区切り文字
-- **一時ディレクトリ**: テスト専用の隔離された環境
+- **一時ディレクトリ**: テスト専用の隔離された環境 
+
+test/fixturesに用意されている
+具体的なfile構造は`_tree.txt`を参照
+
+また,Storageのrootは本番と違い `test/resources`に作成し、終了時に削除する。
 
 ## テストケース詳細
 
@@ -104,7 +109,16 @@ pip install pytest pytest-cov pytest-mock pillow pandas
 #### ディレクトリ管理
 
 - [ ] _ensure_directories(): ディレクトリ作成
-- [ ] 権限不足時の処理
+
+#### bulk
+fixtures/bulk/ディレクトリに各形式100個ずつ
+バルクファイル:
+bulk_001.csv ～ bulk_100.csv (CSV形式)
+bulk_001.tsv ～ bulk_100.tsv (TSV形式)
+bulk_001.png ～ bulk_100.png (PNG画像)
+bulk_001.jpg ～ bulk_100.jpg (JPEG画像)
+
+保存の時間、メモリなどを取得
 
 ### 3. ImageStorage テスト
 
@@ -172,105 +186,3 @@ pip install pytest pytest-cov pytest-mock pillow pandas
 - [ ] search(): 条件検索
 - [ ] get_all(): 全件取得
 
-#### スキーマ検証
-
-- [ ] 無効なフィールドの除外
-- [ ] 必須フィールドの検証
-- [ ] データ型の適切な処理
-
-
-# 現在のfile構造
-```
-LLMflashCard
-├── .git
-├── .pytest_cache
-├── .venv
-├── .VSCodeCounter
-├── db
-│   ├── __pycache__
-│   ├── __init__.py
-│   ├── interface_utils.py
-│   ├── models.py
-│   └── sqlite_utils.py
-├── gui
-│   └── __init__.py
-├── image_processing
-│   └── __init__.py
-├── llm
-│   └── __init__.py
-├── logic
-│   └── __init__.py
-├── resources
-│   ├── db
-│   │   ├── flashcards.db
-│   │   ├── images.db
-│   │   ├── my_database.db
-│   │   ├── test.db
-│   │   └── test.sqlite
-│   ├── flashcard
-│   ├── image
-│   │   └── 477f563689e745089dad3e4798091bc0.png
-│   ├── temp
-│   │   ├── flashcard
-│   │   └── image
-│   ├── tempSave
-│   ├── thumbnails
-│   │   ├── flashcard
-│   │   └── image
-│   │       └── thumb_477f563689e745089dad3e4798091bc0.png
-│   └── upload
-├── storage
-│   ├── __pycache__
-│   ├── __init__.py
-│   ├── base_managers.py
-│   ├── file_manager.py
-│   ├── flashcard_managers.py
-│   ├── image_managers.py
-│   └── storage_controller.py
-├── test
-│   ├── fixtures
-│   │   ├── test_csvs
-│   │   │   ├── basic_flashcards_utf8.csv
-│   │   │   ├── japanese_flashcards_cp932.csv
-│   │   │   ├── japanese_flashcards_sjis.csv
-│   │   │   ├── japanese_flashcards_utf8.csv
-│   │   │   ├── large_flashcards.csv
-│   │   │   ├── many_columns.csv
-│   │   │   ├── minimal_2columns.csv
-│   │   │   ├── special_chars_comma.csv
-│   │   │   ├── special_chars_semicolon.csv
-│   │   │   ├── special_chars_tab.tsv
-│   │   │   ├── unicode_special.csv
-│   │   │   └── with_nulls.csv
-│   │   ├── test_databases
-│   │   └── test_images
-│   │       ├── corrupted.jpg
-│   │       ├── empty.png
-│   │       ├── large_banner.png
-│   │       ├── large_photo.jpg
-│   │       ├── medium_landscape.jpg
-│   │       ├── medium_portrait.png
-│   │       ├── medium_square.jpg
-│   │       ├── pattern_checker.png
-│   │       ├── pattern_gradient.jpg
-│   │       ├── small_blue.png
-│   │       ├── small_green.webp
-│   │       ├── small_red.jpg
-│   │       ├── tall_poster.png
-│   │       └── wide_banner.jpg
-│   ├── make_testdata.py
-│   ├── pytest.ini
-│   ├── StorageTest.md
-│   └── test_db.py
-├── tests
-│   ├── __pycache__
-│   ├── calss.dio
-│   ├── db.try.py
-│   ├── LLMflashCard_tree.txt
-│   ├── path.py
-│   └── tree.py
-├── .gitignore
-├── main.py
-├── my_database.db
-└── requirements.txt
-```

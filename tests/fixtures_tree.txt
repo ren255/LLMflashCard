@@ -1,0 +1,30 @@
+fixtures
+├── test_csvs
+│   ├── basic_flashcards_utf8.csv
+│   ├── japanese_flashcards_cp932.csv
+│   ├── japanese_flashcards_sjis.csv
+│   ├── japanese_flashcards_utf8.csv
+│   ├── large_flashcards.csv
+│   ├── many_columns.csv
+│   ├── minimal_2columns.csv
+│   ├── special_chars_comma.csv
+│   ├── special_chars_semicolon.csv
+│   ├── special_chars_tab.tsv
+│   ├── unicode_special.csv
+│   └── with_nulls.csv
+├── test_databases
+└── test_images
+    ├── corrupted.jpg
+    ├── empty.png
+    ├── large_banner.png
+    ├── large_photo.jpg
+    ├── medium_landscape.jpg
+    ├── medium_portrait.png
+    ├── medium_square.jpg
+    ├── pattern_checker.png
+    ├── pattern_gradient.jpg
+    ├── small_blue.png
+    ├── small_green.webp
+    ├── small_red.jpg
+    ├── tall_poster.png
+    └── wide_banner.jpg

@@ -4,54 +4,36 @@ import json
 import shutil
 from pathlib import Path
 
-from .base_managers import BaseStorage, FileManager, BaseMetadataManager
+from .base_managers import BaseStorage, BaseMetadataManager
+from .file_manager import FileManager
 from db.models import FLASHCARD_SCHEMA
+
 
 class FlashcardStorage(BaseStorage):
     """フラッシュカードストレージ管理クラス"""
 
-    def __init__(self, db_path: str, storage_path: str):
-        super().__init__(db_path, storage_path)
+    def __init__(self, file_type: str, paths: Dict[str, str]):
+        super().__init__(file_type, paths)
 
-    def _create_file_manager(self) -> CSVFileManager:
-        """CSVファイルマネージャーを作成"""
-        return CSVFileManager(self.storage_path)
+    def _create_file_manager(self) -> FileManager:
+        return FileManager(self.paths)
 
     def _create_metadata_manager(self) -> FlashcardMetadataManager:
         """フラッシュカードメタデータマネージャーを作成"""
-        return FlashcardMetadataManager(self.db_path, FLASHCARD_SCHEMA)
+        return FlashcardMetadataManager(self.paths["db_path"], FLASHCARD_SCHEMA)
 
     # フラッシュカード固有の便利メソッド
-    def save_csv(
-        self,
-        source_path: str,
-        original_name: str,
-        collection: str = "",
-        columns_mapping: Dict[str, str] | None = None,
-        **kwargs,
-    ) -> int | None:
-        """
-        CSVファイルをフラッシュカード用に保存
+    def save(self, source_path: Path, collection: str = "", **kwargs) -> int | None:
 
-        Args:
-            source_path: 元CSVファイルパス
-            original_name: 元ファイル名
-            collection: コレクション名
-            columns_mapping: カラムマッピング {"question": "質問", "answer": "回答"}
-            **kwargs: その他のメタデータ
-
-        Returns:
-            (record_id, saved_path)
-        """
         # カラムマッピングをJSONで保存
-        if columns_mapping:
-            kwargs["columns"] = json.dumps(columns_mapping)
+        # if columns_mapping:
+        #     kwargs["columns"] = json.dumps(columns_mapping)
 
-        return self.save(
+        return self.save_file(
             source_path=source_path,
-            original_name=original_name,
+
             collection=collection,
-            **kwargs,
+            **kwargs
         )
 
     def get_columns(self, record_id: int) -> List[str]:
@@ -61,21 +43,23 @@ class FlashcardStorage(BaseStorage):
             return info["columns"]
         return []
 
-    def update_columns_mapping(self, record_id: int, columns_mapping: Dict[str, str]):
-        """カラムマッピングを更新"""
-        self.metadataMgr.update_columns(record_id, list(columns_mapping.keys()))
-        self.update_metadata(record_id, columns=json.dumps(columns_mapping))
+    # def update_columns_mapping(self, record_id: int, columns_mapping: Dict[str, str]):
+    #     """カラムマッピングを更新"""
+    #     self.metadataMgr.update_columns(
+    #         record_id, list(columns_mapping.keys()))
+    #     self.update_metadata(record_id, columns=json.dumps(columns_mapping))
 
     def get_csv_info(self, record_id: int) -> Optional[Dict]:
         """CSV固有の詳細情報を取得"""
         return self.metadataMgr.get_specific_fields(record_id)
 
-    def get_by_row_count_range(self, min_rows: int, max_rows: int) -> List[Dict]:
-        """行数範囲でフラッシュカードを検索"""
-        records = self.metadataMgr.get_by_row_count_range(min_rows, max_rows)
-        for record in records:
-            record["full_path"] = self.fileMgr.get_file_path(record["filename"])
-        return records
+    # def get_by_row_count_range(self, min_rows: int, max_rows: int) -> List[Dict]:
+    #     """行数範囲でフラッシュカードを検索"""
+    #     records = self.metadataMgr.get_by_row_count_range(min_rows, max_rows)
+    #     for record in records:
+    #         record["full_path"] = self.fileMgr.get_file_path(
+    #             record["filename"])
+    #     return records
 
     def get_encoding_info(self, record_id: int) -> Optional[str]:
         """ファイルエンコーディング情報を取得"""
@@ -135,24 +119,6 @@ class FlashcardStorage(BaseStorage):
         params = (f"%{search_term}%", f"%{search_term}%")
         return self.search(condition, params)
 
-class CSVFileManager(FileManager):
-    """CSVファイル専用のマネージャー"""
-
-    def __init__(self, base_path: str):
-        super().__init__(base_path, "csvs")
-
-    def save_file(
-        self, source_path: str, 
-    ) -> Tuple[str, str, Dict[str, Any]]:
-        """CSVファイルを保存"""
-        file_hash = self.calculate_hash(source_path)
-        new_filename = self.generate_filename(original_name)
-        save_path = self.files_dir / new_filename
-        shutil.copy2(source_path, save_path)
-        metadata = self.get_metadata(save_path)
-
-        return str(save_path), file_hash, {**metadata, "filename": new_filename}
-
 
 class FlashcardMetadataManager(BaseMetadataManager):
     """フラッシュカードメタデータ管理"""
@@ -173,7 +139,7 @@ class FlashcardMetadataManager(BaseMetadataManager):
                 "delimiter": record.get("delimiter"),
             }
         return None
-    
+
     def get_metadata(self, file_path: Path) -> Dict[str, Any]:
         """CSVのメタデータを取得"""
         import pandas as pd

@@ -1,10 +1,10 @@
 import os
 from pathlib import Path
-from typing import Optional, Dict, Any
+from typing import Dict, Any
 
 from .image_managers import ImageStorage
 from .flashcard_managers import FlashcardStorage
-from db.sqlite_utils import SQLiteManager
+from db import SQLiteManager
 from db.models import IMAGE_SCHEMA, FLASHCARD_SCHEMA
 
 
@@ -80,7 +80,7 @@ class StorageController:
         for file_type, info in self.FILETYPE_INFO.items():
             db_path = self.db_paths[file_type]
             schema = info["schema"]
-            table_name = info[file_type] + "_metadata"
+            table_name = file_type + "_metadata"
             
             if not os.path.exists(db_path):
                 print(f"{file_type}データベースを作成: {db_path}")
@@ -100,9 +100,17 @@ class StorageController:
             info = self.FILETYPE_INFO[file_type]
             storage_class = info["storage_class"]
             
+            file_type_paths = {
+            "base_path": str(self.base_path),
+            "db_path": self.db_paths[file_type],
+            "storage_path": self.storage_paths[file_type],
+            "thumbnails_path": str(self.base_path / "thumbnails" / file_type),
+            "temp_path": str(self.base_path / "temp" / file_type),
+            }
+            
             self._storage_instances[file_type] = storage_class(
-                db_path=self.db_paths[file_type],
-                storage_path=self.storage_paths[file_type]
+                file_type,
+                file_type_paths,
             )
         
         return self._storage_instances[file_type]
@@ -174,43 +182,3 @@ class StorageController:
                 print(f"{file_type}ストレージをクリーンアップ")
         
         print("StorageController クリーンアップ完了")
-
-
-# ===========================================
-# main.py での使用例
-# ===========================================
-
-def main_example():
-    """main.pyでの使用例"""
-    
-    # StorageController初期化（自動でディレクトリ・DB作成）
-    storage_controller = StorageController("./resources")
-    
-    # パス情報確認
-    paths = storage_controller.get_paths_info()
-    print("パス設定:")
-    for key, path in paths.items():
-        print(f"  {key}: {path}")
-    
-    # 画像ストレージ使用
-    image_storage = storage_controller.image_storage
-    
-    # フラッシュカードストレージ使用  
-    flashcard_storage = storage_controller.flashcard_storage
-    
-    # 任意のストレージ取得も可能
-    # some_storage = storage_controller.get_storage("image")
-    
-    # 統計情報表示
-    stats = storage_controller.get_storage_stats()
-    print(f"\n統計情報:")
-    print(f"  画像ファイル数: {stats['image']['total_files']}")
-    print(f"  フラッシュカード数: {stats['flashcard']['total_files']}")
-    print(f"  総ファイル数: {stats['total_files']}")
-    
-    # クリーンアップ
-    storage_controller.cleanup()
-
-
-if __name__ == "__main__":
-    main_example()

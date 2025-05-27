@@ -2,6 +2,10 @@
 from pathlib import Path
 
 from storage import StorageController
+from utils import LogLevel, set_global_log_level, log
+set_global_log_level(LogLevel.DEBUG)
+
+log.debug("debug: main.pyの実行開始")
 
 # ===========================================
 # main.py での使用例
@@ -15,9 +19,9 @@ def main_example():
     
     # パス情報確認
     paths = storage_controller.get_paths_info()
-    print("パス設定:")
+    log.info("パス設定:")
     for key, path in paths.items():
-        print(f"  {key}: {path}")
+        log.info(f"  {key}: {path}")
     
     # 画像ストレージ使用
     image_storage = storage_controller.image_storage
@@ -30,12 +34,12 @@ def main_example():
     
     # 統計情報表示
     stats = storage_controller.get_storage_stats()
-    print(f"\n統計情報:")
-    print(f"  画像ファイル数: {stats['image']['total_files']}")
-    print(f"  フラッシュカード数: {stats['flashcard']['total_files']}")
-    print(f"  総ファイル数: {stats['total_files']}")
+    log.info(f"  統計情報:")
+    log.info(f"  画像ファイル数: {stats['image']['total_files']}")
+    log.info(f"  フラッシュカード数: {stats['flashcard']['total_files']}")
+    log.info(f"  総ファイル数: {stats['total_files']}")
     
-    print("------------------------------------")
+    log.info("------------------------------------------------------------------------")
     
     # 画像ファイルの保存例
     
@@ -44,9 +48,9 @@ def main_example():
     
     saved_image_path = image_storage.save_file(sorce_image_path)
     if saved_image_path:
-        print(f"画像ファイル保存成功: {saved_image_path}")
+        log.info(f"画像ファイル保存成功: {saved_image_path}")
     else:
-        print("画像ファイル保存失敗")
+        log.error("画像ファイル保存失敗")
     
     # クリーンアップ
     storage_controller.cleanup()

@@ -6,7 +6,7 @@ from .image_managers import ImageStorage
 from .flashcard_managers import FlashcardStorage
 from db import SQLiteManager
 from db.models import IMAGE_SCHEMA, FLASHCARD_SCHEMA
-
+from utils import log
 
 class StorageController:
     """ストレージ管理の統合クラス - main.pyから呼ばれる"""
@@ -73,7 +73,7 @@ class StorageController:
         for directory in all_directories:
             directory.mkdir(parents=True, exist_ok=True)
         
-        print(f"ディレクトリセットアップ完了: {self.base_path}")
+        log.info(f"ディレクトリセットアップ完了: {self.base_path}")
 
     def _setup_databases(self):
         """データベースをセットアップ（テーブル作成）"""
@@ -83,18 +83,18 @@ class StorageController:
             table_name = file_type + "_metadata"
             
             if not os.path.exists(db_path):
-                print(f"{file_type}データベースを作成: {db_path}")
+                log.info(f"{file_type}データベースを作成: {db_path}")
             
             db = SQLiteManager(db_path)
             db.create_table(table_name, schema)
             db.close()
         
-        print("データベースセットアップ完了")
+        log.info("データベースセットアップ完了")
 
     def _get_storage_instance(self, file_type: str):
         """ストレージインスタンスを取得（遅延初期化）"""
         if file_type not in self.FILETYPE_INFO:
-            raise ValueError(f"未対応のファイルタイプ: {file_type}")
+            log.error(f"未対応のファイルタイプ: {file_type}")
         
         if self._storage_instances[file_type] is None:
             info = self.FILETYPE_INFO[file_type]
@@ -179,6 +179,6 @@ class StorageController:
         for file_type, instance in self._storage_instances.items():
             if instance is not None:
                 instance.metadataMgr.db.close()
-                print(f"{file_type}ストレージをクリーンアップ")
+                log.info(f"{file_type}ストレージをクリーンアップ")
         
-        print("StorageController クリーンアップ完了")
+        log.info("StorageController クリーンアップ完了")

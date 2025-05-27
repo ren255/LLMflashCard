@@ -17,6 +17,9 @@ import os
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 
 from storage import StorageController
+from utils import LogLevel, set_global_log_level, log
+set_global_log_level(LogLevel.DEBUG)
+log.debug("Starting Storage Module Integration Tests")
 
 class TestStorageIntegration:
     """ストレージモジュール統合テスト"""
@@ -122,7 +125,7 @@ class TestStorageIntegration:
                 )
                 if record_id:
                     saved_ids.append(record_id)
-        
+
         assert len(saved_ids) >= 1, "少なくとも1つのCSVが保存されるべき"
         
         # 2. 保存したCSVを取得

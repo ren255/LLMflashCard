@@ -1,24 +1,25 @@
 from __future__ import annotations
 from typing import Optional, Dict, List, Any, Tuple
-import os
-import uuid
-import hashlib
 from pathlib import Path
 
 from abc import ABC, abstractmethod
 from db.sqlite_utils import SQLiteManager
 
+from .file_manager import FileManager
+
+##
+# @brief ストレージ管理の基底クラス
+# @details このクラスはストレージ管理の基本的な機能を提供し、サブクラスで具体的な実装を行う
 class BaseStorage(ABC):
-    """ストレージ管理の基底クラス"""
 
     def __init__(self, db_path: str, storage_path: str):
         self.db_path = db_path
         self.storage_path = storage_path
-        self.file_manager = self._create_file_manager()
-        self.metadata_manager = self._create_metadata_manager()
+        self.fileMgr = self._create_file_manager()
+        self.metadataMgr = self._create_metadata_manager()
 
     @abstractmethod
-    def _create_file_manager(self) -> BaseFileManager:
+    def _create_file_manager(self) -> FileManager:
         """ファイルマネージャーを作成（サブクラスで実装）"""
         pass
 
@@ -27,32 +28,25 @@ class BaseStorage(ABC):
         """メタデータマネージャーを作成（サブクラスで実装）"""
         pass
 
-    def save(self, source_path: str, original_name: str, collection: str = "", **kwargs) -> Tuple[Optional[int], str]:
+    def save(self, source_path: str, collection: str = "", **kwargs) -> int | None:
         """
         ファイルを保存（重複チェック付き）
         Returns: (record_id, saved_path) - record_idはエラー時None
         """
         try:
-            # 一時的にハッシュを計算して重複チェック
-            temp_hash = self.file_manager.calculate_hash(source_path)
-            existing = self.metadata_manager.get_by_hash(temp_hash)
-
+            file_hash = self.fileMgr.calculate_hash(source_path)
+            existing = self.metadataMgr.get_by_hash(file_hash)
             if existing:
-                # 既に存在する場合は既存のIDを返す
-                return existing["id"], existing["file_path"]
+                print(f"重複ファイル検出: {existing['filename']}")
+                return None
 
-            # 新規保存
-            saved_path, file_hash, metadata = self.file_manager.save_file(
-                source_path, original_name
-            )
+            saved_path = self.fileMgr.save_file(source_path)
+            metadata = self.metadataMgr.get_metadata(Path(source_path))
+            relative_path = self.fileMgr.get_relative_path(saved_path)
 
-            # 相対パス計算
-            relative_path = self.file_manager.get_relative_path(saved_path)
-
-            # メタデータ準備
             save_data = {
                 "filename": metadata["filename"],
-                "original_name": original_name,
+                "original_name": Path(source_path).name,
                 "file_path": relative_path,
                 "hash": file_hash,
                 "collection": collection,
@@ -60,21 +54,19 @@ class BaseStorage(ABC):
                 **kwargs  # 追加のメタデータ
             }
 
-            # メタデータ保存
-            record_id = self.metadata_manager.save_metadata(**save_data)
+            record_id = self.metadataMgr.save_metadata(**save_data)
 
-            return record_id, saved_path
+            return record_id
 
         except Exception as e:
             print(f"ファイル保存エラー: {e}")
-            return None, ""
+            return None
 
     def get(self, record_id: int) -> Optional[Dict]:
         """レコード情報を取得"""
-        metadata = self.metadata_manager.get_by_id(record_id)
+        metadata = self.metadataMgr.get_by_id(record_id)
         if metadata:
-            # 完全パスを追加
-            full_path = self.file_manager.get_file_path(metadata["filename"])
+            full_path = self.fileMgr.get_file_path(metadata["filename"])
             metadata["full_path"] = full_path
         return metadata
 
@@ -82,17 +74,14 @@ class BaseStorage(ABC):
         """ファイルを完全削除"""
         try:
             # メタデータ取得
-            metadata = self.metadata_manager.get_by_id(record_id)
+            metadata = self.metadataMgr.get_by_id(record_id)
             if not metadata:
                 return False
 
-            # ファイル削除
-            full_path = self.file_manager.get_file_path(metadata["filename"])
+            full_path = self.fileMgr.get_file_path(metadata["filename"])
             thumbnail_path = metadata.get("thumbnail_path", "")
-            self.file_manager.delete_file(full_path, thumbnail_path)
-
-            # メタデータ削除
-            self.metadata_manager.delete_metadata(record_id)
+            self.fileMgr.delete_file(full_path, thumbnail_path)
+            self.metadataMgr.delete_metadata(record_id)
 
             return True
         except Exception as e:
@@ -101,35 +90,35 @@ class BaseStorage(ABC):
 
     def get_all(self) -> List[Dict]:
         """全レコードを取得"""
-        records = self.metadata_manager.get_all()
+        records = self.metadataMgr.get_all()
         for record in records:
-            record["full_path"] = self.file_manager.get_file_path(
+            record["full_path"] = self.fileMgr.get_file_path(
                 record["filename"])
         return records
 
     def get_by_collection(self, collection: str) -> List[Dict]:
         """コレクション別に取得"""
-        records = self.metadata_manager.get_by_collection(collection)
+        records = self.metadataMgr.get_by_collection(collection)
         for record in records:
-            record["full_path"] = self.file_manager.get_file_path(
+            record["full_path"] = self.fileMgr.get_file_path(
                 record["filename"])
         return records
 
     def update_metadata(self, record_id: int, **kwargs):
         """メタデータを更新"""
-        self.metadata_manager.update_metadata(record_id, **kwargs)
+        self.metadataMgr.update_metadata(record_id, **kwargs)
 
     def search(self, condition: str, params: tuple) -> List[Dict]:
         """条件検索"""
-        records = self.metadata_manager.search(condition, params)
+        records = self.metadataMgr.search(condition, params)
         for record in records:
-            record["full_path"] = self.file_manager.get_file_path(
+            record["full_path"] = self.fileMgr.get_file_path(
                 record["filename"])
         return records
 
     def get_collections(self) -> List[str]:
         """すべてのコレクション名を取得"""
-        records = self.metadata_manager.get_all()
+        records = self.metadataMgr.get_all()
         collections = set()
         for record in records:
             if record.get("collection"):
@@ -138,7 +127,7 @@ class BaseStorage(ABC):
 
     def get_stats(self) -> Dict[str, Any]:
         """統計情報を取得"""
-        all_records = self.metadata_manager.get_all()
+        all_records = self.metadataMgr.get_all()
 
         total_size = sum(record.get("file_size", 0) for record in all_records)
         collections = self.get_collections()
@@ -149,72 +138,6 @@ class BaseStorage(ABC):
             "collections": len(collections),
             "collection_names": collections
         }
-class BaseFileManager(ABC):
-    """ファイル管理の基底クラス"""
-
-    def __init__(self, base_path: str, file_type: str):
-        self.base_path = Path(base_path)
-        self.file_type = file_type
-        self.files_dir = self.base_path / file_type
-        self.thumbnails_dir = self.base_path / "thumbnails" / file_type
-        self.temp_dir = self.base_path / "temp" / file_type
-
-        # ディレクトリ作成
-        self._create_directories()
-
-    def _create_directories(self):
-        """必要なディレクトリを作成"""
-        for directory in [self.files_dir, self.thumbnails_dir, self.temp_dir]:
-            directory.mkdir(parents=True, exist_ok=True)
-
-    def calculate_hash(self, file_path: str) -> str:
-        """ファイルのSHA256ハッシュを計算"""
-        hash_sha256 = hashlib.sha256()
-        with open(file_path, "rb") as f:
-            for chunk in iter(lambda: f.read(4096), b""):
-                hash_sha256.update(chunk)
-        return hash_sha256.hexdigest()
-
-    def generate_filename(self, original_name: str) -> str:
-        """新しいファイル名を生成（重複防止）"""
-        file_extension = Path(original_name).suffix.lower()
-        return f"{uuid.uuid4().hex}{file_extension}"
-
-    def get_file_path(self, filename: str) -> str:
-        """ファイル名から完全パスを取得"""
-        return str(self.files_dir / filename)
-
-    def get_relative_path(self, full_path: str) -> str:
-        """完全パスから相対パスを生成"""
-        return str(Path(full_path).relative_to(self.base_path))
-
-    def delete_file(self, file_path: str, thumbnail_path: str = ""):
-        """ファイルとサムネイルを削除"""
-        try:
-            if os.path.exists(file_path):
-                os.remove(file_path)
-            if thumbnail_path and os.path.exists(thumbnail_path):
-                os.remove(thumbnail_path)
-        except Exception as e:
-            print(f"ファイル削除エラー: {e}")
-
-    @abstractmethod
-    def save_file(self, source_path: str, original_name: str) -> Tuple[str, str, Dict[str, Any]]:
-        """
-        ファイルを保存し、メタデータを返す
-        Returns: (saved_path, file_hash, metadata)
-        サブクラスで実装する
-        """
-        pass
-
-    @abstractmethod
-    def get_metadata(self, file_path: Path) -> Dict[str, Any]:
-        """
-        ファイルのメタデータを取得
-        サブクラスで実装する
-        """
-        pass
-
 
 class BaseMetadataManager(ABC):
     """メタデータ管理の基底クラス"""
@@ -229,7 +152,7 @@ class BaseMetadataManager(ABC):
         """テーブル初期化"""
         self.db.create_table(self.table_name, self.schema)
 
-    def save_metadata(self, **kwargs) -> Optional[int]:
+    def save_metadata(self, **kwargs) -> int | None:
         """
         メタデータを保存
         Returns: 保存されたレコードのID、失敗時はNone
@@ -288,4 +211,11 @@ class BaseMetadataManager(ABC):
         サブクラスで実装する
         """
         pass
-
+    
+    @abstractmethod
+    def get_metadata(self, file_path: Path) -> Dict[str, Any]:
+        """
+        ファイルのメタデータを取得
+        サブクラスで実装する
+        """
+        pass

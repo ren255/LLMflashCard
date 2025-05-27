@@ -27,11 +27,11 @@ FLASHCARD_SCHEMA = {
     "original_name": "TEXT",                              # 元のファイル名
     "file_path"    : "TEXT NOT NULL",                     # 相対パス
 
-    "collection": "TEXT", # コレクション名
+    "collection": "TEXT",    # コレクション名
+    "columns"   : "TEXT",    # JSON形式のカラム構造（ユーザー定義）
+    "row_count" : "INTEGER", # レコード数
 
     "file_size" : "INTEGER",                             # ファイルサイズ(bytes)
-    "columns"   : "TEXT",                                # JSON形式のカラム構造（ユーザー定義）
-    "row_count" : "INTEGER",                             # レコード数
     "encoding"  : "TEXT DEFAULT 'utf-8'",                # ファイルエンコーディング
     "delimiter" : "TEXT DEFAULT ','",                    # CSV区切り文字
     "hash"      : "TEXT UNIQUE",                         # ファイルハッシュ（重複防止）

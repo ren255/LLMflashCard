@@ -1,0 +1,18 @@
+docs
+├── _build
+├── _static
+├── _templates
+├── source
+│   ├── db.rst
+│   ├── gui.rst
+│   ├── image_processing.rst
+│   ├── llm.rst
+│   ├── logic.rst
+│   ├── main.rst
+│   ├── modules.rst
+│   ├── storage.rst
+│   └── utils.rst
+├── conf.py
+├── index.rst
+├── make.bat
+└── Makefile

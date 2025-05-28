@@ -1,7 +1,10 @@
 # python -m pip install --upgrade pip && pip install -r requirements.txt
 # pip install -r requirements.txt
 
+# documentation
 sphinx
+myst-parser
+sphinx_rtd_theme
 
 # math
 pandas>=1.5.0

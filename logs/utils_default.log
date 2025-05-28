@@ -825,3 +825,186 @@
 18:32:07:697 : [INFO]     cleanup:76           : MainController: クリーンアップを開始します
 18:32:07:699 : [INFO]     cleanup:87           : MainController: クリーンアップが完了しました
 18:32:07:702 : [INFO]     cleanup:77           : GUIアプリケーションのクリーンアップ完了
+20:10:09:310 : [INFO]     <module>:20          : Components パッケージが初期化されました
+20:10:09:314 : [INFO]     <module>:12          : Views パッケージが初期化されました
+20:10:09:440 : [INFO]     <module>:26          : GUIパッケージが初期化されました
+20:10:09:441 : [INFO]     __init__:28          : GUIアプリケーションを初期化中...
+20:10:09:443 : [INFO]     initialize:67        : MainController: 初期化を開始します
+20:10:09:444 : [INFO]     _initialize_application_state:171 : MainController: アプリケーション状態を初期化します
+20:10:09:445 : [INFO]     initialize:72        : MainController: 初期化が完了しました
+20:10:10:322 : [INFO]     __init__:152         : BaseMainWindow initialized: LLMflashCard (1200x800)
+20:10:10:323 : [INFO]     setup_ui:51          : メインウィンドウのUI構築開始
+20:10:10:821 : [INFO]     set_status:246       : Status: 準備完了
+20:10:10:910 : [INFO]     setup_ui:69          : メインウィンドウのUI構築完了
+20:10:10:911 : [INFO]     setup_bindings:298   : キーボードショートカットが設定されました
+20:10:10:912 : [INFO]     initialize:184       : MainWindow initialization completed: LLM FlashCard
+20:10:10:912 : [INFO]     __init__:47          : メインウィンドウが初期化されました
+20:10:10:914 : [INFO]     set_view:23          : MainController: ビューを設定しました
+20:10:10:915 : [INFO]     set_controller:283   : メインウィンドウにコントローラーが設定されました
+20:10:10:916 : [INFO]     initialize:44        : GUIアプリケーションの初期化完了
+20:10:10:917 : [INFO]     run:56               : GUIアプリケーションを開始します
+20:10:18:103 : [INFO]     cleanup:69           : GUIアプリケーションのクリーンアップ中...
+20:10:18:105 : [INFO]     cleanup:76           : MainController: クリーンアップを開始します
+20:10:18:105 : [INFO]     cleanup:87           : MainController: クリーンアップが完了しました
+20:10:18:106 : [INFO]     cleanup:77           : GUIアプリケーションのクリーンアップ完了
+20:10:18:107 : [INFO]     main:89              : ユーザーによってアプリケーションが中断されました
+22:19:34:527 : [INFO]     <module>:20          : Components パッケージが初期化されました
+22:19:34:531 : [INFO]     <module>:12          : Views パッケージが初期化されました
+22:20:35:655 : [INFO]     <module>:20          : Components パッケージが初期化されました
+22:20:35:657 : [INFO]     <module>:12          : Views パッケージが初期化されました
+22:21:24:716 : [INFO]     <module>:20          : Components パッケージが初期化されました
+22:21:24:718 : [INFO]     <module>:12          : Views パッケージが初期化されました
+22:21:38:104 : [INFO]     <module>:20          : Components パッケージが初期化されました
+22:21:38:106 : [INFO]     <module>:12          : Views パッケージが初期化されました
+22:22:23:892 : [INFO]     <module>:20          : Components パッケージが初期化されました
+22:22:23:894 : [INFO]     <module>:12          : Views パッケージが初期化されました
+22:22:23:908 : [INFO]     <module>:25          : GUIパッケージが初期化されました
+22:22:23:910 : [INFO]     __init__:31          : GUIアプリケーションを初期化中...
+22:22:23:911 : [INFO]     initialize:67        : MainController: 初期化を開始します
+22:22:23:911 : [INFO]     _initialize_application_state:171 : MainController: アプリケーション状態を初期化します
+22:22:23:913 : [INFO]     initialize:72        : MainController: 初期化が完了しました
+22:22:24:430 : [INFO]     __init__:152         : BaseMainWindow initialized: LLMflashCard (1200x800)
+22:22:24:432 : [INFO]     setup_ui:51          : メインウィンドウのUI構築開始
+22:22:24:727 : [INFO]     set_status:246       : Status: 準備完了
+22:22:24:798 : [INFO]     setup_ui:69          : メインウィンドウのUI構築完了
+22:22:24:799 : [INFO]     setup_bindings:298   : キーボードショートカットが設定されました
+22:22:24:800 : [INFO]     initialize:184       : MainWindow initialization completed: LLM FlashCard
+22:22:24:800 : [INFO]     __init__:47          : メインウィンドウが初期化されました
+22:22:24:800 : [INFO]     set_view:23          : MainController: ビューを設定しました
+22:22:24:802 : [INFO]     set_controller:283   : メインウィンドウにコントローラーが設定されました
+22:22:24:803 : [INFO]     initialize:47        : GUIアプリケーションの初期化完了
+22:22:24:804 : [INFO]     run:59               : GUIアプリケーションを開始します
+22:23:46:089 : [INFO]     switch_mode:211      : モードを切り替え: main -> flashcard
+22:23:46:139 : [INFO]     set_status:246       : Status: 現在のモード: フラッシュカード管理
+22:23:46:141 : [INFO]     set_application_state:104 : MainController: アプリケーション状態更新 current_mode: main -> flashcard
+22:23:46:141 : [INFO]     switch_mode:120      : MainController: モードを切り替えました main -> flashcard
+22:23:46:682 : [INFO]     switch_mode:211      : モードを切り替え: flashcard -> image
+22:23:46:692 : [INFO]     set_status:246       : Status: 現在のモード: 画像管理
+22:23:46:693 : [INFO]     set_application_state:104 : MainController: アプリケーション状態更新 current_mode: flashcard -> image
+22:23:46:695 : [INFO]     switch_mode:120      : MainController: モードを切り替えました flashcard -> image
+22:23:47:208 : [INFO]     switch_mode:211      : モードを切り替え: image -> flashcard
+22:23:47:209 : [INFO]     set_status:246       : Status: 現在のモード: フラッシュカード管理
+22:23:47:211 : [INFO]     set_application_state:104 : MainController: アプリケーション状態更新 current_mode: image -> flashcard
+22:23:47:212 : [INFO]     switch_mode:120      : MainController: モードを切り替えました image -> flashcard
+22:23:49:021 : [INFO]     switch_mode:211      : モードを切り替え: flashcard -> image
+22:23:49:024 : [INFO]     set_status:246       : Status: 現在のモード: 画像管理
+22:23:49:024 : [INFO]     set_application_state:104 : MainController: アプリケーション状態更新 current_mode: flashcard -> image
+22:23:49:025 : [INFO]     switch_mode:120      : MainController: モードを切り替えました flashcard -> image
+22:23:50:115 : [INFO]     switch_mode:211      : モードを切り替え: image -> flashcard
+22:23:50:120 : [INFO]     set_status:246       : Status: 現在のモード: フラッシュカード管理
+22:23:50:120 : [INFO]     set_application_state:104 : MainController: アプリケーション状態更新 current_mode: image -> flashcard
+22:23:50:124 : [INFO]     switch_mode:120      : MainController: モードを切り替えました image -> flashcard
+22:23:50:744 : [INFO]     switch_mode:211      : モードを切り替え: flashcard -> image
+22:23:50:751 : [INFO]     set_status:246       : Status: 現在のモード: 画像管理
+22:23:50:753 : [INFO]     set_application_state:104 : MainController: アプリケーション状態更新 current_mode: flashcard -> image
+22:23:50:754 : [INFO]     switch_mode:120      : MainController: モードを切り替えました flashcard -> image
+22:23:51:288 : [INFO]     switch_mode:211      : モードを切り替え: image -> flashcard
+22:23:51:292 : [INFO]     set_status:246       : Status: 現在のモード: フラッシュカード管理
+22:23:51:293 : [INFO]     set_application_state:104 : MainController: アプリケーション状態更新 current_mode: image -> flashcard
+22:23:51:295 : [INFO]     switch_mode:120      : MainController: モードを切り替えました image -> flashcard
+22:23:51:744 : [INFO]     switch_mode:211      : モードを切り替え: flashcard -> image
+22:23:51:747 : [INFO]     set_status:246       : Status: 現在のモード: 画像管理
+22:23:51:748 : [INFO]     set_application_state:104 : MainController: アプリケーション状態更新 current_mode: flashcard -> image
+22:23:51:749 : [INFO]     switch_mode:120      : MainController: モードを切り替えました flashcard -> image
+22:23:52:166 : [INFO]     switch_mode:211      : モードを切り替え: image -> flashcard
+22:23:52:169 : [INFO]     set_status:246       : Status: 現在のモード: フラッシュカード管理
+22:23:52:170 : [INFO]     set_application_state:104 : MainController: アプリケーション状態更新 current_mode: image -> flashcard
+22:23:52:171 : [INFO]     switch_mode:120      : MainController: モードを切り替えました image -> flashcard
+22:23:52:629 : [INFO]     switch_mode:211      : モードを切り替え: flashcard -> main
+22:23:52:635 : [INFO]     set_status:246       : Status: 現在のモード: メイン画面
+22:23:52:636 : [INFO]     set_application_state:104 : MainController: アプリケーション状態更新 current_mode: flashcard -> main
+22:23:52:636 : [INFO]     switch_mode:120      : MainController: モードを切り替えました flashcard -> main
+22:23:53:036 : [INFO]     switch_mode:211      : モードを切り替え: main -> flashcard
+22:23:53:039 : [INFO]     set_status:246       : Status: 現在のモード: フラッシュカード管理
+22:23:53:041 : [INFO]     set_application_state:104 : MainController: アプリケーション状態更新 current_mode: main -> flashcard
+22:23:53:042 : [INFO]     switch_mode:120      : MainController: モードを切り替えました main -> flashcard
+22:23:53:472 : [INFO]     switch_mode:211      : モードを切り替え: flashcard -> image
+22:23:53:474 : [INFO]     set_status:246       : Status: 現在のモード: 画像管理
+22:23:53:475 : [INFO]     set_application_state:104 : MainController: アプリケーション状態更新 current_mode: flashcard -> image
+22:23:53:476 : [INFO]     switch_mode:120      : MainController: モードを切り替えました flashcard -> image
+22:23:54:111 : [INFO]     switch_mode:211      : モードを切り替え: image -> main
+22:23:54:115 : [INFO]     set_status:246       : Status: 現在のモード: メイン画面
+22:23:54:117 : [INFO]     set_application_state:104 : MainController: アプリケーション状態更新 current_mode: image -> main
+22:23:54:118 : [INFO]     switch_mode:120      : MainController: モードを切り替えました image -> main
+22:26:31:585 : [INFO]     switch_mode:211      : モードを切り替え: main -> flashcard
+22:26:31:599 : [INFO]     set_status:246       : Status: 現在のモード: フラッシュカード管理
+22:26:31:599 : [INFO]     set_application_state:104 : MainController: アプリケーション状態更新 current_mode: main -> flashcard
+22:26:31:599 : [INFO]     switch_mode:120      : MainController: モードを切り替えました main -> flashcard
+22:26:35:375 : [INFO]     ask_yes_no:226       : Confirmation dialog: 確認 -> True
+22:26:35:375 : [INFO]     on_closing:303       : メインウィンドウを閉じています
+22:26:35:376 : [INFO]     cleanup:76           : MainController: クリーンアップを開始します
+22:26:35:378 : [INFO]     cleanup:87           : MainController: クリーンアップが完了しました
+22:26:35:378 : [INFO]     cleanup:314          : メインウィンドウのクリーンアップ実行
+22:26:35:554 : [INFO]     cleanup:72           : GUIアプリケーションのクリーンアップ中...
+22:26:35:555 : [INFO]     cleanup:76           : MainController: クリーンアップを開始します
+22:26:35:556 : [INFO]     cleanup:87           : MainController: クリーンアップが完了しました
+22:26:35:556 : [INFO]     cleanup:80           : GUIアプリケーションのクリーンアップ完了
+22:38:18:021 : [INFO]     <module>:20          : Components パッケージが初期化されました
+22:38:18:023 : [INFO]     <module>:12          : Views パッケージが初期化されました
+22:38:18:029 : [INFO]     <module>:25          : GUIパッケージが初期化されました
+22:38:18:030 : [INFO]     __init__:31          : GUIアプリケーションを初期化中...
+22:38:18:031 : [INFO]     initialize:67        : MainController: 初期化を開始します
+22:38:18:032 : [INFO]     _initialize_application_state:171 : MainController: アプリケーション状態を初期化します
+22:38:18:033 : [INFO]     initialize:72        : MainController: 初期化が完了しました
+22:38:18:389 : [INFO]     __init__:152         : BaseMainWindow initialized: LLMflashCard (1200x800)
+22:38:18:391 : [INFO]     setup_ui:48          : メインウィンドウのUI構築開始
+22:38:18:543 : [INFO]     set_status:246       : Status: 準備完了
+22:38:18:576 : [INFO]     setup_ui:58          : メインウィンドウのUI構築完了
+22:38:18:577 : [INFO]     setup_bindings:287   : キーボードショートカットが設定されました
+22:38:18:577 : [INFO]     initialize:184       : MainWindow initialization completed: LLM FlashCard
+22:38:18:579 : [INFO]     __init__:44          : メインウィンドウが初期化されました
+22:38:18:581 : [INFO]     set_view:23          : MainController: ビューを設定しました
+22:38:18:581 : [INFO]     set_controller:272   : メインウィンドウにコントローラーが設定されました
+22:38:18:583 : [INFO]     initialize:47        : GUIアプリケーションの初期化完了
+22:38:18:583 : [INFO]     run:59               : GUIアプリケーションを開始します
+22:38:30:952 : [INFO]     _handle_menu_action:253 : メニューアクション実行: new
+22:38:30:953 : [INFO]     handle_menu_action:125 : MainController: メニューアクション 'new' を処理します
+22:38:30:954 : [WARNING]  handle_menu_action:143 : MainController: 未知のメニューアクション 'new'
+22:44:05:682 : [INFO]     cleanup:72           : GUIアプリケーションのクリーンアップ中...
+22:44:05:682 : [INFO]     cleanup:76           : MainController: クリーンアップを開始します
+22:44:05:683 : [INFO]     cleanup:87           : MainController: クリーンアップが完了しました
+22:44:05:684 : [INFO]     cleanup:80           : GUIアプリケーションのクリーンアップ完了
+22:44:05:686 : [INFO]     main:92              : ユーザーによってアプリケーションが中断されました
+22:44:31:233 : [DEBUG]    <module>:28          : Setting up test fixtures for Storage module
+22:44:31:642 : [INFO]     <module>:20          : Components パッケージが初期化されました
+22:44:31:645 : [INFO]     <module>:12          : Views パッケージが初期化されました
+22:44:31:654 : [INFO]     <module>:25          : GUIパッケージが初期化されました
+22:44:31:659 : [INFO]     set_view:23          : DummyController: ビューを設定しました
+22:46:14:937 : [DEBUG]    <module>:28          : Setting up test fixtures for Storage module
+22:46:15:306 : [INFO]     <module>:20          : Components パッケージが初期化されました
+22:46:15:308 : [INFO]     <module>:12          : Views パッケージが初期化されました
+22:46:15:312 : [INFO]     <module>:25          : GUIパッケージが初期化されました
+22:46:15:318 : [INFO]     set_view:23          : DummyController: ビューを設定しました
+22:47:07:572 : [DEBUG]    <module>:28          : Setting up test fixtures for Storage module
+22:47:07:975 : [INFO]     <module>:20          : Components パッケージが初期化されました
+22:47:07:976 : [INFO]     <module>:12          : Views パッケージが初期化されました
+22:47:07:981 : [INFO]     <module>:25          : GUIパッケージが初期化されました
+22:47:08:897 : [INFO]     register_callback:30 : DummyController: イベント 'on_broken' にコールバック : broken_callback を登録
+22:47:08:897 : [ERROR]    trigger_callback:39  : コールバック実行エラー (event: on_broken): Intentional
+22:47:30:797 : [DEBUG]    <module>:28          : Setting up test fixtures for Storage module
+22:47:31:114 : [INFO]     <module>:20          : Components パッケージが初期化されました
+22:47:31:115 : [INFO]     <module>:12          : Views パッケージが初期化されました
+22:47:31:120 : [INFO]     <module>:25          : GUIパッケージが初期化されました
+22:50:42:630 : [DEBUG]    <module>:28          : Setting up test fixtures for Storage module
+22:50:42:968 : [INFO]     <module>:20          : Components パッケージが初期化されました
+22:50:42:971 : [INFO]     <module>:12          : Views パッケージが初期化されました
+22:50:42:974 : [INFO]     <module>:25          : GUIパッケージが初期化されました
+22:51:25:629 : [DEBUG]    <module>:28          : Setting up test fixtures for Storage module
+22:54:03:460 : [DEBUG]    <module>:28          : Setting up test fixtures for Storage module
+22:54:03:791 : [INFO]     <module>:20          : Components パッケージが初期化されました
+22:54:03:792 : [INFO]     <module>:12          : Views パッケージが初期化されました
+22:54:03:795 : [INFO]     <module>:25          : GUIパッケージが初期化されました
+22:55:21:089 : [DEBUG]    <module>:28          : Setting up test fixtures for Storage module
+22:55:21:401 : [INFO]     <module>:20          : Components パッケージが初期化されました
+22:55:21:404 : [INFO]     <module>:12          : Views パッケージが初期化されました
+22:55:21:408 : [INFO]     <module>:25          : GUIパッケージが初期化されました
+22:57:46:179 : [DEBUG]    <module>:28          : Setting up test fixtures for Storage module
+22:57:46:503 : [INFO]     <module>:20          : Components パッケージが初期化されました
+22:57:46:504 : [INFO]     <module>:12          : Views パッケージが初期化されました
+22:57:46:510 : [INFO]     <module>:25          : GUIパッケージが初期化されました
+22:57:46:520 : [ERROR]    trigger_callback:39  : コールバック実行エラー (event: eventA): test_set_view() got an unexpected keyword argument 'key'
+23:01:07:111 : [DEBUG]    <module>:28          : Setting up test fixtures for Storage module
+23:01:07:470 : [INFO]     <module>:20          : Components パッケージが初期化されました
+23:01:07:472 : [INFO]     <module>:12          : Views パッケージが初期化されました
+23:01:07:477 : [INFO]     <module>:25          : GUIパッケージが初期化されました
+23:01:07:490 : [INFO]     register_callback:30 : ConcreteController: イベント 'error_event' にコールバック : bad_callback を登録

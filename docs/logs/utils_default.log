@@ -1,3 +1,47 @@
 17:22:03:511 : [DEBUG]    <module>:8           : debug: main.pyの実行開始
 17:25:14:947 : [DEBUG]    <module>:8           : debug: main.pyの実行開始
 17:31:47:223 : [DEBUG]    <module>:8           : debug: main.pyの実行開始
+20:11:22:728 : [INFO]     <module>:20          : Components パッケージが初期化されました
+20:11:22:730 : [INFO]     <module>:12          : Views パッケージが初期化されました
+20:11:22:739 : [INFO]     <module>:26          : GUIパッケージが初期化されました
+20:11:22:940 : [DEBUG]    <module>:8           : debug: main.pyの実行開始
+20:11:38:775 : [INFO]     <module>:20          : Components パッケージが初期化されました
+20:11:38:777 : [INFO]     <module>:12          : Views パッケージが初期化されました
+20:11:38:784 : [INFO]     <module>:26          : GUIパッケージが初期化されました
+20:11:38:907 : [DEBUG]    <module>:8           : debug: main.pyの実行開始
+20:18:09:129 : [INFO]     <module>:20          : Components パッケージが初期化されました
+20:18:09:132 : [INFO]     <module>:12          : Views パッケージが初期化されました
+20:18:09:141 : [INFO]     <module>:26          : GUIパッケージが初期化されました
+20:18:09:259 : [DEBUG]    <module>:8           : debug: main.pyの実行開始
+20:18:22:777 : [DEBUG]    <module>:8           : debug: main.pyの実行開始
+20:18:23:030 : [INFO]     <module>:20          : Components パッケージが初期化されました
+20:18:23:031 : [INFO]     <module>:12          : Views パッケージが初期化されました
+20:18:23:037 : [INFO]     <module>:26          : GUIパッケージが初期化されました
+20:24:58:856 : [INFO]     <module>:20          : Components パッケージが初期化されました
+20:24:58:858 : [INFO]     <module>:12          : Views パッケージが初期化されました
+20:24:58:868 : [INFO]     <module>:26          : GUIパッケージが初期化されました
+20:24:59:061 : [DEBUG]    <module>:8           : debug: main.pyの実行開始
+20:25:06:709 : [INFO]     <module>:20          : Components パッケージが初期化されました
+20:25:06:712 : [INFO]     <module>:12          : Views パッケージが初期化されました
+20:25:06:719 : [INFO]     <module>:26          : GUIパッケージが初期化されました
+20:25:06:848 : [DEBUG]    <module>:8           : debug: main.pyの実行開始
+20:28:43:148 : [DEBUG]    <module>:8           : debug: main.pyの実行開始
+20:28:43:497 : [INFO]     <module>:20          : Components パッケージが初期化されました
+20:28:43:499 : [INFO]     <module>:12          : Views パッケージが初期化されました
+20:28:43:506 : [INFO]     <module>:26          : GUIパッケージが初期化されました
+20:28:50:621 : [INFO]     <module>:20          : Components パッケージが初期化されました
+20:28:50:622 : [INFO]     <module>:12          : Views パッケージが初期化されました
+20:28:50:634 : [INFO]     <module>:26          : GUIパッケージが初期化されました
+20:28:50:723 : [DEBUG]    <module>:8           : debug: main.pyの実行開始
+22:07:54:806 : [DEBUG]    <module>:8           : debug: main.pyの実行開始
+22:07:56:094 : [INFO]     <module>:20          : Components パッケージが初期化されました
+22:07:56:096 : [INFO]     <module>:12          : Views パッケージが初期化されました
+22:07:56:119 : [INFO]     <module>:26          : GUIパッケージが初期化されました
+23:08:56:762 : [INFO]     <module>:20          : Components パッケージが初期化されました
+23:08:56:765 : [INFO]     <module>:12          : Views パッケージが初期化されました
+23:08:56:788 : [INFO]     <module>:25          : GUIパッケージが初期化されました
+23:08:56:886 : [DEBUG]    <module>:8           : debug: main.pyの実行開始
+23:09:12:016 : [INFO]     <module>:20          : Components パッケージが初期化されました
+23:09:12:017 : [INFO]     <module>:12          : Views パッケージが初期化されました
+23:09:12:023 : [INFO]     <module>:25          : GUIパッケージが初期化されました
+23:09:12:136 : [DEBUG]    <module>:8           : debug: main.pyの実行開始

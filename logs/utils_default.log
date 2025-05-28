@@ -616,3 +616,212 @@
 15:50:59:061 : [INFO]     close:112            : SQLite database connection closed: C:\Users\renpe\AppData\Local\Temp\storage_test_0y4iy1wy\db\images.db
 15:50:59:062 : [INFO]     cleanup:201          : imageストレージをクリーンアップ
 15:50:59:063 : [INFO]     cleanup:203          : StorageController クリーンアップ完了
+18:30:00:122 : [INFO]     <module>:20          : Components パッケージが初期化されました
+18:30:00:127 : [INFO]     <module>:12          : Views パッケージが初期化されました
+18:30:41:126 : [INFO]     <module>:20          : Components パッケージが初期化されました
+18:30:41:127 : [INFO]     <module>:12          : Views パッケージが初期化されました
+18:30:41:143 : [INFO]     <module>:26          : GUIパッケージが初期化されました
+18:30:41:143 : [INFO]     __init__:28          : GUIアプリケーションを初期化中...
+18:30:41:145 : [INFO]     initialize:67        : MainController: 初期化を開始します
+18:30:41:145 : [INFO]     _initialize_application_state:171 : MainController: アプリケーション状態を初期化します
+18:30:41:145 : [INFO]     initialize:72        : MainController: 初期化が完了しました
+18:30:41:787 : [INFO]     __init__:152         : BaseMainWindow initialized: LLMflashCard (1200x800)
+18:30:41:788 : [INFO]     setup_ui:51          : メインウィンドウのUI構築開始
+18:30:42:180 : [INFO]     set_status:246       : Status: 準備完了
+18:30:42:247 : [INFO]     setup_ui:69          : メインウィンドウのUI構築完了
+18:30:42:247 : [INFO]     setup_bindings:298   : キーボードショートカットが設定されました
+18:30:42:248 : [INFO]     initialize:184       : MainWindow initialization completed: LLM FlashCard
+18:30:42:249 : [INFO]     __init__:47          : メインウィンドウが初期化されました
+18:30:42:250 : [INFO]     set_view:23          : MainController: ビューを設定しました
+18:30:42:250 : [INFO]     set_controller:283   : メインウィンドウにコントローラーが設定されました
+18:30:42:251 : [INFO]     initialize:44        : GUIアプリケーションの初期化完了
+18:30:42:251 : [INFO]     run:56               : GUIアプリケーションを開始します
+18:30:46:303 : [INFO]     switch_mode:211      : モードを切り替え: main -> flashcard
+18:30:46:348 : [INFO]     set_status:246       : Status: 現在のモード: フラッシュカード管理
+18:30:46:349 : [INFO]     set_application_state:104 : MainController: アプリケーション状態更新 current_mode: main -> flashcard
+18:30:46:349 : [INFO]     switch_mode:120      : MainController: モードを切り替えました main -> flashcard
+18:30:47:096 : [INFO]     switch_mode:211      : モードを切り替え: flashcard -> image
+18:30:47:104 : [INFO]     set_status:246       : Status: 現在のモード: 画像管理
+18:30:47:106 : [INFO]     set_application_state:104 : MainController: アプリケーション状態更新 current_mode: flashcard -> image
+18:30:47:107 : [INFO]     switch_mode:120      : MainController: モードを切り替えました flashcard -> image
+18:30:47:783 : [INFO]     switch_mode:211      : モードを切り替え: image -> flashcard
+18:30:47:785 : [INFO]     set_status:246       : Status: 現在のモード: フラッシュカード管理
+18:30:47:787 : [INFO]     set_application_state:104 : MainController: アプリケーション状態更新 current_mode: image -> flashcard
+18:30:47:788 : [INFO]     switch_mode:120      : MainController: モードを切り替えました image -> flashcard
+18:30:48:178 : [INFO]     switch_mode:211      : モードを切り替え: flashcard -> image
+18:30:48:182 : [INFO]     set_status:246       : Status: 現在のモード: 画像管理
+18:30:48:183 : [INFO]     set_application_state:104 : MainController: アプリケーション状態更新 current_mode: flashcard -> image
+18:30:48:185 : [INFO]     switch_mode:120      : MainController: モードを切り替えました flashcard -> image
+18:30:52:432 : [INFO]     switch_mode:211      : モードを切り替え: image -> flashcard
+18:30:52:435 : [INFO]     set_status:246       : Status: 現在のモード: フラッシュカード管理
+18:30:52:436 : [INFO]     set_application_state:104 : MainController: アプリケーション状態更新 current_mode: image -> flashcard
+18:30:52:436 : [INFO]     switch_mode:120      : MainController: モードを切り替えました image -> flashcard
+18:30:53:139 : [INFO]     switch_mode:211      : モードを切り替え: flashcard -> image
+18:30:53:142 : [INFO]     set_status:246       : Status: 現在のモード: 画像管理
+18:30:53:143 : [INFO]     set_application_state:104 : MainController: アプリケーション状態更新 current_mode: flashcard -> image
+18:30:53:143 : [INFO]     switch_mode:120      : MainController: モードを切り替えました flashcard -> image
+18:30:54:945 : [INFO]     switch_mode:211      : モードを切り替え: image -> flashcard
+18:30:54:948 : [INFO]     set_status:246       : Status: 現在のモード: フラッシュカード管理
+18:30:54:949 : [INFO]     set_application_state:104 : MainController: アプリケーション状態更新 current_mode: image -> flashcard
+18:30:54:949 : [INFO]     switch_mode:120      : MainController: モードを切り替えました image -> flashcard
+18:30:56:450 : [INFO]     _handle_menu_action:264 : メニューアクション実行: settings
+18:30:56:451 : [INFO]     handle_menu_action:125 : MainController: メニューアクション 'settings' を処理します
+18:30:56:453 : [INFO]     _handle_settings:207 : MainController: 設定画面を表示
+18:30:57:009 : [INFO]     _handle_menu_action:264 : メニューアクション実行: settings
+18:30:57:010 : [INFO]     handle_menu_action:125 : MainController: メニューアクション 'settings' を処理します
+18:30:57:010 : [INFO]     _handle_settings:207 : MainController: 設定画面を表示
+18:30:57:137 : [INFO]     _handle_menu_action:264 : メニューアクション実行: settings
+18:30:57:138 : [INFO]     handle_menu_action:125 : MainController: メニューアクション 'settings' を処理します
+18:30:57:138 : [INFO]     _handle_settings:207 : MainController: 設定画面を表示
+18:30:57:235 : [INFO]     _handle_menu_action:264 : メニューアクション実行: settings
+18:30:57:236 : [INFO]     handle_menu_action:125 : MainController: メニューアクション 'settings' を処理します
+18:30:57:236 : [INFO]     _handle_settings:207 : MainController: 設定画面を表示
+18:30:57:436 : [INFO]     _handle_menu_action:264 : メニューアクション実行: settings
+18:30:57:436 : [INFO]     handle_menu_action:125 : MainController: メニューアクション 'settings' を処理します
+18:30:57:437 : [INFO]     _handle_settings:207 : MainController: 設定画面を表示
+18:30:57:594 : [INFO]     _handle_menu_action:264 : メニューアクション実行: settings
+18:30:57:595 : [INFO]     handle_menu_action:125 : MainController: メニューアクション 'settings' を処理します
+18:30:57:596 : [INFO]     _handle_settings:207 : MainController: 設定画面を表示
+18:30:58:064 : [INFO]     _handle_menu_action:264 : メニューアクション実行: settings
+18:30:58:064 : [INFO]     handle_menu_action:125 : MainController: メニューアクション 'settings' を処理します
+18:30:58:065 : [INFO]     _handle_settings:207 : MainController: 設定画面を表示
+18:30:58:486 : [INFO]     _handle_menu_action:264 : メニューアクション実行: settings
+18:30:58:487 : [INFO]     handle_menu_action:125 : MainController: メニューアクション 'settings' を処理します
+18:30:58:488 : [INFO]     _handle_settings:207 : MainController: 設定画面を表示
+18:30:59:631 : [INFO]     switch_mode:211      : モードを切り替え: flashcard -> main
+18:30:59:636 : [INFO]     set_status:246       : Status: 現在のモード: メイン画面
+18:30:59:636 : [INFO]     set_application_state:104 : MainController: アプリケーション状態更新 current_mode: flashcard -> main
+18:30:59:637 : [INFO]     switch_mode:120      : MainController: モードを切り替えました flashcard -> main
+18:31:05:511 : [INFO]     _handle_menu_action:264 : メニューアクション実行: new
+18:31:05:512 : [INFO]     handle_menu_action:125 : MainController: メニューアクション 'new' を処理します
+18:31:05:512 : [WARNING]  handle_menu_action:143 : MainController: 未知のメニューアクション 'new'
+18:31:09:600 : [INFO]     _handle_menu_action:264 : メニューアクション実行: open
+18:31:09:600 : [INFO]     handle_menu_action:125 : MainController: メニューアクション 'open' を処理します
+18:31:09:601 : [WARNING]  handle_menu_action:143 : MainController: 未知のメニューアクション 'open'
+18:31:11:353 : [INFO]     switch_mode:211      : モードを切り替え: main -> flashcard
+18:31:11:355 : [INFO]     set_status:246       : Status: 現在のモード: フラッシュカード管理
+18:31:11:357 : [INFO]     set_application_state:104 : MainController: アプリケーション状態更新 current_mode: main -> flashcard
+18:31:11:358 : [INFO]     switch_mode:120      : MainController: モードを切り替えました main -> flashcard
+18:31:12:744 : [INFO]     switch_mode:211      : モードを切り替え: flashcard -> image
+18:31:12:747 : [INFO]     set_status:246       : Status: 現在のモード: 画像管理
+18:31:12:747 : [INFO]     set_application_state:104 : MainController: アプリケーション状態更新 current_mode: flashcard -> image
+18:31:12:748 : [INFO]     switch_mode:120      : MainController: モードを切り替えました flashcard -> image
+18:31:20:882 : [INFO]     switch_mode:211      : モードを切り替え: image -> flashcard
+18:31:20:884 : [INFO]     set_status:246       : Status: 現在のモード: フラッシュカード管理
+18:31:20:886 : [INFO]     set_application_state:104 : MainController: アプリケーション状態更新 current_mode: image -> flashcard
+18:31:20:887 : [INFO]     switch_mode:120      : MainController: モードを切り替えました image -> flashcard
+18:31:21:570 : [INFO]     switch_mode:211      : モードを切り替え: flashcard -> image
+18:31:21:573 : [INFO]     set_status:246       : Status: 現在のモード: 画像管理
+18:31:21:573 : [INFO]     set_application_state:104 : MainController: アプリケーション状態更新 current_mode: flashcard -> image
+18:31:21:574 : [INFO]     switch_mode:120      : MainController: モードを切り替えました flashcard -> image
+18:31:22:266 : [INFO]     switch_mode:211      : モードを切り替え: image -> flashcard
+18:31:22:271 : [INFO]     set_status:246       : Status: 現在のモード: フラッシュカード管理
+18:31:22:272 : [INFO]     set_application_state:104 : MainController: アプリケーション状態更新 current_mode: image -> flashcard
+18:31:22:273 : [INFO]     switch_mode:120      : MainController: モードを切り替えました image -> flashcard
+18:31:22:976 : [INFO]     switch_mode:211      : モードを切り替え: flashcard -> main
+18:31:22:979 : [INFO]     set_status:246       : Status: 現在のモード: メイン画面
+18:31:22:979 : [INFO]     set_application_state:104 : MainController: アプリケーション状態更新 current_mode: flashcard -> main
+18:31:22:980 : [INFO]     switch_mode:120      : MainController: モードを切り替えました flashcard -> main
+18:31:23:446 : [INFO]     switch_mode:211      : モードを切り替え: main -> flashcard
+18:31:23:449 : [INFO]     set_status:246       : Status: 現在のモード: フラッシュカード管理
+18:31:23:450 : [INFO]     set_application_state:104 : MainController: アプリケーション状態更新 current_mode: main -> flashcard
+18:31:23:451 : [INFO]     switch_mode:120      : MainController: モードを切り替えました main -> flashcard
+18:31:23:952 : [INFO]     switch_mode:211      : モードを切り替え: flashcard -> image
+18:31:23:955 : [INFO]     set_status:246       : Status: 現在のモード: 画像管理
+18:31:23:956 : [INFO]     set_application_state:104 : MainController: アプリケーション状態更新 current_mode: flashcard -> image
+18:31:23:956 : [INFO]     switch_mode:120      : MainController: モードを切り替えました flashcard -> image
+18:31:24:438 : [INFO]     switch_mode:211      : モードを切り替え: image -> main
+18:31:24:442 : [INFO]     set_status:246       : Status: 現在のモード: メイン画面
+18:31:24:443 : [INFO]     set_application_state:104 : MainController: アプリケーション状態更新 current_mode: image -> main
+18:31:24:443 : [INFO]     switch_mode:120      : MainController: モードを切り替えました image -> main
+18:31:24:802 : [INFO]     switch_mode:211      : モードを切り替え: main -> flashcard
+18:31:24:804 : [INFO]     set_status:246       : Status: 現在のモード: フラッシュカード管理
+18:31:24:806 : [INFO]     set_application_state:104 : MainController: アプリケーション状態更新 current_mode: main -> flashcard
+18:31:24:806 : [INFO]     switch_mode:120      : MainController: モードを切り替えました main -> flashcard
+18:31:25:164 : [INFO]     switch_mode:211      : モードを切り替え: flashcard -> image
+18:31:25:167 : [INFO]     set_status:246       : Status: 現在のモード: 画像管理
+18:31:25:168 : [INFO]     set_application_state:104 : MainController: アプリケーション状態更新 current_mode: flashcard -> image
+18:31:25:224 : [INFO]     switch_mode:120      : MainController: モードを切り替えました flashcard -> image
+18:31:25:622 : [INFO]     switch_mode:211      : モードを切り替え: image -> main
+18:31:25:625 : [INFO]     set_status:246       : Status: 現在のモード: メイン画面
+18:31:25:627 : [INFO]     set_application_state:104 : MainController: アプリケーション状態更新 current_mode: image -> main
+18:31:25:627 : [INFO]     switch_mode:120      : MainController: モードを切り替えました image -> main
+18:31:26:020 : [INFO]     switch_mode:211      : モードを切り替え: main -> flashcard
+18:31:26:024 : [INFO]     set_status:246       : Status: 現在のモード: フラッシュカード管理
+18:31:26:026 : [INFO]     set_application_state:104 : MainController: アプリケーション状態更新 current_mode: main -> flashcard
+18:31:26:026 : [INFO]     switch_mode:120      : MainController: モードを切り替えました main -> flashcard
+18:31:26:373 : [INFO]     switch_mode:211      : モードを切り替え: flashcard -> image
+18:31:26:376 : [INFO]     set_status:246       : Status: 現在のモード: 画像管理
+18:31:26:377 : [INFO]     set_application_state:104 : MainController: アプリケーション状態更新 current_mode: flashcard -> image
+18:31:26:378 : [INFO]     switch_mode:120      : MainController: モードを切り替えました flashcard -> image
+18:31:26:809 : [INFO]     switch_mode:211      : モードを切り替え: image -> flashcard
+18:31:26:811 : [INFO]     set_status:246       : Status: 現在のモード: フラッシュカード管理
+18:31:26:812 : [INFO]     set_application_state:104 : MainController: アプリケーション状態更新 current_mode: image -> flashcard
+18:31:26:813 : [INFO]     switch_mode:120      : MainController: モードを切り替えました image -> flashcard
+18:31:27:225 : [INFO]     switch_mode:211      : モードを切り替え: flashcard -> image
+18:31:27:227 : [INFO]     set_status:246       : Status: 現在のモード: 画像管理
+18:31:27:228 : [INFO]     set_application_state:104 : MainController: アプリケーション状態更新 current_mode: flashcard -> image
+18:31:27:229 : [INFO]     switch_mode:120      : MainController: モードを切り替えました flashcard -> image
+18:31:38:293 : [INFO]     switch_mode:211      : モードを切り替え: image -> flashcard
+18:31:38:297 : [INFO]     set_status:246       : Status: 現在のモード: フラッシュカード管理
+18:31:38:297 : [INFO]     set_application_state:104 : MainController: アプリケーション状態更新 current_mode: image -> flashcard
+18:31:38:298 : [INFO]     switch_mode:120      : MainController: モードを切り替えました image -> flashcard
+18:31:38:725 : [INFO]     switch_mode:211      : モードを切り替え: flashcard -> main
+18:31:38:728 : [INFO]     set_status:246       : Status: 現在のモード: メイン画面
+18:31:38:728 : [INFO]     set_application_state:104 : MainController: アプリケーション状態更新 current_mode: flashcard -> main
+18:31:38:729 : [INFO]     switch_mode:120      : MainController: モードを切り替えました flashcard -> main
+18:31:43:932 : [INFO]     switch_mode:211      : モードを切り替え: main -> flashcard
+18:31:43:935 : [INFO]     set_status:246       : Status: 現在のモード: フラッシュカード管理
+18:31:43:935 : [INFO]     set_application_state:104 : MainController: アプリケーション状態更新 current_mode: main -> flashcard
+18:31:43:937 : [INFO]     switch_mode:120      : MainController: モードを切り替えました main -> flashcard
+18:31:45:207 : [INFO]     switch_mode:211      : モードを切り替え: flashcard -> main
+18:31:45:210 : [INFO]     set_status:246       : Status: 現在のモード: メイン画面
+18:31:45:210 : [INFO]     set_application_state:104 : MainController: アプリケーション状態更新 current_mode: flashcard -> main
+18:31:45:211 : [INFO]     switch_mode:120      : MainController: モードを切り替えました flashcard -> main
+18:31:47:063 : [INFO]     switch_mode:211      : モードを切り替え: main -> flashcard
+18:31:47:066 : [INFO]     set_status:246       : Status: 現在のモード: フラッシュカード管理
+18:31:47:067 : [INFO]     set_application_state:104 : MainController: アプリケーション状態更新 current_mode: main -> flashcard
+18:31:47:068 : [INFO]     switch_mode:120      : MainController: モードを切り替えました main -> flashcard
+18:31:47:907 : [INFO]     switch_mode:211      : モードを切り替え: flashcard -> main
+18:31:47:911 : [INFO]     set_status:246       : Status: 現在のモード: メイン画面
+18:31:47:912 : [INFO]     set_application_state:104 : MainController: アプリケーション状態更新 current_mode: flashcard -> main
+18:31:47:913 : [INFO]     switch_mode:120      : MainController: モードを切り替えました flashcard -> main
+18:31:48:765 : [INFO]     switch_mode:211      : モードを切り替え: main -> image
+18:31:48:767 : [INFO]     set_status:246       : Status: 現在のモード: 画像管理
+18:31:48:769 : [INFO]     set_application_state:104 : MainController: アプリケーション状態更新 current_mode: main -> image
+18:31:48:769 : [INFO]     switch_mode:120      : MainController: モードを切り替えました main -> image
+18:31:49:768 : [INFO]     switch_mode:211      : モードを切り替え: image -> main
+18:31:49:772 : [INFO]     set_status:246       : Status: 現在のモード: メイン画面
+18:31:49:773 : [INFO]     set_application_state:104 : MainController: アプリケーション状態更新 current_mode: image -> main
+18:31:49:773 : [INFO]     switch_mode:120      : MainController: モードを切り替えました image -> main
+18:31:51:235 : [INFO]     switch_mode:211      : モードを切り替え: main -> flashcard
+18:31:51:240 : [INFO]     set_status:246       : Status: 現在のモード: フラッシュカード管理
+18:31:51:240 : [INFO]     set_application_state:104 : MainController: アプリケーション状態更新 current_mode: main -> flashcard
+18:31:51:241 : [INFO]     switch_mode:120      : MainController: モードを切り替えました main -> flashcard
+18:31:54:939 : [INFO]     _handle_menu_action:264 : メニューアクション実行: settings
+18:31:54:941 : [INFO]     handle_menu_action:125 : MainController: メニューアクション 'settings' を処理します
+18:31:54:942 : [INFO]     _handle_settings:207 : MainController: 設定画面を表示
+18:31:57:695 : [INFO]     _handle_menu_action:264 : メニューアクション実行: about
+18:31:57:696 : [INFO]     handle_menu_action:125 : MainController: メニューアクション 'about' を処理します
+18:31:57:697 : [INFO]     _handle_about:212    : MainController: アバウト画面を表示
+18:32:01:465 : [INFO]     switch_mode:211      : モードを切り替え: flashcard -> main
+18:32:01:469 : [INFO]     set_status:246       : Status: 現在のモード: メイン画面
+18:32:01:469 : [INFO]     set_application_state:104 : MainController: アプリケーション状態更新 current_mode: flashcard -> main
+18:32:01:470 : [INFO]     switch_mode:120      : MainController: モードを切り替えました flashcard -> main
+18:32:01:853 : [INFO]     switch_mode:211      : モードを切り替え: main -> flashcard
+18:32:01:856 : [INFO]     set_status:246       : Status: 現在のモード: フラッシュカード管理
+18:32:01:857 : [INFO]     set_application_state:104 : MainController: アプリケーション状態更新 current_mode: main -> flashcard
+18:32:01:857 : [INFO]     switch_mode:120      : MainController: モードを切り替えました main -> flashcard
+18:32:02:205 : [INFO]     switch_mode:211      : モードを切り替え: flashcard -> image
+18:32:02:209 : [INFO]     set_status:246       : Status: 現在のモード: 画像管理
+18:32:02:209 : [INFO]     set_application_state:104 : MainController: アプリケーション状態更新 current_mode: flashcard -> image
+18:32:02:211 : [INFO]     switch_mode:120      : MainController: モードを切り替えました flashcard -> image
+18:32:07:501 : [INFO]     ask_yes_no:226       : Confirmation dialog: 確認 -> True
+18:32:07:502 : [INFO]     on_closing:303       : メインウィンドウを閉じています
+18:32:07:503 : [INFO]     cleanup:76           : MainController: クリーンアップを開始します
+18:32:07:503 : [INFO]     cleanup:87           : MainController: クリーンアップが完了しました
+18:32:07:505 : [INFO]     cleanup:314          : メインウィンドウのクリーンアップ実行
+18:32:07:696 : [INFO]     cleanup:69           : GUIアプリケーションのクリーンアップ中...
+18:32:07:697 : [INFO]     cleanup:76           : MainController: クリーンアップを開始します
+18:32:07:699 : [INFO]     cleanup:87           : MainController: クリーンアップが完了しました
+18:32:07:702 : [INFO]     cleanup:77           : GUIアプリケーションのクリーンアップ完了

@@ -1,3 +1,0 @@
-2025-05-27 21:39:23,326 - test.module1 - INFO - <module>:257 - This is an info message from module1
-2025-05-27 21:39:23,328 - test.module1 - WARNING - <module>:258 - This is a warning from module1
-2025-05-27 21:39:23,329 - test.module1 - ERROR - <module>:259 - This is an error from module1

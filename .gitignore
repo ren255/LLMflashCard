@@ -76,3 +76,5 @@ Thumbs.db
 /docs/_static
 /docs/_templates
 /docs/source
+
+*.log

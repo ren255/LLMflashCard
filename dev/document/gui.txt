@@ -1,0 +1,205 @@
+# GUI開発ドキュメント
+
+## 概要
+
+LLMflashCardプロジェクトのGUI部分の開発指針と構成について説明します。本プロジェクトでは、tkinterとcustomtkinterを使用してユーザーインターフェースを構築します。
+
+## ログ機能の使用について
+
+プロジェクト全体で統一されたログ機能を使用してください：
+
+```python
+from utils import log
+
+# ログレベル別の使用例
+log.info("情報メッセージ")
+log.warning("警告メッセージ") 
+log.error("エラーメッセージ")
+```
+
+## GUI構成（Tree View）
+
+```
+gui/
+├── __init__.py
+├── components/
+│   ├── __init__.py
+│   ├── common/
+│   │   ├── __init__.py
+│   │   ├── base_window.py
+│   │   ├── custom_widgets.py
+│   │   └── dialogs.py
+│   ├── flashcard/
+│   │   ├── __init__.py
+│   │   ├── flashcard_list_view.py
+│   │   ├── flashcard_detail_view.py
+│   │   ├── flashcard_edit_dialog.py
+│   │   └── csv_import_dialog.py
+│   └── image/
+│       ├── __init__.py
+│       ├── image_gallery.py
+│       ├── image_viewer.py
+│       ├── image_edit_tools.py
+│       └── mask_editor.py
+├── controllers/
+│   ├── __init__.py
+│   ├── main_controller.py
+│   ├── flashcard_controller.py
+│   └── image_controller.py
+├── views/
+│   ├── __init__.py
+│   ├── main_window.py
+│   ├── flashcard_manager.py
+│   └── image_manager.py
+├── styles/
+│   ├── __init__.py
+│   ├── themes.py
+│   └── colors.py
+└── utils/
+    ├── __init__.py
+    ├── gui_helpers.py
+    └── validators.py
+```
+
+## フォルダ構成と役割
+
+| フォルダ/ファイル | レイヤー | 役割 | 説明 |
+|------------------|---------|------|------|
+| `__init__.py` | - | パッケージ初期化 | GUIモジュールの初期化とエクスポート定義 |
+| `components/` | **View** | UIコンポーネント | 再利用可能なUIコンポーネントの格納 |
+| `components/common/` | **View** | 共通コンポーネント | 全体で使用される基本的なUI要素 |
+| `components/flashcard/` | **View** | フラッシュカード関連UI | フラッシュカード機能専用のUIコンポーネント |
+| `components/image/` | **View** | 画像関連UI | 画像処理・表示関連のUIコンポーネント |
+| `controllers/` | **Controller** | コントローラー | ビジネスロジックとUI間の仲介役 |
+| `views/` | **View** | メインビュー | アプリケーションの主要画面定義 |
+| `styles/` | **View** | スタイル定義 | テーマ、色、外観設定の管理 |
+| `utils/` | **Controller** | GUI補助機能 | GUI開発に必要なヘルパー関数群 |
+
+### Model層（データとビジネスロジック）
+プロジェクト全体での位置づけ：
+
+| 既存モジュール | 役割 | MVCでの位置 |
+|---------------|------|------------|
+| `storage/` | データ永続化・管理 | **Model** |
+| `db/` | データベース操作 | **Model** |
+| `logic/` | ビジネスロジック | **Model** |
+| `llm/` | AI機能 | **Model** |
+| `image_processing/` | 画像処理 | **Model** |
+
+## 各コンポーネントの詳細説明
+
+### components/common/
+- **base_window.py**: 全ウィンドウの基底クラス
+- **custom_widgets.py**: プロジェクト固有のカスタムウィジェット
+- **dialogs.py**: 汎用ダイアログボックス（確認、エラー、入力等）
+
+### components/flashcard/
+- **flashcard_list_view.py**: フラッシュカード一覧表示
+- **flashcard_detail_view.py**: 個別フラッシュカード詳細表示
+- **flashcard_edit_dialog.py**: フラッシュカード編集ダイアログ
+- **csv_import_dialog.py**: CSVインポート専用ダイアログ
+
+### components/image/
+- **image_gallery.py**: 画像ギャラリー表示
+- **image_viewer.py**: 単一画像詳細表示
+- **image_edit_tools.py**: 画像編集ツールバー
+- **mask_editor.py**: マスク編集専用エディター
+
+### controllers/
+- **main_controller.py**: アプリケーション全体の制御
+- **flashcard_controller.py**: フラッシュカード機能の制御
+- **image_controller.py**: 画像機能の制御
+
+### views/
+- **main_window.py**: メインアプリケーションウィンドウ
+- **flashcard_manager.py**: フラッシュカード管理メイン画面
+- **image_manager.py**: 画像管理メイン画面
+
+### styles/
+- **themes.py**: アプリケーションテーマ定義
+- **colors.py**: 色パレット定義
+
+### utils/
+- **gui_helpers.py**: GUI開発補助関数
+- **validators.py**: 入力値検証関数
+
+## 技術仕様
+
+### 使用ライブラリ
+- **tkinter**: Python標準GUIライブラリ
+- **customtkinter**: モダンな外観のカスタムtkinterコンポーネント
+
+### 設計原則
+1. **MVCアーキテクチャ**: Model-View-Controller構造の採用
+2. **コンポーネント再利用**: 共通UIコンポーネントの活用
+3. **レスポンシブ設計**: 画面サイズに対応した柔軟なレイアウト
+4. **一貫性**: 統一されたUI/UX体験の提供
+
+### データフローの例
+
+#### フラッシュカード表示の場合：
+1. **View** (`flashcard_manager.py`) がユーザーの「表示」要求を受信
+2. **Controller** (`flashcard_controller.py`) がViewからイベントを受け取り
+3. **Controller** が **Model** (`FlashcardStorage`) にデータ要求
+4. **Model** がデータベースからデータを取得・加工して返却
+5. **Controller** がデータを**View**に適した形式に変換
+6. **View** がデータを画面に表示
+
+#### 画像保存の場合：
+1. **View** (`image_manager.py`) がファイル選択・保存要求を受信  
+2. **Controller** (`image_controller.py`) が処理を開始
+3. **Controller** が **Model** (`ImageStorage`) にファイル保存を依頼
+4. **Model** がファイル処理・メタデータ生成・DB保存を実行
+5. **Controller** が結果を **View** に通知
+6. **View** が保存完了メッセージを表示
+
+### ストレージ連携
+既存のStorageControllerとの連携：
+- `storage.storage_controller.StorageController`との統合
+- `storage.flashcard_managers.FlashcardStorage`の活用
+- `storage.image_managers.ImageStorage`の活用
+
+### データベース連携
+- `db.sqlite_utils.SQLiteManager`を通じたデータベース操作
+- メタデータ管理クラスとの連携
+
+## 開発ガイドライン
+
+### ログ使用規則
+- 情報ログ: ユーザーアクション、状態変更
+- 警告ログ: 予期せぬ状況、非致命的エラー
+- エラーログ: 例外処理、致命的エラー
+
+### コーディング規約
+- PEP 8準拠
+- 日本語コメント推奨
+- 型ヒント必須 option禁止、|を使用
+- docstring記述必須
+
+### テスト方針
+- 各コンポーネントの単体テスト
+- 統合テストでの動作確認
+- ユーザビリティテストの実施
+
+## 今後の拡張予定
+
+### Phase 1: 基本機能
+- メインウィンドウ構築
+- 画像基本表示
+- フラッシュカード基本表示
+
+### Phase 2: 高度な機能
+- フラッシュカード編集機能
+- 画像編集機能
+- インポート/エクスポート機能
+
+### Phase 3: ユーザビリティ向上
+- テーマ切り替え
+- キーボードショートカット
+- 設定保存機能
+
+## 注意事項
+
+- 既存のプロジェクト構造を尊重し、storageやdbモジュールとの連携を重視
+- ユーザビリティを最優先に考慮した設計
+- パフォーマンスを考慮した実装（大量データ対応）

@@ -10,11 +10,10 @@ from pathlib import Path
 from utils import log
 
 
-##
-# @brief ファイル管理クラス
-# @details path辞書を受け取ってファイルの保存、削除、サムネイル作成などを行う。filetypeごとにインスタンス化される。
 class FileManager:
-    """共通のファイル管理クラス,filetypeごとに作成される"""
+    """共通のファイル管理クラス,filetypeごとに作成される
+    path辞書を受け取ってファイルの保存、削除、サムネイル作成などを行う。filetypeごとにインスタンス化される。
+    """
 
     def __init__(self, paths: Dict[str, str], thumbnail_size=(200, 200)):
         """

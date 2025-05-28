@@ -9,12 +9,13 @@ from db.sqlite_utils import SQLiteManager
 from .file_manager import FileManager
 from utils import log
 
-##
-# @brief ストレージ管理の基底クラス
-# @details このクラスはストレージ管理の基本的な機能を提供し、サブクラスで具体的な実装を行う
+
 
 
 class BaseStorage(ABC):
+    """ストレージ管理の基底クラス
+    このクラスはストレージ管理の基本的な機能を提供し、サブクラスで具体的な実装を行う
+    """
 
     def __init__(self, file_type: str, paths: Dict[str, str]):
         self.file_type = file_type

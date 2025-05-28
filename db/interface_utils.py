@@ -2,9 +2,8 @@ from abc import ABC, abstractmethod
 from typing import Any, List, Tuple, Dict
 
 
-##
-# @brief データベース管理のインターフェース
 class DBManagerInterface(ABC):
+    """データベース管理のインターフェース"""
     @abstractmethod
     def create_table(self, table_name: str, columns: Dict[str, str]):
         """

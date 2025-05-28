@@ -8,13 +8,12 @@ from .base_managers import BaseStorage, BaseMetadataManager
 from .file_manager import FileManager
 from db.models import IMAGE_SCHEMA
 
-##
-# @brief 画像ストレージ管理クラス
-# @details メタデータclassとfilemanagerを組み合わせて画像の保存、検索、メタデータ管理を行う
 
 
 class ImageStorage(BaseStorage):
-    """画像ストレージ管理クラス"""
+    """画像ストレージ管理クラス
+    メタデータclassとfilemanagerを組み合わせて画像の保存、検索、メタデータ管理を行う
+    """
 
     def __init__(self, file_type: str, paths: Dict[str, str]):
         super().__init__(file_type, paths)

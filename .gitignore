@@ -72,3 +72,6 @@ Thumbs.db
 /.VSCodeCounter
 /resources
 /test/_fixtures
+/docs/_build
+/docs/_static
+/docs/_templates

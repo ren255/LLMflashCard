@@ -1,97 +1,123 @@
-LLMflashCard
-├── .git
-├── .pytest_cache
-├── .venv
-├── .VSCodeCounter
-├── db
-│   ├── __pycache__
-│   ├── __init__.py
-│   ├── flashcards.db
-│   ├── images.db
-│   ├── interface_utils.py
-│   ├── models.py
-│   └── sqlite_utils.py
-├── flashcard
-├── gui
-│   └── __init__.py
-├── image
-├── image_processing
-│   └── __init__.py
-├── llm
-│   └── __init__.py
-├── logic
-│   └── __init__.py
-├── logs
-│   ├── test_module1.log
-│   ├── test_module2.log
-│   └── utils_default.log
-├── resources
-│   ├── db
-│   │   ├── flashcards.db
-│   │   └── images.db
-│   ├── flashcard
-│   ├── image
-│   │   └── 34f5f808a9f4442185a5d0696ffe0d52.png
-│   ├── temp
-│   │   ├── flashcard
-│   │   └── image
-│   ├── tempSave
-│   ├── thumbnails
-│   │   ├── flashcard
-│   │   └── image
-│   │       ├── thumb_0b95871b0d9d4a579359fe10246fce3c.png
-│   │       ├── thumb_25e7fca9ad7440c3aabfc5c829c47859.png
-│   │       ├── thumb_34f5f808a9f4442185a5d0696ffe0d52.png
-│   │       ├── thumb_36ccef3692924850bfa4e64411cec233.png
-│   │       ├── thumb_386fc5d6fa274e90bd125ec1e34d8198.png
-│   │       ├── thumb_3edf9b29f83e45d89c67eea2a091ccd7.png
-│   │       ├── thumb_477f563689e745089dad3e4798091bc0.png
-│   │       ├── thumb_49ddd201a2d24f37a8c53392deb4c10d.png
-│   │       ├── thumb_5e600cfe669d4403b419f31f5353e0bb.png
-│   │       ├── thumb_5f3d6674e75f4679b275fd69a80922f9.png
-│   │       └── ... and 22 more items
-│   └── upload
-├── storage
-│   ├── __pycache__
-│   ├── __init__.py
-│   ├── base_managers.py
-│   ├── file_manager.py
-│   ├── flashcard_managers.py
-│   ├── image_managers.py
-│   └── storage_controller.py
-├── temp
-│   ├── flashcard
-│   └── image
-├── test
-│   ├── .pytest_cache
-│   ├── __pycache__
-│   ├── _fixtures
-│   ├── document
-│   │   ├── explain.txt
-│   │   ├── prototype.txt
-│   │   └── StorageTest.txt
-│   ├── conftest.py
-│   ├── make_testdata.py
-│   ├── pytest.ini
-│   ├── test_data_definitions.py
-│   ├── test_db.py
-│   ├── test_storage_controller.py
-│   └── ... and 1 more items
-├── tests
-│   ├── calss.dio
-│   ├── db.try.py
-│   ├── fixtures_tree.txt
-│   ├── LLMflashCard_tree.txt
-│   ├── path.py
-│   ├── test_tree.txt
-│   ├── tree.py
-│   └── utils_tree.txt
-├── utils
-│   ├── __pycache__
-│   ├── __init__.py
-│   └── Logger.py
-├── .coverage
-├── .gitignore
-├── main.py
-├── my_database.db
-└── requirements.txt
+LLMflashCard                                     [580.5MB]
+├── .git                                         [54.8MB]
+├── .pytest_cache                                [5.4KB]
+├── .venv                                        [508.3MB]
+├── .VSCodeCounter                               [138.0KB]
+├── __pycache__                                  [2.4KB]
+├── db                                           [52.9KB]
+│   ├── __pycache__                              [12.2KB]
+│   ├── __init__.py                              [72B]
+│   ├── flashcards.db                            [16.0KB]
+│   ├── images.db                                [16.0KB]
+│   ├── interface_utils.py                       [2.1KB]
+│   ├── models.py                                [2.2KB]
+│   └── sqlite_utils.py                          [4.2KB]
+├── docs                                         [10.9MB]
+│   ├── _build                                   [10.9MB]
+│   ├── _static                                  [0B]
+│   ├── _templates                               [0B]
+│   ├── logs                                     [188B]
+│   │   └── utils_default.log                    [188B]
+│   ├── source                                   [3.0KB]
+│   │   ├── db.interface_utils.rst               [151B]
+│   │   ├── db.models.rst                        [122B]
+│   │   ├── db.rst                               [257B]
+│   │   ├── db.sqlite_utils.rst                  [142B]
+│   │   ├── gui.rst                              [142B]
+│   │   ├── image_processing.rst                 [183B]
+│   │   ├── llm.rst                              [142B]
+│   │   ├── logic.rst                            [148B]
+│   │   ├── main.rst                             [107B]
+│   │   ├── modules.rst                          [148B]
+│   │   └── ... and 8 more items                 [N/A]
+│   ├── conf.py                                  [1.2KB]
+│   ├── index.rst                                [615B]
+│   ├── make.bat                                 [800B]
+│   └── Makefile                                 [634B]
+├── gui                                          [170B]
+│   ├── __pycache__                              [170B]
+│   └── __init__.py                              [0B]
+├── image                                        [0B]
+├── image_processing                             [183B]
+│   ├── __pycache__                              [183B]
+│   └── __init__.py                              [0B]
+├── llm                                          [170B]
+│   ├── __pycache__                              [170B]
+│   └── __init__.py                              [0B]
+├── logic                                        [172B]
+│   ├── __pycache__                              [172B]
+│   └── __init__.py                              [0B]
+├── logs                                         [2.7MB]
+│   ├── test_module1.log                         [294B]
+│   ├── test_module2.log                         [203B]
+│   └── utils_default.log                        [2.7MB]
+├── resources                                    [418.6KB]
+│   ├── db                                       [48.0KB]
+│   │   ├── flashcards.db                        [24.0KB]
+│   │   └── images.db                            [24.0KB]
+│   ├── flashcard                                [0B]
+│   ├── image                                    [159.0KB]
+│   │   └── 34f5f808a9f4442185a5d0696ffe0d52.png [159.0KB]
+│   ├── temp                                     [0B]
+│   │   ├── flashcard                            [0B]
+│   │   └── image                                [0B]
+│   ├── tempSave                                 [0B]
+│   ├── thumbnails                               [211.7KB]
+│   │   ├── flashcard                            [0B]
+│   │   └── image                                [211.7KB]
+│   │       ├── thumb_0b95871b0d9d4a579359fe10246fce3c.png [6.6KB]
+│   │       ├── thumb_25e7fca9ad7440c3aabfc5c829c47859.png [6.6KB]
+│   │       ├── thumb_34f5f808a9f4442185a5d0696ffe0d52.png [6.6KB]
+│   │       ├── thumb_36ccef3692924850bfa4e64411cec233.png [6.6KB]
+│   │       ├── thumb_386fc5d6fa274e90bd125ec1e34d8198.png [6.6KB]
+│   │       ├── thumb_3edf9b29f83e45d89c67eea2a091ccd7.png [6.6KB]
+│   │       ├── thumb_477f563689e745089dad3e4798091bc0.png [6.6KB]
+│   │       ├── thumb_49ddd201a2d24f37a8c53392deb4c10d.png [6.6KB]
+│   │       ├── thumb_5e600cfe669d4403b419f31f5353e0bb.png [6.6KB]
+│   │       ├── thumb_5f3d6674e75f4679b275fd69a80922f9.png [6.6KB]
+│   │       └── ... and 22 more items            [N/A]
+│   └── upload                                   [0B]
+├── storage                                      [85.4KB]
+│   ├── __pycache__                              [47.9KB]
+│   ├── __init__.py                              [628B]
+│   ├── base_managers.py                         [8.9KB]
+│   ├── file_manager.py                          [5.5KB]
+│   ├── flashcard_managers.py                    [7.2KB]
+│   ├── image_managers.py                        [7.9KB]
+│   └── storage_controller.py                    [7.3KB]
+├── temp                                         [0B]
+│   ├── flashcard                                [0B]
+│   └── image                                    [0B]
+├── test                                         [3.0MB]
+│   ├── .pytest_cache                            [5.7KB]
+│   ├── __pycache__                              [146.9KB]
+│   ├── _fixtures                                [2.7MB]
+│   ├── document                                 [29.1KB]
+│   │   ├── explain.txt                          [6.7KB]
+│   │   ├── prototype.txt                        [16.8KB]
+│   │   └── StorageTest.txt                      [5.6KB]
+│   ├── conftest.py                              [10.6KB]
+│   ├── make_testdata.py                         [12.6KB]
+│   ├── pytest.ini                               [1.9KB]
+│   ├── test_data_definitions.py                 [6.3KB]
+│   ├── test_db.py                               [11.1KB]
+│   ├── test_storage_controller.py               [13.3KB]
+│   └── ... and 1 more items                     [N/A]
+├── tests                                        [36.3KB]
+│   ├── calss.dio                                [8.8KB]
+│   ├── db.try.py                                [870B]
+│   ├── docs_tree.txt                            [411B]
+│   ├── fixtures_tree.txt                        [1.9KB]
+│   ├── LLMflashCard_tree.txt                    [3.6KB]
+│   ├── path.py                                  [174B]
+│   ├── test_tree.txt                            [522B]
+│   ├── tree.py                                  [20.0KB]
+│   └── utils_tree.txt                           [65B]
+├── utils                                        [21.6KB]
+│   ├── __pycache__                              [11.9KB]
+│   ├── __init__.py                              [1009B]
+│   └── Logger.py                                [8.7KB]
+├── .coverage                                    [52.0KB]
+├── .gitignore                                   [782B]
+├── main.py                                      [1.9KB]
+└── requirements.txt                             [738B]

@@ -7,10 +7,6 @@ set_global_log_level(LogLevel.DEBUG)
 
 log.debug("debug: main.pyの実行開始")
 
-# ===========================================
-# main.py での使用例
-# ===========================================
-
 def main_example():
     """main.pyでの使用例"""
     

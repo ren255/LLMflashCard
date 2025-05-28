@@ -24,39 +24,91 @@ LLMflashCard
 │   │   └── utils_tree.txt
 │   ├── calss.dio
 │   ├── db.try.py
+│   ├── makeGUIfile.bat
 │   ├── path.py
+│   ├── text_doc.lnk
 │   └── tree.py
 ├── docs
 │   ├── _build
 │   ├── _static
 │   ├── _templates
+│   ├── logs
+│   │   └── utils_default.log
 │   ├── source
 │   │   ├── build_docs.rst
 │   │   ├── db.interface_utils.rst
 │   │   ├── db.models.rst
 │   │   ├── db.rst
 │   │   ├── db.sqlite_utils.rst
+│   │   ├── gui.components.common.rst
+│   │   ├── gui.components.flashcard.rst
+│   │   ├── gui.components.image.rst
+│   │   ├── gui.components.rst
+│   │   ├── gui.controllers.rst
 │   │   ├── gui.rst
+│   │   ├── gui.styles.rst
+│   │   ├── gui.utils.rst
+│   │   ├── gui.views.rst
 │   │   ├── image_processing.rst
 │   │   ├── llm.rst
 │   │   ├── logic.rst
 │   │   ├── main.rst
 │   │   ├── modules.rst
 │   │   ├── storage.base_managers.rst
-│   │   ├── storage.file_manager.rst
-│   │   ├── storage.flashcard_managers.rst
-│   │   ├── storage.image_managers.rst
-│   │   ├── storage.rst
-│   │   ├── storage.storage_controller.rst
-│   │   ├── utils.Logger.rst
-│   │   └── utils.rst
+│   │   └── ... and 7 more items
 │   ├── conf.py
 │   ├── index.rst
 │   ├── make.bat
 │   └── Makefile
 ├── gui
 │   ├── __pycache__
-│   └── __init__.py
+│   ├── components
+│   │   ├── __pycache__
+│   │   ├── common
+│   │   │   ├── __pycache__
+│   │   │   ├── __init__.py
+│   │   │   ├── base_window.py
+│   │   │   ├── custom_widgets.py
+│   │   │   └── dialogs.py
+│   │   ├── flashcard
+│   │   │   ├── __pycache__
+│   │   │   ├── __init__.py
+│   │   │   ├── csv_import_dialog.py
+│   │   │   ├── flashcard_detail_view.py
+│   │   │   ├── flashcard_edit_dialog.py
+│   │   │   └── flashcard_list_view.py
+│   │   ├── image
+│   │   │   ├── __pycache__
+│   │   │   ├── __init__.py
+│   │   │   ├── image_edit_tools.py
+│   │   │   ├── image_gallery.py
+│   │   │   ├── image_viewer.py
+│   │   │   └── mask_editor.py
+│   │   └── __init__.py
+│   ├── controllers
+│   │   ├── __pycache__
+│   │   ├── __init__.py
+│   │   ├── flashcard_controller.py
+│   │   ├── image_controller.py
+│   │   └── main_controller.py
+│   ├── styles
+│   │   ├── __pycache__
+│   │   ├── __init__.py
+│   │   ├── colors.py
+│   │   └── themes.py
+│   ├── utils
+│   │   ├── __pycache__
+│   │   ├── __init__.py
+│   │   ├── gui_helpers.py
+│   │   └── validators.py
+│   ├── views
+│   │   ├── __pycache__
+│   │   ├── __init__.py
+│   │   ├── flashcard_manager.py
+│   │   ├── image_manager.py
+│   │   └── main_window.py
+│   ├── __init__.py
+│   └── main.py
 ├── image_processing
 │   ├── __pycache__
 │   └── __init__.py

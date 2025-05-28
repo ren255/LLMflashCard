@@ -13,8 +13,11 @@ project_root = Path(__file__).parent.parent
 sys.path.insert(0, str(project_root))
 
 from utils import log
-from gui.views.main_window import MainWindow
-from gui.controllers.main_controller import MainController
+
+from gui import (
+    MainController,
+    MainWindow
+)
 
 
 class GUIApplication:

@@ -28,12 +28,9 @@ class MainWindow(BaseMainWindow):
         self.geometry("1200x800")
         self.minsize(800, 600)
         
-        # 現在のモード
         self.current_mode = "main"
-        
-        # コントローラー参照
         self.controller: Optional[Any] = None
-        
+
         # UI要素
         self.menu_bar: Optional[tk.Menu] = None
         self.toolbar: Optional[ctk.CTkFrame] = None
@@ -50,20 +47,12 @@ class MainWindow(BaseMainWindow):
         """UIセットアップ"""
         log.info("メインウィンドウのUI構築開始")
         
-        # メニューバーの作成
         self._create_menu_bar()
-        
-        # ツールバーの作成
         self._create_toolbar()
-        
-        # メインフレームの作成
         self._create_main_frame()
-        
-        # ステータスバーの作成
         self._create_status_bar()
-        
-        # 初期モードの設定
         self._create_main_mode()
+        
         self.switch_mode("main")
         
         log.info("メインウィンドウのUI構築完了")

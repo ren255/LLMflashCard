@@ -245,6 +245,11 @@ popd
             self.print_info("makeコマンドが見つかりません。", "ERROR")
             return False
 
+        # HTML出力ディレクトリの確認
+        if not self.html_dir.exists():
+            self.print_info("HTML出力ディレクトリが存在しません。ビルドが失敗している可能性があります。", "ERROR")
+            return False
+
         return True
 
     def build_text(self, args):

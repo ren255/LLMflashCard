@@ -27,7 +27,7 @@ class BaseController(ABC):
         if event not in self._callbacks:
             self._callbacks[event] = []
         self._callbacks[event].append(callback)
-        log.info(f"{self.__class__.__name__}: イベント '{event}' にコールバックを登録")
+        log.info(f"{self.__class__.__name__}: イベント '{event}' にコールバック '{callback.__name__}' を登録")
         
     def trigger_callback(self, event: str, *args, **kwargs) -> None:
         """コールバック関数を実行"""

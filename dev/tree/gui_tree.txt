@@ -1,0 +1,48 @@
+gui
+├── __pycache__
+├── components
+│   ├── __pycache__
+│   ├── common
+│   │   ├── __pycache__
+│   │   ├── __init__.py
+│   │   ├── base_window.py
+│   │   ├── custom_widgets.py
+│   │   └── dialogs.py
+│   ├── flashcard
+│   │   ├── __pycache__
+│   │   ├── __init__.py
+│   │   ├── csv_import_dialog.py
+│   │   ├── flashcard_detail_view.py
+│   │   ├── flashcard_edit_dialog.py
+│   │   └── flashcard_list_view.py
+│   ├── image
+│   │   ├── __pycache__
+│   │   ├── __init__.py
+│   │   ├── image_edit_tools.py
+│   │   ├── image_gallery.py
+│   │   ├── image_viewer.py
+│   │   └── mask_editor.py
+│   └── __init__.py
+├── controllers
+│   ├── __pycache__
+│   ├── __init__.py
+│   ├── flashcard_controller.py
+│   ├── image_controller.py
+│   └── main_controller.py
+├── styles
+│   ├── __pycache__
+│   ├── __init__.py
+│   ├── colors.py
+│   └── themes.py
+├── utils
+│   ├── __pycache__
+│   ├── __init__.py
+│   ├── gui_helpers.py
+│   └── validators.py
+├── views
+│   ├── __pycache__
+│   ├── __init__.py
+│   ├── flashcard_manager.py
+│   ├── image_manager.py
+│   └── main_window.py
+└── __init__.py

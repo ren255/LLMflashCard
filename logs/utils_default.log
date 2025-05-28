@@ -20973,3 +20973,621 @@ ages.db
 2025-05-28 14:42:19,918 - utils.default - INFO - close:103 - SQLite database connection closed: C:\Users\renpe\MyDocuments\programing\VScode\LLMflashCard\resources\db\flashcards.db
 2025-05-28 14:42:19,921 - utils.default - INFO - cleanup:189 - flashcardストレージをクリーンアップ
 2025-05-28 14:42:19,921 - utils.default - INFO - cleanup:191 - StorageController クリーンアップ完了
+2025-05-28 15:17:26,425 - utils.default - DEBUG - <module>:28 - Setting up test fixtures for Storage module
+2025-05-28 15:17:27,414 - utils.default - INFO - __init__:14 - SQLite database connection established: C:\Users\renpe\AppData\Local\Temp\tmpu3bpp1c6.db
+2025-05-28 15:17:27,442 - utils.default - INFO - create_table:25 - Table 'users' created or verified successfully
+2025-05-28 15:17:27,442 - utils.default - INFO - close:103 - SQLite database connection closed: C:\Users\renpe\AppData\Local\Temp\tmpu3bpp1c6.db
+2025-05-28 15:17:27,449 - utils.default - INFO - __init__:14 - SQLite database connection established: C:\Users\renpe\AppData\Local\Temp\tmpq2mwluj4.db
+2025-05-28 15:17:27,467 - utils.default - INFO - create_table:25 - Table 'data_types' created or verified successfully
+2025-05-28 15:17:27,476 - utils.default - INFO - close:103 - SQLite database connection closed: C:\Users\renpe\AppData\Local\Temp\tmpq2mwluj4.db
+2025-05-28 15:17:27,480 - utils.default - INFO - __init__:14 - SQLite database connection established: C:\Users\renpe\AppData\Local\Temp\tmp_v87jth6.db
+2025-05-28 15:17:27,495 - utils.default - INFO - create_table:25 - Table 'inventory' created or verified successfully
+2025-05-28 15:17:27,558 - utils.default - INFO - close:103 - SQLite database connection closed: C:\Users\renpe\AppData\Local\Temp\tmp_v87jth6.db
+2025-05-28 15:17:27,565 - utils.default - INFO - __init__:14 - SQLite database connection established: C:\Users\renpe\AppData\Local\Temp\tmp6281eym4.db
+2025-05-28 15:17:27,582 - utils.default - INFO - create_table:25 - Table 'duplicate_test' created or verified successfully
+2025-05-28 15:17:27,593 - utils.default - INFO - create_table:25 - Table 'duplicate_test' created or verified successfully
+2025-05-28 15:17:27,595 - utils.default - INFO - close:103 - SQLite database connection closed: C:\Users\renpe\AppData\Local\Temp\tmp6281eym4.db
+2025-05-28 15:17:27,598 - utils.default - INFO - __init__:14 - SQLite database connection established: C:\Users\renpe\AppData\Local\Temp\tmp1cxxyaqj.db
+2025-05-28 15:17:27,615 - utils.default - INFO - create_table:25 - Table 'empty_table' created or verified successfully
+2025-05-28 15:17:27,616 - utils.default - INFO - close:103 - SQLite database connection closed: C:\Users\renpe\AppData\Local\Temp\tmp1cxxyaqj.db
+2025-05-28 15:17:27,620 - utils.default - INFO - __init__:14 - SQLite database connection established: C:\Users\renpe\AppData\Local\Temp\tmpr5jz1_wu.db
+2025-05-28 15:17:27,636 - utils.default - INFO - create_table:25 - Table 'products' created or verified successfully
+2025-05-28 15:17:27,670 - utils.default - INFO - close:103 - SQLite database connection closed: C:\Users\renpe\AppData\Local\Temp\tmpr5jz1_wu.db
+2025-05-28 15:17:27,675 - utils.default - INFO - __init__:14 - SQLite database connection established: C:\Users\renpe\AppData\Local\Temp\tmpoh5kz0yc.db
+2025-05-28 15:17:27,686 - utils.default - INFO - create_table:25 - Table 'people' created or verified successfully
+2025-05-28 15:17:27,739 - utils.default - INFO - close:103 - SQLite database connection closed: C:\Users\renpe\AppData\Local\Temp\tmpoh5kz0yc.db
+2025-05-28 15:17:27,745 - utils.default - INFO - __init__:14 - SQLite database connection established: C:\Users\renpe\AppData\Local\Temp\tmplrhwevpw.db
+2025-05-28 15:17:27,760 - utils.default - INFO - create_table:25 - Table 'students' created or verified successfully
+2025-05-28 15:17:27,790 - utils.default - INFO - close:103 - SQLite database connection closed: C:\Users\renpe\AppData\Local\Temp\tmplrhwevpw.db
+2025-05-28 15:17:27,790 - utils.default - INFO - __init__:14 - SQLite database connection established: C:\Users\renpe\AppData\Local\Temp\tmpg0p8dauu.db
+2025-05-28 15:17:27,811 - utils.default - INFO - create_table:25 - Table 'test_users' created or verified successfully
+2025-05-28 15:17:27,822 - utils.default - INFO - close:103 - SQLite database connection closed: C:\Users\renpe\AppData\Local\Temp\tmpg0p8dauu.db
+2025-05-28 15:17:27,828 - utils.default - INFO - __init__:14 - SQLite database connection established: C:\Users\renpe\AppData\Local\Temp\tmpvxif2nfg.db
+2025-05-28 15:17:27,840 - utils.default - INFO - create_table:25 - Table 'tasks' created or verified successfully
+2025-05-28 15:17:27,904 - utils.default - INFO - close:103 - SQLite database connection closed: C:\Users\renpe\AppData\Local\Temp\tmpvxif2nfg.db
+2025-05-28 15:17:27,906 - utils.default - INFO - _setup_directories:82 - ディレクトリセットアップ完了: C:\Users\renpe\AppData\Local\Temp\storage_test__bd1eky2
+2025-05-28 15:17:27,906 - utils.default - INFO - _setup_databases:92 - imageデータベースを作成: C:\Users\renpe\AppData\Local\Temp\storage_test__bd1eky2\db\images.db
+2025-05-28 15:17:27,906 - utils.default - INFO - __init__:14 - SQLite database connection established: C:\Users\renpe\AppData\Local\Temp\storage_test__bd1eky2\db\images.db
+2025-05-28 15:17:27,928 - utils.default - INFO - create_table:25 - Table 'image_metadata' created or verified successfully
+2025-05-28 15:17:27,928 - utils.default - INFO - close:103 - SQLite database connection closed: C:\Users\renpe\AppData\Local\Temp\storage_test__bd1eky2\db\images.db
+2025-05-28 15:17:27,934 - utils.default - INFO - _setup_databases:92 - flashcardデータベースを作成: C:\Users\renpe\AppData\Local\Temp\storage_test__bd1eky2\db\flashcards.db
+2025-05-28 15:17:27,935 - utils.default - INFO - __init__:14 - SQLite database connection established: C:\Users\renpe\AppData\Local\Temp\storage_test__bd1eky2\db\flashcards.db
+2025-05-28 15:17:27,949 - utils.default - INFO - create_table:25 - Table 'flashcard_metadata' created or verified successfully
+2025-05-28 15:17:27,949 - utils.default - INFO - close:103 - SQLite database connection closed: C:\Users\renpe\AppData\Local\Temp\storage_test__bd1eky2\db\flashcards.db
+2025-05-28 15:17:27,949 - utils.default - INFO - _setup_databases:98 - データベースセットアップ完了
+2025-05-28 15:17:27,953 - utils.default - INFO - cleanup:191 - StorageController クリーンアップ完了
+2025-05-28 15:17:27,965 - utils.default - INFO - _setup_directories:82 - ディレクトリセットアップ完了: C:\Users\renpe\AppData\Local\Temp\storage_test_s7i30vzi
+2025-05-28 15:17:27,965 - utils.default - INFO - _setup_databases:92 - imageデータベースを作成: C:\Users\renpe\AppData\Local\Temp\storage_test_s7i30vzi\db\images.db
+2025-05-28 15:17:27,965 - utils.default - INFO - __init__:14 - SQLite database connection established: C:\Users\renpe\AppData\Local\Temp\storage_test_s7i30vzi\db\images.db
+2025-05-28 15:17:27,982 - utils.default - INFO - create_table:25 - Table 'image_metadata' created or verified successfully
+2025-05-28 15:17:27,988 - utils.default - INFO - close:103 - SQLite database connection closed: C:\Users\renpe\AppData\Local\Temp\storage_test_s7i30vzi\db\images.db
+2025-05-28 15:17:27,990 - utils.default - INFO - _setup_databases:92 - flashcardデータベースを作成: C:\Users\renpe\AppData\Local\Temp\storage_test_s7i30vzi\db\flashcards.db
+2025-05-28 15:17:27,990 - utils.default - INFO - __init__:14 - SQLite database connection established: C:\Users\renpe\AppData\Local\Temp\storage_test_s7i30vzi\db\flashcards.db
+2025-05-28 15:17:28,004 - utils.default - INFO - create_table:25 - Table 'flashcard_metadata' created or verified successfully
+2025-05-28 15:17:28,006 - utils.default - INFO - close:103 - SQLite database connection closed: C:\Users\renpe\AppData\Local\Temp\storage_test_s7i30vzi\db\flashcards.db
+2025-05-28 15:17:28,006 - utils.default - INFO - _setup_databases:98 - データベースセットアップ完了
+2025-05-28 15:17:28,010 - utils.default - INFO - cleanup:191 - StorageController クリーンアップ完了
+2025-05-28 15:17:28,027 - utils.default - INFO - _setup_directories:82 - ディレクトリセットアップ完了: C:\Users\renpe\AppData\Local\Temp\storage_test_8gllhdmn
+2025-05-28 15:17:28,029 - utils.default - INFO - _setup_databases:92 - imageデータベースを作成: C:\Users\renpe\AppData\Local\Temp\storage_test_8gllhdmn\db\images.db
+2025-05-28 15:17:28,030 - utils.default - INFO - __init__:14 - SQLite database connection established: C:\Users\renpe\AppData\Local\Temp\storage_test_8gllhdmn\db\images.db
+2025-05-28 15:17:28,047 - utils.default - INFO - create_table:25 - Table 'image_metadata' created or verified successfully
+2025-05-28 15:17:28,047 - utils.default - INFO - close:103 - SQLite database connection closed: C:\Users\renpe\AppData\Local\Temp\storage_test_8gllhdmn\db\images.db
+2025-05-28 15:17:28,047 - utils.default - INFO - _setup_databases:92 - flashcardデータベースを作成: C:\Users\renpe\AppData\Local\Temp\storage_test_8gllhdmn\db\flashcards.db
+2025-05-28 15:17:28,047 - utils.default - INFO - __init__:14 - SQLite database connection established: C:\Users\renpe\AppData\Local\Temp\storage_test_8gllhdmn\db\flashcards.db
+2025-05-28 15:17:28,063 - utils.default - INFO - create_table:25 - Table 'flashcard_metadata' created or verified successfully
+2025-05-28 15:17:28,063 - utils.default - INFO - close:103 - SQLite database connection closed: C:\Users\renpe\AppData\Local\Temp\storage_test_8gllhdmn\db\flashcards.db
+2025-05-28 15:17:28,067 - utils.default - INFO - _setup_databases:98 - データベースセットアップ完了
+2025-05-28 15:17:28,067 - utils.default - INFO - cleanup:191 - StorageController クリーンアップ完了
+2025-05-28 15:17:28,082 - utils.default - INFO - _setup_directories:82 - ディレクトリセットアップ完了: C:\Users\renpe\AppData\Local\Temp\storage_test_6tspt8mi
+2025-05-28 15:17:28,082 - utils.default - INFO - _setup_databases:92 - imageデータベースを作成: C:\Users\renpe\AppData\Local\Temp\storage_test_6tspt8mi\db\images.db
+2025-05-28 15:17:28,082 - utils.default - INFO - __init__:14 - SQLite database connection established: C:\Users\renpe\AppData\Local\Temp\storage_test_6tspt8mi\db\images.db
+2025-05-28 15:17:28,099 - utils.default - INFO - create_table:25 - Table 'image_metadata' created or verified successfully
+2025-05-28 15:17:28,099 - utils.default - INFO - close:103 - SQLite database connection closed: C:\Users\renpe\AppData\Local\Temp\storage_test_6tspt8mi\db\images.db
+2025-05-28 15:17:28,099 - utils.default - INFO - _setup_databases:92 - flashcardデータベースを作成: C:\Users\renpe\AppData\Local\Temp\storage_test_6tspt8mi\db\flashcards.db
+2025-05-28 15:17:28,101 - utils.default - INFO - __init__:14 - SQLite database connection established: C:\Users\renpe\AppData\Local\Temp\storage_test_6tspt8mi\db\flashcards.db
+2025-05-28 15:17:28,113 - utils.default - INFO - create_table:25 - Table 'flashcard_metadata' created or verified successfully
+2025-05-28 15:17:28,117 - utils.default - INFO - close:103 - SQLite database connection closed: C:\Users\renpe\AppData\Local\Temp\storage_test_6tspt8mi\db\flashcards.db
+2025-05-28 15:17:28,117 - utils.default - INFO - _setup_databases:98 - データベースセットアップ完了
+2025-05-28 15:17:28,117 - utils.default - INFO - cleanup:191 - StorageController クリーンアップ完了
+2025-05-28 15:17:28,139 - utils.default - INFO - _setup_directories:82 - ディレクトリセットアップ完了: C:\Users\renpe\AppData\Local\Temp\storage_test_9tjqo_3b
+2025-05-28 15:17:28,139 - utils.default - INFO - _setup_databases:92 - imageデータベースを作成: C:\Users\renpe\AppData\Local\Temp\storage_test_9tjqo_3b\db\images.db
+2025-05-28 15:17:28,143 - utils.default - INFO - __init__:14 - SQLite database connection established: C:\Users\renpe\AppData\Local\Temp\storage_test_9tjqo_3b\db\images.db
+2025-05-28 15:17:28,154 - utils.default - INFO - create_table:25 - Table 'image_metadata' created or verified successfully
+2025-05-28 15:17:28,161 - utils.default - INFO - close:103 - SQLite database connection closed: C:\Users\renpe\AppData\Local\Temp\storage_test_9tjqo_3b\db\images.db
+2025-05-28 15:17:28,162 - utils.default - INFO - _setup_databases:92 - flashcardデータベースを作成: C:\Users\renpe\AppData\Local\Temp\storage_test_9tjqo_3b\db\flashcards.db
+2025-05-28 15:17:28,163 - utils.default - INFO - __init__:14 - SQLite database connection established: C:\Users\renpe\AppData\Local\Temp\storage_test_9tjqo_3b\db\flashcards.db
+2025-05-28 15:17:28,175 - utils.default - INFO - create_table:25 - Table 'flashcard_metadata' created or verified successfully
+2025-05-28 15:17:28,175 - utils.default - INFO - close:103 - SQLite database connection closed: C:\Users\renpe\AppData\Local\Temp\storage_test_9tjqo_3b\db\flashcards.db
+2025-05-28 15:17:28,175 - utils.default - INFO - _setup_databases:98 - データベースセットアップ完了
+2025-05-28 15:17:28,175 - utils.default - INFO - __init__:14 - SQLite database connection established: C:\Users\renpe\AppData\Local\Temp\storage_test_9tjqo_3b\db\images.db
+2025-05-28 15:17:28,191 - utils.default - INFO - create_table:25 - Table 'images' created or verified successfully
+2025-05-28 15:17:28,191 - utils.default - INFO - __init__:14 - SQLite database connection established: C:\Users\renpe\AppData\Local\Temp\storage_test_9tjqo_3b\db\flashcards.db
+2025-05-28 15:17:28,205 - utils.default - INFO - create_table:25 - Table 'flashcards' created or verified successfully
+2025-05-28 15:17:28,205 - utils.default - INFO - close:103 - SQLite database connection closed: C:\Users\renpe\AppData\Local\Temp\storage_test_9tjqo_3b\db\images.db
+2025-05-28 15:17:28,210 - utils.default - INFO - cleanup:189 - imageストレージをクリーンアップ
+2025-05-28 15:17:28,210 - utils.default - INFO - close:103 - SQLite database connection closed: C:\Users\renpe\AppData\Local\Temp\storage_test_9tjqo_3b\db\flashcards.db
+2025-05-28 15:17:28,210 - utils.default - INFO - cleanup:189 - flashcardストレージをクリーンアップ
+2025-05-28 15:17:28,210 - utils.default - INFO - cleanup:191 - StorageController クリーンアップ完了
+2025-05-28 15:17:28,226 - utils.default - INFO - _setup_directories:82 - ディレクトリセットアップ完了: C:\Users\renpe\AppData\Local\Temp\storage_test_9h9cz8s0
+2025-05-28 15:17:28,226 - utils.default - INFO - _setup_databases:92 - imageデータベースを作成: C:\Users\renpe\AppData\Local\Temp\storage_test_9h9cz8s0\db\images.db
+2025-05-28 15:17:28,228 - utils.default - INFO - __init__:14 - SQLite database connection established: C:\Users\renpe\AppData\Local\Temp\storage_test_9h9cz8s0\db\images.db
+2025-05-28 15:17:28,240 - utils.default - INFO - create_table:25 - Table 'image_metadata' created or verified successfully
+2025-05-28 15:17:28,240 - utils.default - INFO - close:103 - SQLite database connection closed: C:\Users\renpe\AppData\Local\Temp\storage_test_9h9cz8s0\db\images.db
+2025-05-28 15:17:28,240 - utils.default - INFO - _setup_databases:92 - flashcardデータベースを作成: C:\Users\renpe\AppData\Local\Temp\storage_test_9h9cz8s0\db\flashcards.db
+2025-05-28 15:17:28,240 - utils.default - INFO - __init__:14 - SQLite database connection established: C:\Users\renpe\AppData\Local\Temp\storage_test_9h9cz8s0\db\flashcards.db
+2025-05-28 15:17:28,261 - utils.default - INFO - create_table:25 - Table 'flashcard_metadata' created or verified successfully
+2025-05-28 15:17:28,261 - utils.default - INFO - close:103 - SQLite database connection closed: C:\Users\renpe\AppData\Local\Temp\storage_test_9h9cz8s0\db\flashcards.db
+2025-05-28 15:17:28,263 - utils.default - INFO - _setup_databases:98 - データベースセットアップ完了
+2025-05-28 15:17:28,267 - utils.default - INFO - __init__:14 - SQLite database connection established: C:\Users\renpe\AppData\Local\Temp\storage_test_9h9cz8s0\db\images.db
+2025-05-28 15:17:28,280 - utils.default - INFO - create_table:25 - Table 'images' created or verified successfully
+2025-05-28 15:17:28,282 - utils.default - INFO - __init__:14 - SQLite database connection established: C:\Users\renpe\AppData\Local\Temp\storage_test_9h9cz8s0\db\flashcards.db
+2025-05-28 15:17:28,297 - utils.default - INFO - create_table:25 - Table 'flashcards' created or verified successfully
+2025-05-28 15:17:28,297 - utils.default - INFO - close:103 - SQLite database connection closed: C:\Users\renpe\AppData\Local\Temp\storage_test_9h9cz8s0\db\images.db
+2025-05-28 15:17:28,297 - utils.default - INFO - cleanup:189 - imageストレージをクリーンアップ
+2025-05-28 15:17:28,300 - utils.default - INFO - close:103 - SQLite database connection closed: C:\Users\renpe\AppData\Local\Temp\storage_test_9h9cz8s0\db\flashcards.db
+2025-05-28 15:17:28,300 - utils.default - INFO - cleanup:189 - flashcardストレージをクリーンアップ
+2025-05-28 15:17:28,300 - utils.default - INFO - cleanup:191 - StorageController クリーンアップ完了
+2025-05-28 15:17:28,315 - utils.default - INFO - _setup_directories:82 - ディレクトリセットアップ完了: C:\Users\renpe\AppData\Local\Temp\storage_test_aj8c0i9h
+2025-05-28 15:17:28,315 - utils.default - INFO - _setup_databases:92 - imageデータベースを作成: C:\Users\renpe\AppData\Local\Temp\storage_test_aj8c0i9h\db\images.db
+2025-05-28 15:17:28,315 - utils.default - INFO - __init__:14 - SQLite database connection established: C:\Users\renpe\AppData\Local\Temp\storage_test_aj8c0i9h\db\images.db
+2025-05-28 15:17:28,338 - utils.default - INFO - create_table:25 - Table 'image_metadata' created or verified successfully
+2025-05-28 15:17:28,340 - utils.default - INFO - close:103 - SQLite database connection closed: C:\Users\renpe\AppData\Local\Temp\storage_test_aj8c0i9h\db\images.db
+2025-05-28 15:17:28,340 - utils.default - INFO - _setup_databases:92 - flashcardデータベースを作成: C:\Users\renpe\AppData\Local\Temp\storage_test_aj8c0i9h\db\flashcards.db
+2025-05-28 15:17:28,340 - utils.default - INFO - __init__:14 - SQLite database connection established: C:\Users\renpe\AppData\Local\Temp\storage_test_aj8c0i9h\db\flashcards.db
+2025-05-28 15:17:28,357 - utils.default - INFO - create_table:25 - Table 'flashcard_metadata' created or verified successfully
+2025-05-28 15:17:28,357 - utils.default - INFO - close:103 - SQLite database connection closed: C:\Users\renpe\AppData\Local\Temp\storage_test_aj8c0i9h\db\flashcards.db
+2025-05-28 15:17:28,357 - utils.default - INFO - _setup_databases:98 - データベースセットアップ完了
+2025-05-28 15:17:28,363 - utils.default - INFO - __init__:14 - SQLite database connection established: C:\Users\renpe\AppData\Local\Temp\storage_test_aj8c0i9h\db\images.db
+2025-05-28 15:17:28,375 - utils.default - INFO - create_table:25 - Table 'images' created or verified successfully
+2025-05-28 15:17:28,375 - utils.default - INFO - __init__:14 - SQLite database connection established: C:\Users\renpe\AppData\Local\Temp\storage_test_aj8c0i9h\db\flashcards.db
+2025-05-28 15:17:28,388 - utils.default - INFO - create_table:25 - Table 'flashcards' created or verified successfully
+2025-05-28 15:17:28,390 - utils.default - INFO - close:103 - SQLite database connection closed: C:\Users\renpe\AppData\Local\Temp\storage_test_aj8c0i9h\db\images.db
+2025-05-28 15:17:28,390 - utils.default - INFO - cleanup:189 - imageストレージをクリーンアップ
+2025-05-28 15:17:28,392 - utils.default - INFO - close:103 - SQLite database connection closed: C:\Users\renpe\AppData\Local\Temp\storage_test_aj8c0i9h\db\flashcards.db
+2025-05-28 15:17:28,392 - utils.default - INFO - cleanup:189 - flashcardストレージをクリーンアップ
+2025-05-28 15:17:28,392 - utils.default - INFO - cleanup:191 - StorageController クリーンアップ完了
+2025-05-28 15:17:28,408 - utils.default - INFO - _setup_directories:82 - ディレクトリセットアップ完了: C:\Users\renpe\AppData\Local\Temp\storage_test_wlhvxxc2
+2025-05-28 15:17:28,408 - utils.default - INFO - _setup_databases:92 - imageデータベースを作成: C:\Users\renpe\AppData\Local\Temp\storage_test_wlhvxxc2\db\images.db
+2025-05-28 15:17:28,412 - utils.default - INFO - __init__:14 - SQLite database connection established: C:\Users\renpe\AppData\Local\Temp\storage_test_wlhvxxc2\db\images.db
+2025-05-28 15:17:28,427 - utils.default - INFO - create_table:25 - Table 'image_metadata' created or verified successfully
+2025-05-28 15:17:28,427 - utils.default - INFO - close:103 - SQLite database connection closed: C:\Users\renpe\AppData\Local\Temp\storage_test_wlhvxxc2\db\images.db
+2025-05-28 15:17:28,429 - utils.default - INFO - _setup_databases:92 - flashcardデータベースを作成: C:\Users\renpe\AppData\Local\Temp\storage_test_wlhvxxc2\db\flashcards.db
+2025-05-28 15:17:28,429 - utils.default - INFO - __init__:14 - SQLite database connection established: C:\Users\renpe\AppData\Local\Temp\storage_test_wlhvxxc2\db\flashcards.db
+2025-05-28 15:17:28,445 - utils.default - INFO - create_table:25 - Table 'flashcard_metadata' created or verified successfully
+2025-05-28 15:17:28,445 - utils.default - INFO - close:103 - SQLite database connection closed: C:\Users\renpe\AppData\Local\Temp\storage_test_wlhvxxc2\db\flashcards.db
+2025-05-28 15:17:28,445 - utils.default - INFO - _setup_databases:98 - データベースセットアップ完了
+2025-05-28 15:17:28,445 - utils.default - ERROR - _get_storage_instance:103 - 未対応のファイルタイプ: invalid_type
+2025-05-28 15:17:28,445 - utils.default - INFO - cleanup:191 - StorageController クリーンアップ完了
+2025-05-28 15:17:28,463 - utils.default - INFO - _setup_directories:82 - ディレクトリセットアップ完了: C:\Users\renpe\AppData\Local\Temp\storage_test_9rmkcvgk
+2025-05-28 15:17:28,465 - utils.default - INFO - _setup_databases:92 - imageデータベースを作成: C:\Users\renpe\AppData\Local\Temp\storage_test_9rmkcvgk\db\images.db
+2025-05-28 15:17:28,466 - utils.default - INFO - __init__:14 - SQLite database connection established: C:\Users\renpe\AppData\Local\Temp\storage_test_9rmkcvgk\db\images.db
+2025-05-28 15:17:28,479 - utils.default - INFO - create_table:25 - Table 'image_metadata' created or verified successfully
+2025-05-28 15:17:28,485 - utils.default - INFO - close:103 - SQLite database connection closed: C:\Users\renpe\AppData\Local\Temp\storage_test_9rmkcvgk\db\images.db
+2025-05-28 15:17:28,486 - utils.default - INFO - _setup_databases:92 - flashcardデータベースを作成: C:\Users\renpe\AppData\Local\Temp\storage_test_9rmkcvgk\db\flashcards.db
+2025-05-28 15:17:28,486 - utils.default - INFO - __init__:14 - SQLite database connection established: C:\Users\renpe\AppData\Local\Temp\storage_test_9rmkcvgk\db\flashcards.db
+2025-05-28 15:17:28,497 - utils.default - INFO - create_table:25 - Table 'flashcard_metadata' created or verified successfully
+2025-05-28 15:17:28,497 - utils.default - INFO - close:103 - SQLite database connection closed: C:\Users\renpe\AppData\Local\Temp\storage_test_9rmkcvgk\db\flashcards.db
+2025-05-28 15:17:28,497 - utils.default - INFO - _setup_databases:98 - データベースセットアップ完了
+2025-05-28 15:17:28,507 - utils.default - INFO - __init__:14 - SQLite database connection established: C:\Users\renpe\AppData\Local\Temp\storage_test_9rmkcvgk\db\images.db
+2025-05-28 15:17:28,516 - utils.default - INFO - create_table:25 - Table 'images' created or verified successfully
+2025-05-28 15:17:28,522 - utils.default - INFO - __init__:14 - SQLite database connection established: C:\Users\renpe\AppData\Local\Temp\storage_test_9rmkcvgk\db\flashcards.db
+2025-05-28 15:17:28,527 - utils.default - INFO - create_table:25 - Table 'flashcards' created or verified successfully
+2025-05-28 15:17:28,537 - utils.default - INFO - close:103 - SQLite database connection closed: C:\Users\renpe\AppData\Local\Temp\storage_test_9rmkcvgk\db\images.db
+2025-05-28 15:17:28,539 - utils.default - INFO - cleanup:189 - imageストレージをクリーンアップ
+2025-05-28 15:17:28,539 - utils.default - INFO - close:103 - SQLite database connection closed: C:\Users\renpe\AppData\Local\Temp\storage_test_9rmkcvgk\db\flashcards.db
+2025-05-28 15:17:28,539 - utils.default - INFO - cleanup:189 - flashcardストレージをクリーンアップ
+2025-05-28 15:17:28,539 - utils.default - INFO - cleanup:191 - StorageController クリーンアップ完了
+2025-05-28 15:17:28,554 - utils.default - INFO - _setup_directories:82 - ディレクトリセットアップ完了: C:\Users\renpe\AppData\Local\Temp\storage_test_l1_4o450
+2025-05-28 15:17:28,557 - utils.default - INFO - _setup_databases:92 - imageデータベースを作成: C:\Users\renpe\AppData\Local\Temp\storage_test_l1_4o450\db\images.db
+2025-05-28 15:17:28,557 - utils.default - INFO - __init__:14 - SQLite database connection established: C:\Users\renpe\AppData\Local\Temp\storage_test_l1_4o450\db\images.db
+2025-05-28 15:17:28,574 - utils.default - INFO - create_table:25 - Table 'image_metadata' created or verified successfully
+2025-05-28 15:17:28,576 - utils.default - INFO - close:103 - SQLite database connection closed: C:\Users\renpe\AppData\Local\Temp\storage_test_l1_4o450\db\images.db
+2025-05-28 15:17:28,576 - utils.default - INFO - _setup_databases:92 - flashcardデータベースを作成: C:\Users\renpe\AppData\Local\Temp\storage_test_l1_4o450\db\flashcards.db
+2025-05-28 15:17:28,577 - utils.default - INFO - __init__:14 - SQLite database connection established: C:\Users\renpe\AppData\Local\Temp\storage_test_l1_4o450\db\flashcards.db
+2025-05-28 15:17:28,593 - utils.default - INFO - create_table:25 - Table 'flashcard_metadata' created or verified successfully
+2025-05-28 15:17:28,594 - utils.default - INFO - close:103 - SQLite database connection closed: C:\Users\renpe\AppData\Local\Temp\storage_test_l1_4o450\db\flashcards.db
+2025-05-28 15:17:28,595 - utils.default - INFO - _setup_databases:98 - データベースセットアップ完了
+2025-05-28 15:17:28,595 - utils.default - INFO - cleanup:191 - StorageController クリーンアップ完了
+2025-05-28 15:17:28,612 - utils.default - INFO - _setup_directories:82 - ディレクトリセットアップ完了: C:\Users\renpe\AppData\Local\Temp\storage_test_ef2nkte4
+2025-05-28 15:17:28,613 - utils.default - INFO - _setup_databases:92 - imageデータベースを作成: C:\Users\renpe\AppData\Local\Temp\storage_test_ef2nkte4\db\images.db
+2025-05-28 15:17:28,614 - utils.default - INFO - __init__:14 - SQLite database connection established: C:\Users\renpe\AppData\Local\Temp\storage_test_ef2nkte4\db\images.db
+2025-05-28 15:17:28,630 - utils.default - INFO - create_table:25 - Table 'image_metadata' created or verified successfully
+2025-05-28 15:17:28,633 - utils.default - INFO - close:103 - SQLite database connection closed: C:\Users\renpe\AppData\Local\Temp\storage_test_ef2nkte4\db\images.db
+2025-05-28 15:17:28,634 - utils.default - INFO - _setup_databases:92 - flashcardデータベースを作成: C:\Users\renpe\AppData\Local\Temp\storage_test_ef2nkte4\db\flashcards.db
+2025-05-28 15:17:28,636 - utils.default - INFO - __init__:14 - SQLite database connection established: C:\Users\renpe\AppData\Local\Temp\storage_test_ef2nkte4\db\flashcards.db
+2025-05-28 15:17:28,652 - utils.default - INFO - create_table:25 - Table 'flashcard_metadata' created or verified successfully
+2025-05-28 15:17:28,653 - utils.default - INFO - close:103 - SQLite database connection closed: C:\Users\renpe\AppData\Local\Temp\storage_test_ef2nkte4\db\flashcards.db
+2025-05-28 15:17:28,654 - utils.default - INFO - _setup_databases:98 - データベースセットアップ完了
+2025-05-28 15:17:28,657 - utils.default - INFO - __init__:14 - SQLite database connection established: C:\Users\renpe\AppData\Local\Temp\storage_test_ef2nkte4\db\images.db
+2025-05-28 15:17:28,668 - utils.default - INFO - create_table:25 - Table 'images' created or verified successfully
+2025-05-28 15:17:28,671 - utils.default - INFO - __init__:14 - SQLite database connection established: C:\Users\renpe\AppData\Local\Temp\storage_test_ef2nkte4\db\flashcards.db
+2025-05-28 15:17:28,682 - utils.default - INFO - create_table:25 - Table 'flashcards' created or verified successfully
+2025-05-28 15:17:28,684 - utils.default - INFO - close:103 - SQLite database connection closed: C:\Users\renpe\AppData\Local\Temp\storage_test_ef2nkte4\db\images.db
+2025-05-28 15:17:28,685 - utils.default - INFO - cleanup:189 - imageストレージをクリーンアップ
+2025-05-28 15:17:28,685 - utils.default - INFO - close:103 - SQLite database connection closed: C:\Users\renpe\AppData\Local\Temp\storage_test_ef2nkte4\db\flashcards.db
+2025-05-28 15:17:28,686 - utils.default - INFO - cleanup:189 - flashcardストレージをクリーンアップ
+2025-05-28 15:17:28,686 - utils.default - INFO - cleanup:191 - StorageController クリーンアップ完了
+2025-05-28 15:17:28,801 - utils.default - INFO - _setup_directories:82 - ディレクトリセットアップ完了: C:\Users\renpe\AppData\Local\Temp\storage_test_3c6bhps4
+2025-05-28 15:17:28,801 - utils.default - INFO - _setup_databases:92 - imageデータベースを作成: C:\Users\renpe\AppData\Local\Temp\storage_test_3c6bhps4\db\images.db
+2025-05-28 15:17:28,801 - utils.default - INFO - __init__:14 - SQLite database connection established: C:\Users\renpe\AppData\Local\Temp\storage_test_3c6bhps4\db\images.db
+2025-05-28 15:17:28,821 - utils.default - INFO - create_table:25 - Table 'image_metadata' created or verified successfully
+2025-05-28 15:17:28,821 - utils.default - INFO - close:103 - SQLite database connection closed: C:\Users\renpe\AppData\Local\Temp\storage_test_3c6bhps4\db\images.db
+2025-05-28 15:17:28,821 - utils.default - INFO - _setup_databases:92 - flashcardデータベースを作成: C:\Users\renpe\AppData\Local\Temp\storage_test_3c6bhps4\db\flashcards.db
+2025-05-28 15:17:28,825 - utils.default - INFO - __init__:14 - SQLite database connection established: C:\Users\renpe\AppData\Local\Temp\storage_test_3c6bhps4\db\flashcards.db
+2025-05-28 15:17:28,839 - utils.default - INFO - create_table:25 - Table 'flashcard_metadata' created or verified successfully
+2025-05-28 15:17:28,839 - utils.default - INFO - close:103 - SQLite database connection closed: C:\Users\renpe\AppData\Local\Temp\storage_test_3c6bhps4\db\flashcards.db
+2025-05-28 15:17:28,839 - utils.default - INFO - _setup_databases:98 - データベースセットアップ完了
+2025-05-28 15:17:28,845 - utils.default - INFO - __init__:14 - SQLite database connection established: C:\Users\renpe\AppData\Local\Temp\storage_test_3c6bhps4\db\images.db
+2025-05-28 15:17:28,855 - utils.default - INFO - create_table:25 - Table 'images' created or verified successfully
+2025-05-28 15:17:28,877 - utils.default - INFO - __init__:14 - SQLite database connection established: C:\Users\renpe\AppData\Local\Temp\storage_test_3c6bhps4\db\flashcards.db
+2025-05-28 15:17:28,877 - utils.default - INFO - create_table:25 - Table 'flashcards' created or verified successfully
+2025-05-28 15:17:29,040 - utils.default - ERROR - create_thumbnail:54 - サムネイル作成エラー: cannot identify image file 'C:\\Users\\renpe\\AppData\\Local\\Temp\\storage_test_3c6bhps4\\flashcard\\cdec8f6d0d7c410d9c5e64a2f7e11f7f.csv'
+2025-05-28 15:17:29,057 - utils.default - INFO - close:103 - SQLite database connection closed: C:\Users\renpe\AppData\Local\Temp\storage_test_3c6bhps4\db\images.db
+2025-05-28 15:17:29,057 - utils.default - INFO - cleanup:189 - imageストレージをクリーンアップ
+2025-05-28 15:17:29,060 - utils.default - INFO - close:103 - SQLite database connection closed: C:\Users\renpe\AppData\Local\Temp\storage_test_3c6bhps4\db\flashcards.db
+2025-05-28 15:17:29,060 - utils.default - INFO - cleanup:189 - flashcardストレージをクリーンアップ
+2025-05-28 15:17:29,060 - utils.default - INFO - cleanup:191 - StorageController クリーンアップ完了
+2025-05-28 15:17:29,072 - utils.default - INFO - _setup_directories:82 - ディレクトリセットアップ完了: C:\Users\renpe\AppData\Local\Temp\storage_test_hwrpktfk
+2025-05-28 15:17:29,079 - utils.default - INFO - _setup_databases:92 - imageデータベースを作成: C:\Users\renpe\AppData\Local\Temp\storage_test_hwrpktfk\db\images.db
+2025-05-28 15:17:29,079 - utils.default - INFO - __init__:14 - SQLite database connection established: C:\Users\renpe\AppData\Local\Temp\storage_test_hwrpktfk\db\images.db
+2025-05-28 15:17:29,087 - utils.default - INFO - create_table:25 - Table 'image_metadata' created or verified successfully
+2025-05-28 15:17:29,095 - utils.default - INFO - close:103 - SQLite database connection closed: C:\Users\renpe\AppData\Local\Temp\storage_test_hwrpktfk\db\images.db
+2025-05-28 15:17:29,095 - utils.default - INFO - _setup_databases:92 - flashcardデータベースを作成: C:\Users\renpe\AppData\Local\Temp\storage_test_hwrpktfk\db\flashcards.db
+2025-05-28 15:17:29,097 - utils.default - INFO - __init__:14 - SQLite database connection established: C:\Users\renpe\AppData\Local\Temp\storage_test_hwrpktfk\db\flashcards.db
+2025-05-28 15:17:29,107 - utils.default - INFO - create_table:25 - Table 'flashcard_metadata' created or verified successfully
+2025-05-28 15:17:29,115 - utils.default - INFO - close:103 - SQLite database connection closed: C:\Users\renpe\AppData\Local\Temp\storage_test_hwrpktfk\db\flashcards.db
+2025-05-28 15:17:29,116 - utils.default - INFO - _setup_databases:98 - データベースセットアップ完了
+2025-05-28 15:17:29,117 - utils.default - INFO - __init__:14 - SQLite database connection established: C:\Users\renpe\AppData\Local\Temp\storage_test_hwrpktfk\db\images.db
+2025-05-28 15:17:29,127 - utils.default - INFO - create_table:25 - Table 'images' created or verified successfully
+2025-05-28 15:17:29,127 - utils.default - INFO - __init__:14 - SQLite database connection established: C:\Users\renpe\AppData\Local\Temp\storage_test_hwrpktfk\db\flashcards.db
+2025-05-28 15:17:29,140 - utils.default - INFO - create_table:25 - Table 'flashcards' created or verified successfully
+2025-05-28 15:17:29,140 - utils.default - INFO - close:103 - SQLite database connection closed: C:\Users\renpe\AppData\Local\Temp\storage_test_hwrpktfk\db\images.db
+2025-05-28 15:17:29,140 - utils.default - INFO - cleanup:189 - imageストレージをクリーンアップ
+2025-05-28 15:17:29,145 - utils.default - INFO - close:103 - SQLite database connection closed: C:\Users\renpe\AppData\Local\Temp\storage_test_hwrpktfk\db\flashcards.db
+2025-05-28 15:17:29,145 - utils.default - INFO - cleanup:189 - flashcardストレージをクリーンアップ
+2025-05-28 15:17:29,145 - utils.default - INFO - cleanup:191 - StorageController クリーンアップ完了
+2025-05-28 15:17:29,158 - utils.default - INFO - _setup_directories:82 - ディレクトリセットアップ完了: C:\Users\renpe\AppData\Local\Temp\storage_test_hgurtst8
+2025-05-28 15:17:29,158 - utils.default - INFO - _setup_databases:92 - imageデータベースを作成: C:\Users\renpe\AppData\Local\Temp\storage_test_hgurtst8\db\images.db
+2025-05-28 15:17:29,158 - utils.default - INFO - __init__:14 - SQLite database connection established: C:\Users\renpe\AppData\Local\Temp\storage_test_hgurtst8\db\images.db
+2025-05-28 15:17:29,179 - utils.default - INFO - create_table:25 - Table 'image_metadata' created or verified successfully
+2025-05-28 15:17:29,179 - utils.default - INFO - close:103 - SQLite database connection closed: C:\Users\renpe\AppData\Local\Temp\storage_test_hgurtst8\db\images.db
+2025-05-28 15:17:29,181 - utils.default - INFO - _setup_databases:92 - flashcardデータベースを作成: C:\Users\renpe\AppData\Local\Temp\storage_test_hgurtst8\db\flashcards.db
+2025-05-28 15:17:29,181 - utils.default - INFO - __init__:14 - SQLite database connection established: C:\Users\renpe\AppData\Local\Temp\storage_test_hgurtst8\db\flashcards.db
+2025-05-28 15:17:29,197 - utils.default - INFO - create_table:25 - Table 'flashcard_metadata' created or verified successfully
+2025-05-28 15:17:29,197 - utils.default - INFO - close:103 - SQLite database connection closed: C:\Users\renpe\AppData\Local\Temp\storage_test_hgurtst8\db\flashcards.db
+2025-05-28 15:17:29,197 - utils.default - INFO - _setup_databases:98 - データベースセットアップ完了
+2025-05-28 15:17:29,197 - utils.default - INFO - cleanup:191 - StorageController クリーンアップ完了
+2025-05-28 15:17:29,197 - utils.default - INFO - cleanup:191 - StorageController クリーンアップ完了
+2025-05-28 15:17:29,210 - utils.default - ERROR - __init__:31 - invalid path
+2025-05-28 15:17:29,215 - utils.default - ERROR - __init__:31 - invalid path
+2025-05-28 15:17:29,223 - utils.default - INFO - _setup_directories:82 - ディレクトリセットアップ完了: C:\Users\renpe\AppData\Local\Temp\storage_test_7ghjr6ag\テスト_フォルダ
+2025-05-28 15:17:29,225 - utils.default - INFO - _setup_databases:92 - imageデータベースを作成: C:\Users\renpe\AppData\Local\Temp\storage_test_7ghjr6ag\テスト_フォルダ\db\images.db
+2025-05-28 15:17:29,225 - utils.default - INFO - __init__:14 - SQLite database connection established: C:\Users\renpe\AppData\Local\Temp\storage_test_7ghjr6ag\テスト_フォルダ\db\images.db
+2025-05-28 15:17:29,240 - utils.default - INFO - create_table:25 - Table 'image_metadata' created or verified successfully
+2025-05-28 15:17:29,240 - utils.default - INFO - close:103 - SQLite database connection closed: C:\Users\renpe\AppData\Local\Temp\storage_test_7ghjr6ag\テスト_フォルダ\db\images.db
+2025-05-28 15:17:29,243 - utils.default - INFO - _setup_databases:92 - flashcardデータベースを作成: C:\Users\renpe\AppData\Local\Temp\storage_test_7ghjr6ag\テスト_フォルダ\db\flashcards.db
+2025-05-28 15:17:29,245 - utils.default - INFO - __init__:14 - SQLite database connection established: C:\Users\renpe\AppData\Local\Temp\storage_test_7ghjr6ag\テスト_フォルダ\db\flashcards.db
+2025-05-28 15:17:29,259 - utils.default - INFO - create_table:25 - Table 'flashcard_metadata' created or verified successfully
+2025-05-28 15:17:29,259 - utils.default - INFO - close:103 - SQLite database connection closed: C:\Users\renpe\AppData\Local\Temp\storage_test_7ghjr6ag\テスト_フォルダ\db\flashcards.db
+2025-05-28 15:17:29,259 - utils.default - INFO - _setup_databases:98 - データベースセットアップ完了
+2025-05-28 15:17:29,259 - utils.default - INFO - cleanup:191 - StorageController クリーンアップ完了
+2025-05-28 15:17:29,277 - utils.default - INFO - _setup_directories:82 - ディレクトリセットアップ完了: C:\Users\renpe\AppData\Local\Temp\storage_test_vb8fzodi
+2025-05-28 15:17:29,277 - utils.default - INFO - _setup_databases:92 - imageデータベースを作成: C:\Users\renpe\AppData\Local\Temp\storage_test_vb8fzodi\db\images.db
+2025-05-28 15:17:29,277 - utils.default - INFO - __init__:14 - SQLite database connection established: C:\Users\renpe\AppData\Local\Temp\storage_test_vb8fzodi\db\images.db
+2025-05-28 15:17:29,295 - utils.default - INFO - create_table:25 - Table 'image_metadata' created or verified successfully
+2025-05-28 15:17:29,297 - utils.default - INFO - close:103 - SQLite database connection closed: C:\Users\renpe\AppData\Local\Temp\storage_test_vb8fzodi\db\images.db
+2025-05-28 15:17:29,297 - utils.default - INFO - _setup_databases:92 - flashcardデータベースを作成: C:\Users\renpe\AppData\Local\Temp\storage_test_vb8fzodi\db\flashcards.db
+2025-05-28 15:17:29,297 - utils.default - INFO - __init__:14 - SQLite database connection established: C:\Users\renpe\AppData\Local\Temp\storage_test_vb8fzodi\db\flashcards.db
+2025-05-28 15:17:29,313 - utils.default - INFO - create_table:25 - Table 'flashcard_metadata' created or verified successfully
+2025-05-28 15:17:29,313 - utils.default - INFO - close:103 - SQLite database connection closed: C:\Users\renpe\AppData\Local\Temp\storage_test_vb8fzodi\db\flashcards.db
+2025-05-28 15:17:29,315 - utils.default - INFO - _setup_databases:98 - データベースセットアップ完了
+2025-05-28 15:17:29,318 - utils.default - INFO - _setup_directories:82 - ディレクトリセットアップ完了: C:\Users\renpe\AppData\Local\Temp\storage_test_vb8fzodi
+2025-05-28 15:17:29,320 - utils.default - INFO - __init__:14 - SQLite database connection established: C:\Users\renpe\AppData\Local\Temp\storage_test_vb8fzodi\db\images.db
+2025-05-28 15:17:29,322 - utils.default - INFO - create_table:25 - Table 'image_metadata' created or verified successfully
+2025-05-28 15:17:29,323 - utils.default - INFO - close:103 - SQLite database connection closed: C:\Users\renpe\AppData\Local\Temp\storage_test_vb8fzodi\db\images.db
+2025-05-28 15:17:29,325 - utils.default - INFO - __init__:14 - SQLite database connection established: C:\Users\renpe\AppData\Local\Temp\storage_test_vb8fzodi\db\flashcards.db
+2025-05-28 15:17:29,325 - utils.default - INFO - create_table:25 - Table 'flashcard_metadata' created or verified successfully
+2025-05-28 15:17:29,326 - utils.default - INFO - close:103 - SQLite database connection closed: C:\Users\renpe\AppData\Local\Temp\storage_test_vb8fzodi\db\flashcards.db
+2025-05-28 15:17:29,326 - utils.default - INFO - _setup_databases:98 - データベースセットアップ完了
+2025-05-28 15:17:29,326 - utils.default - INFO - __init__:14 - SQLite database connection established: C:\Users\renpe\AppData\Local\Temp\storage_test_vb8fzodi\db\images.db
+2025-05-28 15:17:29,340 - utils.default - INFO - create_table:25 - Table 'images' created or verified successfully
+2025-05-28 15:17:29,345 - utils.default - INFO - __init__:14 - SQLite database connection established: C:\Users\renpe\AppData\Local\Temp\storage_test_vb8fzodi\db\images.db
+2025-05-28 15:17:29,346 - utils.default - INFO - create_table:25 - Table 'images' created or verified successfully
+2025-05-28 15:17:29,346 - utils.default - INFO - close:103 - SQLite database connection closed: C:\Users\renpe\AppData\Local\Temp\storage_test_vb8fzodi\db\images.db
+2025-05-28 15:17:29,346 - utils.default - INFO - cleanup:189 - imageストレージをクリーンアップ
+2025-05-28 15:17:29,346 - utils.default - INFO - cleanup:191 - StorageController クリーンアップ完了
+2025-05-28 15:17:29,346 - utils.default - INFO - close:103 - SQLite database connection closed: C:\Users\renpe\AppData\Local\Temp\storage_test_vb8fzodi\db\images.db
+2025-05-28 15:17:29,346 - utils.default - INFO - cleanup:189 - imageストレージをクリーンアップ
+2025-05-28 15:17:29,346 - utils.default - INFO - cleanup:191 - StorageController クリーンアップ完了
+2025-05-28 15:17:29,367 - utils.default - INFO - _setup_directories:82 - ディレクトリセットアップ完了: C:\Users\renpe\AppData\Local\Temp\storage_test_vtoqwqnz
+2025-05-28 15:17:29,367 - utils.default - INFO - _setup_databases:92 - imageデータベースを作成: C:\Users\renpe\AppData\Local\Temp\storage_test_vtoqwqnz\db\images.db
+2025-05-28 15:17:29,370 - utils.default - INFO - __init__:14 - SQLite database connection established: C:\Users\renpe\AppData\Local\Temp\storage_test_vtoqwqnz\db\images.db
+2025-05-28 15:17:29,385 - utils.default - INFO - create_table:25 - Table 'image_metadata' created or verified successfully
+2025-05-28 15:17:29,385 - utils.default - INFO - close:103 - SQLite database connection closed: C:\Users\renpe\AppData\Local\Temp\storage_test_vtoqwqnz\db\images.db
+2025-05-28 15:17:29,385 - utils.default - INFO - _setup_databases:92 - flashcardデータベースを作成: C:\Users\renpe\AppData\Local\Temp\storage_test_vtoqwqnz\db\flashcards.db
+2025-05-28 15:17:29,385 - utils.default - INFO - __init__:14 - SQLite database connection established: C:\Users\renpe\AppData\Local\Temp\storage_test_vtoqwqnz\db\flashcards.db
+2025-05-28 15:17:29,405 - utils.default - INFO - create_table:25 - Table 'flashcard_metadata' created or verified successfully
+2025-05-28 15:17:29,405 - utils.default - INFO - close:103 - SQLite database connection closed: C:\Users\renpe\AppData\Local\Temp\storage_test_vtoqwqnz\db\flashcards.db
+2025-05-28 15:17:29,405 - utils.default - INFO - _setup_databases:98 - データベースセットアップ完了
+2025-05-28 15:17:29,408 - utils.default - INFO - __init__:14 - SQLite database connection established: C:\Users\renpe\AppData\Local\Temp\storage_test_vtoqwqnz\db\images.db
+2025-05-28 15:17:29,419 - utils.default - INFO - create_table:25 - Table 'images' created or verified successfully
+2025-05-28 15:17:29,437 - utils.default - INFO - __init__:14 - SQLite database connection established: C:\Users\renpe\AppData\Local\Temp\storage_test_vtoqwqnz\db\flashcards.db
+2025-05-28 15:17:29,455 - utils.default - INFO - create_table:25 - Table 'flashcards' created or verified successfully
+2025-05-28 15:17:29,457 - utils.default - ERROR - create_thumbnail:54 - サムネイル作成エラー: cannot identify image file 'C:\\Users\\renpe\\AppData\\Local\\Temp\\storage_test_vtoqwqnz\\flashcard\\dbf2da01811747db94e67431d7ffdbac.csv'
+2025-05-28 15:17:29,497 - utils.default - INFO - close:103 - SQLite database connection closed: C:\Users\renpe\AppData\Local\Temp\storage_test_vtoqwqnz\db\images.db
+2025-05-28 15:17:29,497 - utils.default - INFO - cleanup:189 - imageストレージをクリーンアップ
+2025-05-28 15:17:29,499 - utils.default - INFO - close:103 - SQLite database connection closed: C:\Users\renpe\AppData\Local\Temp\storage_test_vtoqwqnz\db\flashcards.db
+2025-05-28 15:17:29,499 - utils.default - INFO - cleanup:189 - flashcardストレージをクリーンアップ
+2025-05-28 15:17:29,499 - utils.default - INFO - cleanup:191 - StorageController クリーンアップ完了
+2025-05-28 15:17:29,515 - utils.default - INFO - _setup_directories:82 - ディレクトリセットアップ完了: C:\Users\renpe\AppData\Local\Temp\storage_test_gwj_nvh1
+2025-05-28 15:17:29,517 - utils.default - INFO - _setup_databases:92 - imageデータベースを作成: C:\Users\renpe\AppData\Local\Temp\storage_test_gwj_nvh1\db\images.db
+2025-05-28 15:17:29,517 - utils.default - INFO - __init__:14 - SQLite database connection established: C:\Users\renpe\AppData\Local\Temp\storage_test_gwj_nvh1\db\images.db
+2025-05-28 15:17:29,529 - utils.default - INFO - create_table:25 - Table 'image_metadata' created or verified successfully
+2025-05-28 15:17:29,529 - utils.default - INFO - close:103 - SQLite database connection closed: C:\Users\renpe\AppData\Local\Temp\storage_test_gwj_nvh1\db\images.db
+2025-05-28 15:17:29,535 - utils.default - INFO - _setup_databases:92 - flashcardデータベースを作成: C:\Users\renpe\AppData\Local\Temp\storage_test_gwj_nvh1\db\flashcards.db
+2025-05-28 15:17:29,535 - utils.default - INFO - __init__:14 - SQLite database connection established: C:\Users\renpe\AppData\Local\Temp\storage_test_gwj_nvh1\db\flashcards.db
+2025-05-28 15:17:29,549 - utils.default - INFO - create_table:25 - Table 'flashcard_metadata' created or verified successfully
+2025-05-28 15:17:29,549 - utils.default - INFO - close:103 - SQLite database connection closed: C:\Users\renpe\AppData\Local\Temp\storage_test_gwj_nvh1\db\flashcards.db
+2025-05-28 15:17:29,549 - utils.default - INFO - _setup_databases:98 - データベースセットアップ完了
+2025-05-28 15:17:29,555 - utils.default - INFO - __init__:14 - SQLite database connection established: C:\Users\renpe\AppData\Local\Temp\storage_test_gwj_nvh1\db\images.db
+2025-05-28 15:17:29,565 - utils.default - INFO - create_table:25 - Table 'images' created or verified successfully
+2025-05-28 15:17:29,569 - utils.default - ERROR - create_thumbnail:54 - サムネイル作成エラー: cannot identify image file 'C:\\Users\\renpe\\AppData\\Local\\Temp\\storage_test_gwj_nvh1\\image\\c745473e9570447ba06f3a672ede00e6.jpg'
+2025-05-28 15:17:29,582 - utils.default - INFO - __init__:14 - SQLite database connection established: C:\Users\renpe\AppData\Local\Temp\storage_test_gwj_nvh1\db\flashcards.db
+2025-05-28 15:17:29,595 - utils.default - INFO - create_table:25 - Table 'flashcards' created or verified successfully
+2025-05-28 15:17:29,602 - utils.default - ERROR - create_thumbnail:54 - サムネイル作成エラー: cannot identify image file 'C:\\Users\\renpe\\AppData\\Local\\Temp\\storage_test_gwj_nvh1\\flashcard\\b3ca2cde8dcb40a7a0632c459b74af79.csv'
+2025-05-28 15:17:29,617 - utils.default - INFO - close:103 - SQLite database connection closed: C:\Users\renpe\AppData\Local\Temp\storage_test_gwj_nvh1\db\images.db
+2025-05-28 15:17:29,617 - utils.default - INFO - cleanup:189 - imageストレージをクリーンアップ
+2025-05-28 15:17:29,617 - utils.default - INFO - close:103 - SQLite database connection closed: C:\Users\renpe\AppData\Local\Temp\storage_test_gwj_nvh1\db\flashcards.db
+2025-05-28 15:17:29,617 - utils.default - INFO - cleanup:189 - flashcardストレージをクリーンアップ
+2025-05-28 15:17:29,617 - utils.default - INFO - cleanup:191 - StorageController クリーンアップ完了
+2025-05-28 15:17:29,632 - utils.default - INFO - _setup_directories:82 - ディレクトリセットアップ完了: C:\Users\renpe\AppData\Local\Temp\storage_test_hsd5qiew
+2025-05-28 15:17:29,632 - utils.default - INFO - _setup_databases:92 - imageデータベースを作成: C:\Users\renpe\AppData\Local\Temp\storage_test_hsd5qiew\db\images.db
+2025-05-28 15:17:29,637 - utils.default - INFO - __init__:14 - SQLite database connection established: C:\Users\renpe\AppData\Local\Temp\storage_test_hsd5qiew\db\images.db
+2025-05-28 15:17:29,649 - utils.default - INFO - create_table:25 - Table 'image_metadata' created or verified successfully
+2025-05-28 15:17:29,655 - utils.default - INFO - close:103 - SQLite database connection closed: C:\Users\renpe\AppData\Local\Temp\storage_test_hsd5qiew\db\images.db
+2025-05-28 15:17:29,655 - utils.default - INFO - _setup_databases:92 - flashcardデータベースを作成: C:\Users\renpe\AppData\Local\Temp\storage_test_hsd5qiew\db\flashcards.db
+2025-05-28 15:17:29,657 - utils.default - INFO - __init__:14 - SQLite database connection established: C:\Users\renpe\AppData\Local\Temp\storage_test_hsd5qiew\db\flashcards.db
+2025-05-28 15:17:29,669 - utils.default - INFO - create_table:25 - Table 'flashcard_metadata' created or verified successfully
+2025-05-28 15:17:29,669 - utils.default - INFO - close:103 - SQLite database connection closed: C:\Users\renpe\AppData\Local\Temp\storage_test_hsd5qiew\db\flashcards.db
+2025-05-28 15:17:29,675 - utils.default - INFO - _setup_databases:98 - データベースセットアップ完了
+2025-05-28 15:17:29,677 - utils.default - INFO - cleanup:191 - StorageController クリーンアップ完了
+2025-05-28 15:17:29,692 - utils.default - INFO - _setup_directories:82 - ディレクトリセットアップ完了: C:\Users\renpe\AppData\Local\Temp\storage_test_g_nz67rp
+2025-05-28 15:17:29,692 - utils.default - INFO - _setup_databases:92 - imageデータベースを作成: C:\Users\renpe\AppData\Local\Temp\storage_test_g_nz67rp\db\images.db
+2025-05-28 15:17:29,692 - utils.default - INFO - __init__:14 - SQLite database connection established: C:\Users\renpe\AppData\Local\Temp\storage_test_g_nz67rp\db\images.db
+2025-05-28 15:17:29,710 - utils.default - INFO - create_table:25 - Table 'image_metadata' created or verified successfully
+2025-05-28 15:17:29,710 - utils.default - INFO - close:103 - SQLite database connection closed: C:\Users\renpe\AppData\Local\Temp\storage_test_g_nz67rp\db\images.db
+2025-05-28 15:17:29,710 - utils.default - INFO - _setup_databases:92 - flashcardデータベースを作成: C:\Users\renpe\AppData\Local\Temp\storage_test_g_nz67rp\db\flashcards.db
+2025-05-28 15:17:29,710 - utils.default - INFO - __init__:14 - SQLite database connection established: C:\Users\renpe\AppData\Local\Temp\storage_test_g_nz67rp\db\flashcards.db
+2025-05-28 15:17:29,727 - utils.default - INFO - create_table:25 - Table 'flashcard_metadata' created or verified successfully
+2025-05-28 15:17:29,727 - utils.default - INFO - close:103 - SQLite database connection closed: C:\Users\renpe\AppData\Local\Temp\storage_test_g_nz67rp\db\flashcards.db
+2025-05-28 15:17:29,729 - utils.default - INFO - _setup_databases:98 - データベースセットアップ完了
+2025-05-28 15:17:29,731 - utils.default - INFO - __init__:14 - SQLite database connection established: C:\Users\renpe\AppData\Local\Temp\storage_test_g_nz67rp\db\images.db
+2025-05-28 15:17:29,743 - utils.default - INFO - create_table:25 - Table 'images' created or verified successfully
+2025-05-28 15:17:29,743 - utils.default - INFO - __init__:14 - SQLite database connection established: C:\Users\renpe\AppData\Local\Temp\storage_test_g_nz67rp\db\flashcards.db
+2025-05-28 15:17:29,756 - utils.default - INFO - create_table:25 - Table 'flashcards' created or verified successfully
+2025-05-28 15:17:29,757 - utils.default - ERROR - _get_storage_instance:103 - 未対応のファイルタイプ: invalid_type
+2025-05-28 15:17:29,757 - utils.default - INFO - close:103 - SQLite database connection closed: C:\Users\renpe\AppData\Local\Temp\storage_test_g_nz67rp\db\images.db
+2025-05-28 15:17:29,757 - utils.default - INFO - cleanup:189 - imageストレージをクリーンアップ
+2025-05-28 15:17:29,757 - utils.default - INFO - close:103 - SQLite database connection closed: C:\Users\renpe\AppData\Local\Temp\storage_test_g_nz67rp\db\flashcards.db
+2025-05-28 15:17:29,757 - utils.default - INFO - cleanup:189 - flashcardストレージをクリーンアップ
+2025-05-28 15:17:29,757 - utils.default - INFO - cleanup:191 - StorageController クリーンアップ完了
+2025-05-28 15:17:29,775 - utils.default - INFO - _setup_directories:82 - ディレクトリセットアップ完了: C:\Users\renpe\AppData\Local\Temp\storage_test_ydw3h10d
+2025-05-28 15:17:29,776 - utils.default - INFO - _setup_databases:92 - imageデータベースを作成: C:\Users\renpe\AppData\Local\Temp\storage_test_ydw3h10d\db\images.db
+2025-05-28 15:17:29,777 - utils.default - INFO - __init__:14 - SQLite database connection established: C:\Users\renpe\AppData\Local\Temp\storage_test_ydw3h10d\db\images.db
+2025-05-28 15:17:29,792 - utils.default - INFO - create_table:25 - Table 'image_metadata' created or verified successfully
+2025-05-28 15:17:29,792 - utils.default - INFO - close:103 - SQLite database connection closed: C:\Users\renpe\AppData\Local\Temp\storage_test_ydw3h10d\db\images.db
+2025-05-28 15:17:29,792 - utils.default - INFO - _setup_databases:92 - flashcardデータベースを作成: C:\Users\renpe\AppData\Local\Temp\storage_test_ydw3h10d\db\flashcards.db
+2025-05-28 15:17:29,794 - utils.default - INFO - __init__:14 - SQLite database connection established: C:\Users\renpe\AppData\Local\Temp\storage_test_ydw3h10d\db\flashcards.db
+2025-05-28 15:17:29,809 - utils.default - INFO - create_table:25 - Table 'flashcard_metadata' created or verified successfully
+2025-05-28 15:17:29,812 - utils.default - INFO - close:103 - SQLite database connection closed: C:\Users\renpe\AppData\Local\Temp\storage_test_ydw3h10d\db\flashcards.db
+2025-05-28 15:17:29,812 - utils.default - INFO - _setup_databases:98 - データベースセットアップ完了
+2025-05-28 15:17:29,815 - utils.default - INFO - cleanup:191 - StorageController クリーンアップ完了
+2025-05-28 15:17:29,826 - utils.default - INFO - _setup_directories:82 - ディレクトリセットアップ完了: C:\Users\renpe\AppData\Local\Temp\storage_test_d8nuxw63
+2025-05-28 15:17:29,826 - utils.default - INFO - _setup_databases:92 - imageデータベースを作成: C:\Users\renpe\AppData\Local\Temp\storage_test_d8nuxw63\db\images.db
+2025-05-28 15:17:29,828 - utils.default - INFO - __init__:14 - SQLite database connection established: C:\Users\renpe\AppData\Local\Temp\storage_test_d8nuxw63\db\images.db
+2025-05-28 15:17:29,836 - utils.default - INFO - create_table:25 - Table 'image_metadata' created or verified successfully
+2025-05-28 15:17:29,836 - utils.default - INFO - close:103 - SQLite database connection closed: C:\Users\renpe\AppData\Local\Temp\storage_test_d8nuxw63\db\images.db
+2025-05-28 15:17:29,836 - utils.default - INFO - _setup_databases:92 - flashcardデータベースを作成: C:\Users\renpe\AppData\Local\Temp\storage_test_d8nuxw63\db\flashcards.db
+2025-05-28 15:17:29,836 - utils.default - INFO - __init__:14 - SQLite database connection established: C:\Users\renpe\AppData\Local\Temp\storage_test_d8nuxw63\db\flashcards.db
+2025-05-28 15:17:29,862 - utils.default - INFO - create_table:25 - Table 'flashcard_metadata' created or verified successfully
+2025-05-28 15:17:29,862 - utils.default - INFO - close:103 - SQLite database connection closed: C:\Users\renpe\AppData\Local\Temp\storage_test_d8nuxw63\db\flashcards.db
+2025-05-28 15:17:29,864 - utils.default - INFO - _setup_databases:98 - データベースセットアップ完了
+2025-05-28 15:17:29,867 - utils.default - INFO - __init__:14 - SQLite database connection established: C:\Users\renpe\AppData\Local\Temp\storage_test_d8nuxw63\db\images.db
+2025-05-28 15:17:29,876 - utils.default - INFO - create_table:25 - Table 'images' created or verified successfully
+2025-05-28 15:17:29,909 - utils.default - INFO - close:103 - SQLite database connection closed: C:\Users\renpe\AppData\Local\Temp\storage_test_d8nuxw63\db\images.db
+2025-05-28 15:17:29,909 - utils.default - INFO - cleanup:189 - imageストレージをクリーンアップ
+2025-05-28 15:17:29,915 - utils.default - INFO - cleanup:191 - StorageController クリーンアップ完了
+2025-05-28 15:17:29,929 - utils.default - INFO - _setup_directories:82 - ディレクトリセットアップ完了: C:\Users\renpe\AppData\Local\Temp\storage_test_qo3b8ck6
+2025-05-28 15:17:29,932 - utils.default - INFO - _setup_databases:92 - imageデータベースを作成: C:\Users\renpe\AppData\Local\Temp\storage_test_qo3b8ck6\db\images.db
+2025-05-28 15:17:29,933 - utils.default - INFO - __init__:14 - SQLite database connection established: C:\Users\renpe\AppData\Local\Temp\storage_test_qo3b8ck6\db\images.db
+2025-05-28 15:17:29,949 - utils.default - INFO - create_table:25 - Table 'image_metadata' created or verified successfully
+2025-05-28 15:17:29,949 - utils.default - INFO - close:103 - SQLite database connection closed: C:\Users\renpe\AppData\Local\Temp\storage_test_qo3b8ck6\db\images.db
+2025-05-28 15:17:29,951 - utils.default - INFO - _setup_databases:92 - flashcardデータベースを作成: C:\Users\renpe\AppData\Local\Temp\storage_test_qo3b8ck6\db\flashcards.db
+2025-05-28 15:17:29,951 - utils.default - INFO - __init__:14 - SQLite database connection established: C:\Users\renpe\AppData\Local\Temp\storage_test_qo3b8ck6\db\flashcards.db
+2025-05-28 15:17:29,966 - utils.default - INFO - create_table:25 - Table 'flashcard_metadata' created or verified successfully
+2025-05-28 15:17:29,969 - utils.default - INFO - close:103 - SQLite database connection closed: C:\Users\renpe\AppData\Local\Temp\storage_test_qo3b8ck6\db\flashcards.db
+2025-05-28 15:17:29,969 - utils.default - INFO - _setup_databases:98 - データベースセットアップ完了
+2025-05-28 15:17:29,973 - utils.default - INFO - __init__:14 - SQLite database connection established: C:\Users\renpe\AppData\Local\Temp\storage_test_qo3b8ck6\db\flashcards.db
+2025-05-28 15:17:29,979 - utils.default - INFO - create_table:25 - Table 'flashcards' created or verified successfully
+2025-05-28 15:17:29,991 - utils.default - ERROR - create_thumbnail:54 - サムネイル作成エラー: cannot identify image file 'C:\\Users\\renpe\\AppData\\Local\\Temp\\storage_test_qo3b8ck6\\flashcard\\8fc4cb2c259f41a187b49337ed134947.csv'
+2025-05-28 15:17:30,019 - utils.default - INFO - close:103 - SQLite database connection closed: C:\Users\renpe\AppData\Local\Temp\storage_test_qo3b8ck6\db\flashcards.db
+2025-05-28 15:17:30,019 - utils.default - INFO - cleanup:189 - flashcardストレージをクリーンアップ
+2025-05-28 15:17:30,021 - utils.default - INFO - cleanup:191 - StorageController クリーンアップ完了
+2025-05-28 15:17:30,033 - utils.default - INFO - _setup_directories:82 - ディレクトリセットアップ完了: C:\Users\renpe\AppData\Local\Temp\storage_test_k9lvyy4v
+2025-05-28 15:17:30,033 - utils.default - INFO - _setup_databases:92 - imageデータベースを作成: C:\Users\renpe\AppData\Local\Temp\storage_test_k9lvyy4v\db\images.db
+2025-05-28 15:17:30,035 - utils.default - INFO - __init__:14 - SQLite database connection established: C:\Users\renpe\AppData\Local\Temp\storage_test_k9lvyy4v\db\images.db
+2025-05-28 15:17:30,050 - utils.default - INFO - create_table:25 - Table 'image_metadata' created or verified successfully
+2025-05-28 15:17:30,052 - utils.default - INFO - close:103 - SQLite database connection closed: C:\Users\renpe\AppData\Local\Temp\storage_test_k9lvyy4v\db\images.db
+2025-05-28 15:17:30,053 - utils.default - INFO - _setup_databases:92 - flashcardデータベースを作成: C:\Users\renpe\AppData\Local\Temp\storage_test_k9lvyy4v\db\flashcards.db
+2025-05-28 15:17:30,054 - utils.default - INFO - __init__:14 - SQLite database connection established: C:\Users\renpe\AppData\Local\Temp\storage_test_k9lvyy4v\db\flashcards.db
+2025-05-28 15:17:30,068 - utils.default - INFO - create_table:25 - Table 'flashcard_metadata' created or verified successfully
+2025-05-28 15:17:30,069 - utils.default - INFO - close:103 - SQLite database connection closed: C:\Users\renpe\AppData\Local\Temp\storage_test_k9lvyy4v\db\flashcards.db
+2025-05-28 15:17:30,069 - utils.default - INFO - _setup_databases:98 - データベースセットアップ完了
+2025-05-28 15:17:30,072 - utils.default - INFO - __init__:14 - SQLite database connection established: C:\Users\renpe\AppData\Local\Temp\storage_test_k9lvyy4v\db\images.db
+2025-05-28 15:17:30,084 - utils.default - INFO - create_table:25 - Table 'images' created or verified successfully
+2025-05-28 15:17:30,106 - utils.default - ERROR - save_file:52 - 重複ファイル検出: c4237c81420042c68db619357165d34a.png
+2025-05-28 15:17:30,107 - utils.default - INFO - close:103 - SQLite database connection closed: C:\Users\renpe\AppData\Local\Temp\storage_test_k9lvyy4v\db\images.db
+2025-05-28 15:17:30,109 - utils.default - INFO - cleanup:189 - imageストレージをクリーンアップ
+2025-05-28 15:17:30,109 - utils.default - INFO - cleanup:191 - StorageController クリーンアップ完了
+2025-05-28 15:17:30,123 - utils.default - INFO - _setup_directories:82 - ディレクトリセットアップ完了: C:\Users\renpe\AppData\Local\Temp\storage_test_ahwuan3n
+2025-05-28 15:17:30,123 - utils.default - INFO - _setup_databases:92 - imageデータベースを作成: C:\Users\renpe\AppData\Local\Temp\storage_test_ahwuan3n\db\images.db
+2025-05-28 15:17:30,126 - utils.default - INFO - __init__:14 - SQLite database connection established: C:\Users\renpe\AppData\Local\Temp\storage_test_ahwuan3n\db\images.db
+2025-05-28 15:17:30,141 - utils.default - INFO - create_table:25 - Table 'image_metadata' created or verified successfully
+2025-05-28 15:17:30,141 - utils.default - INFO - close:103 - SQLite database connection closed: C:\Users\renpe\AppData\Local\Temp\storage_test_ahwuan3n\db\images.db
+2025-05-28 15:17:30,143 - utils.default - INFO - _setup_databases:92 - flashcardデータベースを作成: C:\Users\renpe\AppData\Local\Temp\storage_test_ahwuan3n\db\flashcards.db
+2025-05-28 15:17:30,145 - utils.default - INFO - __init__:14 - SQLite database connection established: C:\Users\renpe\AppData\Local\Temp\storage_test_ahwuan3n\db\flashcards.db
+2025-05-28 15:17:30,159 - utils.default - INFO - create_table:25 - Table 'flashcard_metadata' created or verified successfully
+2025-05-28 15:17:30,160 - utils.default - INFO - close:103 - SQLite database connection closed: C:\Users\renpe\AppData\Local\Temp\storage_test_ahwuan3n\db\flashcards.db
+2025-05-28 15:17:30,161 - utils.default - INFO - _setup_databases:98 - データベースセットアップ完了
+2025-05-28 15:17:30,164 - utils.default - INFO - __init__:14 - SQLite database connection established: C:\Users\renpe\AppData\Local\Temp\storage_test_ahwuan3n\db\images.db
+2025-05-28 15:17:30,175 - utils.default - INFO - create_table:25 - Table 'images' created or verified successfully
+2025-05-28 15:17:30,178 - utils.default - INFO - __init__:14 - SQLite database connection established: C:\Users\renpe\AppData\Local\Temp\storage_test_ahwuan3n\db\flashcards.db
+2025-05-28 15:17:30,190 - utils.default - INFO - create_table:25 - Table 'flashcards' created or verified successfully
+2025-05-28 15:17:30,196 - utils.default - ERROR - create_thumbnail:54 - サムネイル作成エラー: cannot identify image file 'C:\\Users\\renpe\\AppData\\Local\\Temp\\storage_test_ahwuan3n\\image\\c85225ab34914b6c972b9635f14f7120.jpg'
+2025-05-28 15:17:30,259 - utils.default - ERROR - create_thumbnail:54 - サムネイル作成エラー: cannot identify image file 'C:\\Users\\renpe\\AppData\\Local\\Temp\\storage_test_ahwuan3n\\flashcard\\6d555fe3813242cf81b74ad5fcf75e19.csv'
+2025-05-28 15:17:30,278 - utils.default - ERROR - create_thumbnail:54 - サムネイル作成エラー: cannot identify image file 'C:\\Users\\renpe\\AppData\\Local\\Temp\\storage_test_ahwuan3n\\flashcard\\234f10422d694d41bef2b10030e13bcd.csv'
+2025-05-28 15:17:30,289 - utils.default - ERROR - save_file:52 - 重複ファイル検出: 234f10422d694d41bef2b10030e13bcd.csv
+2025-05-28 15:17:30,295 - utils.default - INFO - close:103 - SQLite database connection closed: C:\Users\renpe\AppData\Local\Temp\storage_test_ahwuan3n\db\images.db
+2025-05-28 15:17:30,295 - utils.default - INFO - cleanup:189 - imageストレージをクリーンアップ
+2025-05-28 15:17:30,295 - utils.default - INFO - close:103 - SQLite database connection closed: C:\Users\renpe\AppData\Local\Temp\storage_test_ahwuan3n\db\flashcards.db
+2025-05-28 15:17:30,297 - utils.default - INFO - cleanup:189 - flashcardストレージをクリーンアップ
+2025-05-28 15:17:30,297 - utils.default - INFO - cleanup:191 - StorageController クリーンアップ完了
+2025-05-28 15:17:30,314 - utils.default - INFO - _setup_directories:82 - ディレクトリセットアップ完了: C:\Users\renpe\AppData\Local\Temp\storage_test_sabw_9r8
+2025-05-28 15:17:30,315 - utils.default - INFO - _setup_databases:92 - imageデータベースを作成: C:\Users\renpe\AppData\Local\Temp\storage_test_sabw_9r8\db\images.db
+2025-05-28 15:17:30,317 - utils.default - INFO - __init__:14 - SQLite database connection established: C:\Users\renpe\AppData\Local\Temp\storage_test_sabw_9r8\db\images.db
+2025-05-28 15:17:30,336 - utils.default - INFO - create_table:25 - Table 'image_metadata' created or verified successfully
+2025-05-28 15:17:30,336 - utils.default - INFO - close:103 - SQLite database connection closed: C:\Users\renpe\AppData\Local\Temp\storage_test_sabw_9r8\db\images.db
+2025-05-28 15:17:30,337 - utils.default - INFO - _setup_databases:92 - flashcardデータベースを作成: C:\Users\renpe\AppData\Local\Temp\storage_test_sabw_9r8\db\flashcards.db
+2025-05-28 15:17:30,338 - utils.default - INFO - __init__:14 - SQLite database connection established: C:\Users\renpe\AppData\Local\Temp\storage_test_sabw_9r8\db\flashcards.db
+2025-05-28 15:17:30,352 - utils.default - INFO - create_table:25 - Table 'flashcard_metadata' created or verified successfully
+2025-05-28 15:17:30,353 - utils.default - INFO - close:103 - SQLite database connection closed: C:\Users\renpe\AppData\Local\Temp\storage_test_sabw_9r8\db\flashcards.db
+2025-05-28 15:17:30,353 - utils.default - INFO - _setup_databases:98 - データベースセットアップ完了
+2025-05-28 15:17:30,356 - utils.default - INFO - __init__:14 - SQLite database connection established: C:\Users\renpe\AppData\Local\Temp\storage_test_sabw_9r8\db\images.db
+2025-05-28 15:17:30,368 - utils.default - INFO - create_table:25 - Table 'images' created or verified successfully
+2025-05-28 15:17:30,370 - utils.default - INFO - __init__:14 - SQLite database connection established: C:\Users\renpe\AppData\Local\Temp\storage_test_sabw_9r8\db\flashcards.db
+2025-05-28 15:17:30,380 - utils.default - INFO - create_table:25 - Table 'flashcards' created or verified successfully
+2025-05-28 15:17:30,409 - utils.default - ERROR - create_thumbnail:54 - サムネイル作成エラー: cannot identify image file 'C:\\Users\\renpe\\AppData\\Local\\Temp\\storage_test_sabw_9r8\\flashcard\\7363528864204960b74b7f42e0280233.csv'
+2025-05-28 15:17:30,423 - utils.default - INFO - close:103 - SQLite database connection closed: C:\Users\renpe\AppData\Local\Temp\storage_test_sabw_9r8\db\images.db
+2025-05-28 15:17:30,423 - utils.default - INFO - cleanup:189 - imageストレージをクリーンアップ
+2025-05-28 15:17:30,423 - utils.default - INFO - close:103 - SQLite database connection closed: C:\Users\renpe\AppData\Local\Temp\storage_test_sabw_9r8\db\flashcards.db
+2025-05-28 15:17:30,425 - utils.default - INFO - cleanup:189 - flashcardストレージをクリーンアップ
+2025-05-28 15:17:30,426 - utils.default - INFO - cleanup:191 - StorageController クリーンアップ完了
+2025-05-28 15:17:30,440 - utils.default - INFO - _setup_directories:82 - ディレクトリセットアップ完了: C:\Users\renpe\AppData\Local\Temp\storage_test__ltp_5be
+2025-05-28 15:17:30,441 - utils.default - INFO - _setup_databases:92 - imageデータベースを作成: C:\Users\renpe\AppData\Local\Temp\storage_test__ltp_5be\db\images.db
+2025-05-28 15:17:30,442 - utils.default - INFO - __init__:14 - SQLite database connection established: C:\Users\renpe\AppData\Local\Temp\storage_test__ltp_5be\db\images.db
+2025-05-28 15:17:30,459 - utils.default - INFO - create_table:25 - Table 'image_metadata' created or verified successfully
+2025-05-28 15:17:30,460 - utils.default - INFO - close:103 - SQLite database connection closed: C:\Users\renpe\AppData\Local\Temp\storage_test__ltp_5be\db\images.db
+2025-05-28 15:17:30,461 - utils.default - INFO - _setup_databases:92 - flashcardデータベースを作成: C:\Users\renpe\AppData\Local\Temp\storage_test__ltp_5be\db\flashcards.db
+2025-05-28 15:17:30,463 - utils.default - INFO - __init__:14 - SQLite database connection established: C:\Users\renpe\AppData\Local\Temp\storage_test__ltp_5be\db\flashcards.db
+2025-05-28 15:17:30,477 - utils.default - INFO - create_table:25 - Table 'flashcard_metadata' created or verified successfully
+2025-05-28 15:17:30,478 - utils.default - INFO - close:103 - SQLite database connection closed: C:\Users\renpe\AppData\Local\Temp\storage_test__ltp_5be\db\flashcards.db
+2025-05-28 15:17:30,478 - utils.default - INFO - _setup_databases:98 - データベースセットアップ完了
+2025-05-28 15:17:30,482 - utils.default - INFO - __init__:14 - SQLite database connection established: C:\Users\renpe\AppData\Local\Temp\storage_test__ltp_5be\db\images.db
+2025-05-28 15:17:30,492 - utils.default - INFO - create_table:25 - Table 'images' created or verified successfully
+2025-05-28 15:17:30,494 - utils.default - INFO - __init__:14 - SQLite database connection established: C:\Users\renpe\AppData\Local\Temp\storage_test__ltp_5be\db\flashcards.db
+2025-05-28 15:17:30,505 - utils.default - INFO - create_table:25 - Table 'flashcards' created or verified successfully
+2025-05-28 15:17:30,510 - utils.default - ERROR - create_thumbnail:54 - サムネイル作成エラー: cannot identify image file 'C:\\Users\\renpe\\AppData\\Local\\Temp\\storage_test__ltp_5be\\image\\5f600b8a83264cbe8a33e4e4fcdcb755.jpg'
+2025-05-28 15:17:30,550 - utils.default - ERROR - create_thumbnail:54 - サムネイル作成エラー: cannot identify image file 'C:\\Users\\renpe\\AppData\\Local\\Temp\\storage_test__ltp_5be\\flashcard\\038c5bf373c74d54ba72fe82526c6bc4.csv'
+2025-05-28 15:17:30,566 - utils.default - ERROR - create_thumbnail:54 - サムネイル作成エラー: cannot identify image file 'C:\\Users\\renpe\\AppData\\Local\\Temp\\storage_test__ltp_5be\\flashcard\\207253a6db2643f8b6293e301cd06b77.csv'
+2025-05-28 15:17:30,581 - utils.default - INFO - close:103 - SQLite database connection closed: C:\Users\renpe\AppData\Local\Temp\storage_test__ltp_5be\db\images.db
+2025-05-28 15:17:30,581 - utils.default - INFO - cleanup:189 - imageストレージをクリーンアップ
+2025-05-28 15:17:30,582 - utils.default - INFO - close:103 - SQLite database connection closed: C:\Users\renpe\AppData\Local\Temp\storage_test__ltp_5be\db\flashcards.db
+2025-05-28 15:17:30,583 - utils.default - INFO - cleanup:189 - flashcardストレージをクリーンアップ
+2025-05-28 15:17:30,583 - utils.default - INFO - cleanup:191 - StorageController クリーンアップ完了
+2025-05-28 15:17:30,598 - utils.default - INFO - _setup_directories:82 - ディレクトリセットアップ完了: C:\Users\renpe\AppData\Local\Temp\storage_test_fk0tp8gd
+2025-05-28 15:17:30,599 - utils.default - INFO - _setup_databases:92 - imageデータベースを作成: C:\Users\renpe\AppData\Local\Temp\storage_test_fk0tp8gd\db\images.db
+2025-05-28 15:17:30,600 - utils.default - INFO - __init__:14 - SQLite database connection established: C:\Users\renpe\AppData\Local\Temp\storage_test_fk0tp8gd\db\images.db
+2025-05-28 15:17:30,615 - utils.default - INFO - create_table:25 - Table 'image_metadata' created or verified successfully
+2025-05-28 15:17:30,617 - utils.default - INFO - close:103 - SQLite database connection closed: C:\Users\renpe\AppData\Local\Temp\storage_test_fk0tp8gd\db\images.db
+2025-05-28 15:17:30,617 - utils.default - INFO - _setup_databases:92 - flashcardデータベースを作成: C:\Users\renpe\AppData\Local\Temp\storage_test_fk0tp8gd\db\flashcards.db
+2025-05-28 15:17:30,618 - utils.default - INFO - __init__:14 - SQLite database connection established: C:\Users\renpe\AppData\Local\Temp\storage_test_fk0tp8gd\db\flashcards.db
+2025-05-28 15:17:30,633 - utils.default - INFO - create_table:25 - Table 'flashcard_metadata' created or verified successfully
+2025-05-28 15:17:30,633 - utils.default - INFO - close:103 - SQLite database connection closed: C:\Users\renpe\AppData\Local\Temp\storage_test_fk0tp8gd\db\flashcards.db
+2025-05-28 15:17:30,635 - utils.default - INFO - _setup_databases:98 - データベースセットアップ完了
+2025-05-28 15:17:30,637 - utils.default - INFO - __init__:14 - SQLite database connection established: C:\Users\renpe\AppData\Local\Temp\storage_test_fk0tp8gd\db\flashcards.db
+2025-05-28 15:17:30,648 - utils.default - INFO - create_table:25 - Table 'flashcards' created or verified successfully
+2025-05-28 15:17:30,655 - utils.default - ERROR - create_thumbnail:54 - サムネイル作成エラー: cannot identify image file 'C:\\Users\\renpe\\AppData\\Local\\Temp\\storage_test_fk0tp8gd\\flashcard\\b9872c39b24a426787ce9ae4e3d40bc2.csv'
+2025-05-28 15:17:30,672 - utils.default - ERROR - create_thumbnail:54 - サムネイル作成エラー: cannot identify image file 'C:\\Users\\renpe\\AppData\\Local\\Temp\\storage_test_fk0tp8gd\\flashcard\\e22743b3b2ec44b6a913f5011119e715.csv'
+2025-05-28 15:17:30,685 - utils.default - ERROR - save_file:52 - 重複ファイル検出: e22743b3b2ec44b6a913f5011119e715.csv
+2025-05-28 15:17:30,687 - utils.default - INFO - close:103 - SQLite database connection closed: C:\Users\renpe\AppData\Local\Temp\storage_test_fk0tp8gd\db\flashcards.db
+2025-05-28 15:17:30,687 - utils.default - INFO - cleanup:189 - flashcardストレージをクリーンアップ
+2025-05-28 15:17:30,688 - utils.default - INFO - cleanup:191 - StorageController クリーンアップ完了
+2025-05-28 15:17:30,703 - utils.default - INFO - _setup_directories:82 - ディレクトリセットアップ完了: C:\Users\renpe\AppData\Local\Temp\storage_test_zi1l5m9r
+2025-05-28 15:17:30,704 - utils.default - INFO - _setup_databases:92 - imageデータベースを作成: C:\Users\renpe\AppData\Local\Temp\storage_test_zi1l5m9r\db\images.db
+2025-05-28 15:17:30,708 - utils.default - INFO - __init__:14 - SQLite database connection established: C:\Users\renpe\AppData\Local\Temp\storage_test_zi1l5m9r\db\images.db
+2025-05-28 15:17:30,724 - utils.default - INFO - create_table:25 - Table 'image_metadata' created or verified successfully
+2025-05-28 15:17:30,727 - utils.default - INFO - close:103 - SQLite database connection closed: C:\Users\renpe\AppData\Local\Temp\storage_test_zi1l5m9r\db\images.db
+2025-05-28 15:17:30,727 - utils.default - INFO - _setup_databases:92 - flashcardデータベースを作成: C:\Users\renpe\AppData\Local\Temp\storage_test_zi1l5m9r\db\flashcards.db
+2025-05-28 15:17:30,729 - utils.default - INFO - __init__:14 - SQLite database connection established: C:\Users\renpe\AppData\Local\Temp\storage_test_zi1l5m9r\db\flashcards.db
+2025-05-28 15:17:30,743 - utils.default - INFO - create_table:25 - Table 'flashcard_metadata' created or verified successfully
+2025-05-28 15:17:30,745 - utils.default - INFO - close:103 - SQLite database connection closed: C:\Users\renpe\AppData\Local\Temp\storage_test_zi1l5m9r\db\flashcards.db
+2025-05-28 15:17:30,745 - utils.default - INFO - _setup_databases:98 - データベースセットアップ完了
+2025-05-28 15:17:30,747 - utils.default - INFO - __init__:14 - SQLite database connection established: C:\Users\renpe\AppData\Local\Temp\storage_test_zi1l5m9r\db\images.db
+2025-05-28 15:17:30,758 - utils.default - INFO - create_table:25 - Table 'images' created or verified successfully
+2025-05-28 15:17:30,760 - utils.default - INFO - __init__:14 - SQLite database connection established: C:\Users\renpe\AppData\Local\Temp\storage_test_zi1l5m9r\db\flashcards.db
+2025-05-28 15:17:30,772 - utils.default - INFO - create_table:25 - Table 'flashcards' created or verified successfully
+2025-05-28 15:17:30,996 - utils.default - ERROR - create_thumbnail:54 - サムネイル作成エラー: cannot identify image file 'C:\\Users\\renpe\\AppData\\Local\\Temp\\storage_test_zi1l5m9r\\flashcard\\8718bda38e9843ed97f84d2caf5f0df1.csv'
+2025-05-28 15:17:31,012 - utils.default - ERROR - create_thumbnail:54 - サムネイル作成エラー: cannot identify image file 'C:\\Users\\renpe\\AppData\\Local\\Temp\\storage_test_zi1l5m9r\\flashcard\\dc93684e0b4f45d1aaec3d27362c2426.csv'
+2025-05-28 15:17:31,029 - utils.default - ERROR - create_thumbnail:54 - サムネイル作成エラー: cannot identify image file 'C:\\Users\\renpe\\AppData\\Local\\Temp\\storage_test_zi1l5m9r\\flashcard\\5a2f21a59b7a4e749b4da151cca0ea77.csv'
+2025-05-28 15:17:31,043 - utils.default - ERROR - create_thumbnail:54 - サムネイル作成エラー: cannot identify image file 'C:\\Users\\renpe\\AppData\\Local\\Temp\\storage_test_zi1l5m9r\\flashcard\\87832d8b2a6e4dd38b88ccba6004bc21.csv'
+2025-05-28 15:17:31,061 - utils.default - ERROR - create_thumbnail:54 - サムネイル作成エラー: cannot identify image file 'C:\\Users\\renpe\\AppData\\Local\\Temp\\storage_test_zi1l5m9r\\flashcard\\1ec83876c70b4a69baceadbda02b9a0a.csv'
+2025-05-28 15:17:31,077 - utils.default - ERROR - create_thumbnail:54 - サムネイル作成エラー: cannot identify image file 'C:\\Users\\renpe\\AppData\\Local\\Temp\\storage_test_zi1l5m9r\\flashcard\\da531031cc434566810d15c911a00550.csv'
+2025-05-28 15:17:31,095 - utils.default - ERROR - create_thumbnail:54 - サムネイル作成エラー: cannot identify image file 'C:\\Users\\renpe\\AppData\\Local\\Temp\\storage_test_zi1l5m9r\\flashcard\\ca195961c3f34f67ac6e195b3ce30924.csv'
+2025-05-28 15:17:31,110 - utils.default - ERROR - create_thumbnail:54 - サムネイル作成エラー: cannot identify image file 'C:\\Users\\renpe\\AppData\\Local\\Temp\\storage_test_zi1l5m9r\\flashcard\\6a84f65d07c2443eb1f414017a705603.csv'
+2025-05-28 15:17:31,126 - utils.default - ERROR - create_thumbnail:54 - サムネイル作成エラー: cannot identify image file 'C:\\Users\\renpe\\AppData\\Local\\Temp\\storage_test_zi1l5m9r\\flashcard\\d0b0a8b182d34887b5910e758f60c217.csv'
+2025-05-28 15:17:31,140 - utils.default - ERROR - create_thumbnail:54 - サムネイル作成エラー: cannot identify image file 'C:\\Users\\renpe\\AppData\\Local\\Temp\\storage_test_zi1l5m9r\\flashcard\\8f048777585f45efad214373d67c19b9.csv'
+2025-05-28 15:17:31,153 - utils.default - INFO - close:103 - SQLite database connection closed: C:\Users\renpe\AppData\Local\Temp\storage_test_zi1l5m9r\db\images.db
+2025-05-28 15:17:31,154 - utils.default - INFO - cleanup:189 - imageストレージをクリーンアップ
+2025-05-28 15:17:31,155 - utils.default - INFO - close:103 - SQLite database connection closed: C:\Users\renpe\AppData\Local\Temp\storage_test_zi1l5m9r\db\flashcards.db
+2025-05-28 15:17:31,156 - utils.default - INFO - cleanup:189 - flashcardストレージをクリーンアップ
+2025-05-28 15:17:31,156 - utils.default - INFO - cleanup:191 - StorageController クリーンアップ完了
+2025-05-28 15:17:31,185 - utils.default - INFO - _setup_directories:82 - ディレクトリセットアップ完了: C:\Users\renpe\AppData\Local\Temp\storage_test_n94lphpg
+2025-05-28 15:17:31,186 - utils.default - INFO - _setup_databases:92 - imageデータベースを作成: C:\Users\renpe\AppData\Local\Temp\storage_test_n94lphpg\db\images.db
+2025-05-28 15:17:31,187 - utils.default - INFO - __init__:14 - SQLite database connection established: C:\Users\renpe\AppData\Local\Temp\storage_test_n94lphpg\db\images.db
+2025-05-28 15:17:31,202 - utils.default - INFO - create_table:25 - Table 'image_metadata' created or verified successfully
+2025-05-28 15:17:31,203 - utils.default - INFO - close:103 - SQLite database connection closed: C:\Users\renpe\AppData\Local\Temp\storage_test_n94lphpg\db\images.db
+2025-05-28 15:17:31,205 - utils.default - INFO - _setup_databases:92 - flashcardデータベースを作成: C:\Users\renpe\AppData\Local\Temp\storage_test_n94lphpg\db\flashcards.db
+2025-05-28 15:17:31,205 - utils.default - INFO - __init__:14 - SQLite database connection established: C:\Users\renpe\AppData\Local\Temp\storage_test_n94lphpg\db\flashcards.db
+2025-05-28 15:17:31,220 - utils.default - INFO - create_table:25 - Table 'flashcard_metadata' created or verified successfully
+2025-05-28 15:17:31,221 - utils.default - INFO - close:103 - SQLite database connection closed: C:\Users\renpe\AppData\Local\Temp\storage_test_n94lphpg\db\flashcards.db
+2025-05-28 15:17:31,221 - utils.default - INFO - _setup_databases:98 - データベースセットアップ完了
+2025-05-28 15:17:31,223 - utils.default - INFO - __init__:14 - SQLite database connection established: C:\Users\renpe\AppData\Local\Temp\storage_test_n94lphpg\db\images.db
+2025-05-28 15:17:31,235 - utils.default - INFO - create_table:25 - Table 'images' created or verified successfully
+2025-05-28 15:17:31,237 - utils.default - INFO - __init__:14 - SQLite database connection established: C:\Users\renpe\AppData\Local\Temp\storage_test_n94lphpg\db\flashcards.db
+2025-05-28 15:17:31,249 - utils.default - INFO - create_table:25 - Table 'flashcards' created or verified successfully
+2025-05-28 15:17:31,250 - utils.default - ERROR - save_file:80 - ファイル保存エラー: 'source_path' : from[Errno 2] No such file or directory: '\\non\\existent\\file.jpg'
+2025-05-28 15:17:31,255 - utils.default - ERROR - create_thumbnail:54 - サムネイル作成エラー: cannot identify image file 'C:\\Users\\renpe\\AppData\\Local\\Temp\\storage_test_n94lphpg\\image\\2027ee09c85f4ac7b3b3ab474e398908.jpg'
+2025-05-28 15:17:31,268 - utils.default - INFO - close:103 - SQLite database connection closed: C:\Users\renpe\AppData\Local\Temp\storage_test_n94lphpg\db\images.db
+2025-05-28 15:17:31,269 - utils.default - INFO - cleanup:189 - imageストレージをクリーンアップ
+2025-05-28 15:17:31,270 - utils.default - INFO - close:103 - SQLite database connection closed: C:\Users\renpe\AppData\Local\Temp\storage_test_n94lphpg\db\flashcards.db
+2025-05-28 15:17:31,270 - utils.default - INFO - cleanup:189 - flashcardストレージをクリーンアップ
+2025-05-28 15:17:31,270 - utils.default - INFO - cleanup:191 - StorageController クリーンアップ完了
+2025-05-28 15:17:31,282 - utils.default - INFO - _setup_directories:82 - ディレクトリセットアップ完了: C:\Users\renpe\AppData\Local\Temp\storage_test_k6bbvezz
+2025-05-28 15:17:31,283 - utils.default - INFO - _setup_databases:92 - imageデータベースを作成: C:\Users\renpe\AppData\Local\Temp\storage_test_k6bbvezz\db\images.db
+2025-05-28 15:17:31,285 - utils.default - INFO - __init__:14 - SQLite database connection established: C:\Users\renpe\AppData\Local\Temp\storage_test_k6bbvezz\db\images.db
+2025-05-28 15:17:31,299 - utils.default - INFO - create_table:25 - Table 'image_metadata' created or verified successfully
+2025-05-28 15:17:31,300 - utils.default - INFO - close:103 - SQLite database connection closed: C:\Users\renpe\AppData\Local\Temp\storage_test_k6bbvezz\db\images.db
+2025-05-28 15:17:31,301 - utils.default - INFO - _setup_databases:92 - flashcardデータベースを作成: C:\Users\renpe\AppData\Local\Temp\storage_test_k6bbvezz\db\flashcards.db
+2025-05-28 15:17:31,302 - utils.default - INFO - __init__:14 - SQLite database connection established: C:\Users\renpe\AppData\Local\Temp\storage_test_k6bbvezz\db\flashcards.db
+2025-05-28 15:17:31,318 - utils.default - INFO - create_table:25 - Table 'flashcard_metadata' created or verified successfully
+2025-05-28 15:17:31,319 - utils.default - INFO - close:103 - SQLite database connection closed: C:\Users\renpe\AppData\Local\Temp\storage_test_k6bbvezz\db\flashcards.db
+2025-05-28 15:17:31,320 - utils.default - INFO - _setup_databases:98 - データベースセットアップ完了
+2025-05-28 15:17:31,323 - utils.default - INFO - __init__:14 - SQLite database connection established: C:\Users\renpe\AppData\Local\Temp\storage_test_k6bbvezz\db\images.db
+2025-05-28 15:17:31,335 - utils.default - INFO - create_table:25 - Table 'images' created or verified successfully
+2025-05-28 15:17:31,355 - utils.default - INFO - close:103 - SQLite database connection closed: C:\Users\renpe\AppData\Local\Temp\storage_test_k6bbvezz\db\images.db
+2025-05-28 15:17:31,356 - utils.default - INFO - cleanup:189 - imageストレージをクリーンアップ
+2025-05-28 15:17:31,356 - utils.default - INFO - cleanup:191 - StorageController クリーンアップ完了
+2025-05-28 15:17:31,360 - utils.default - INFO - _setup_directories:82 - ディレクトリセットアップ完了: C:\Users\renpe\AppData\Local\Temp\storage_test_k6bbvezz
+2025-05-28 15:17:31,360 - utils.default - INFO - __init__:14 - SQLite database connection established: C:\Users\renpe\AppData\Local\Temp\storage_test_k6bbvezz\db\images.db
+2025-05-28 15:17:31,363 - utils.default - INFO - create_table:25 - Table 'image_metadata' created or verified successfully
+2025-05-28 15:17:31,363 - utils.default - INFO - close:103 - SQLite database connection closed: C:\Users\renpe\AppData\Local\Temp\storage_test_k6bbvezz\db\images.db
+2025-05-28 15:17:31,364 - utils.default - INFO - __init__:14 - SQLite database connection established: C:\Users\renpe\AppData\Local\Temp\storage_test_k6bbvezz\db\flashcards.db
+2025-05-28 15:17:31,365 - utils.default - INFO - create_table:25 - Table 'flashcard_metadata' created or verified successfully
+2025-05-28 15:17:31,366 - utils.default - INFO - close:103 - SQLite database connection closed: C:\Users\renpe\AppData\Local\Temp\storage_test_k6bbvezz\db\flashcards.db
+2025-05-28 15:17:31,366 - utils.default - INFO - _setup_databases:98 - データベースセットアップ完了
+2025-05-28 15:17:31,368 - utils.default - INFO - __init__:14 - SQLite database connection established: C:\Users\renpe\AppData\Local\Temp\storage_test_k6bbvezz\db\images.db
+2025-05-28 15:17:31,369 - utils.default - INFO - create_table:25 - Table 'images' created or verified successfully
+2025-05-28 15:17:31,370 - utils.default - INFO - close:103 - SQLite database connection closed: C:\Users\renpe\AppData\Local\Temp\storage_test_k6bbvezz\db\images.db
+2025-05-28 15:17:31,371 - utils.default - INFO - cleanup:189 - imageストレージをクリーンアップ
+2025-05-28 15:17:31,371 - utils.default - INFO - cleanup:191 - StorageController クリーンアップ完了
+2025-05-28 15:17:31,373 - utils.default - INFO - close:103 - SQLite database connection closed: C:\Users\renpe\AppData\Local\Temp\storage_test_k6bbvezz\db\images.db
+2025-05-28 15:17:31,373 - utils.default - INFO - cleanup:189 - imageストレージをクリーンアップ
+2025-05-28 15:17:31,373 - utils.default - INFO - cleanup:191 - StorageController クリーンアップ完了
+2025-05-28 15:17:31,388 - utils.default - INFO - _setup_directories:82 - ディレクトリセットアップ完了: C:\Users\renpe\AppData\Local\Temp\storage_test_zz7uzo5u
+2025-05-28 15:17:31,389 - utils.default - INFO - _setup_databases:92 - imageデータベースを作成: C:\Users\renpe\AppData\Local\Temp\storage_test_zz7uzo5u\db\images.db
+2025-05-28 15:17:31,390 - utils.default - INFO - __init__:14 - SQLite database connection established: C:\Users\renpe\AppData\Local\Temp\storage_test_zz7uzo5u\db\images.db
+2025-05-28 15:17:31,407 - utils.default - INFO - create_table:25 - Table 'image_metadata' created or verified successfully
+2025-05-28 15:17:31,407 - utils.default - INFO - close:103 - SQLite database connection closed: C:\Users\renpe\AppData\Local\Temp\storage_test_zz7uzo5u\db\images.db
+2025-05-28 15:17:31,409 - utils.default - INFO - _setup_databases:92 - flashcardデータベースを作成: C:\Users\renpe\AppData\Local\Temp\storage_test_zz7uzo5u\db\flashcards.db
+2025-05-28 15:17:31,410 - utils.default - INFO - __init__:14 - SQLite database connection established: C:\Users\renpe\AppData\Local\Temp\storage_test_zz7uzo5u\db\flashcards.db
+2025-05-28 15:17:31,425 - utils.default - INFO - create_table:25 - Table 'flashcard_metadata' created or verified successfully
+2025-05-28 15:17:31,425 - utils.default - INFO - close:103 - SQLite database connection closed: C:\Users\renpe\AppData\Local\Temp\storage_test_zz7uzo5u\db\flashcards.db
+2025-05-28 15:17:31,426 - utils.default - INFO - _setup_databases:98 - データベースセットアップ完了
+2025-05-28 15:17:31,429 - utils.default - INFO - __init__:14 - SQLite database connection established: C:\Users\renpe\AppData\Local\Temp\storage_test_zz7uzo5u\db\images.db
+2025-05-28 15:17:31,441 - utils.default - INFO - create_table:25 - Table 'images' created or verified successfully
+2025-05-28 15:17:31,444 - utils.default - INFO - __init__:14 - SQLite database connection established: C:\Users\renpe\AppData\Local\Temp\storage_test_zz7uzo5u\db\flashcards.db
+2025-05-28 15:17:31,454 - utils.default - INFO - create_table:25 - Table 'flashcards' created or verified successfully
+2025-05-28 15:17:31,460 - utils.default - ERROR - create_thumbnail:54 - サムネイル作成エラー: cannot identify image file 'C:\\Users\\renpe\\AppData\\Local\\Temp\\storage_test_zz7uzo5u\\image\\7b4e9a5993a8405088ea661bfa3ec4d3.png'
+2025-05-28 15:17:31,477 - utils.default - ERROR - create_thumbnail:54 - サムネイル作成エラー: cannot identify image file 'C:\\Users\\renpe\\AppData\\Local\\Temp\\storage_test_zz7uzo5u\\flashcard\\e9217bb4694a41e6b9b9b901bb3b3d6b.csv'
+2025-05-28 15:17:31,520 - utils.default - ERROR - create_thumbnail:54 - サムネイル作成エラー: cannot identify image file 'C:\\Users\\renpe\\AppData\\Local\\Temp\\storage_test_zz7uzo5u\\flashcard\\d48c070576774eebba8e2a5c744eaed3.csv'
+2025-05-28 15:17:31,552 - utils.default - ERROR - save_file:52 - 重複ファイル検出: d48c070576774eebba8e2a5c744eaed3.csv
+2025-05-28 15:17:31,556 - utils.default - INFO - close:103 - SQLite database connection closed: C:\Users\renpe\AppData\Local\Temp\storage_test_zz7uzo5u\db\images.db
+2025-05-28 15:17:31,557 - utils.default - INFO - cleanup:189 - imageストレージをクリーンアップ
+2025-05-28 15:17:31,558 - utils.default - INFO - close:103 - SQLite database connection closed: C:\Users\renpe\AppData\Local\Temp\storage_test_zz7uzo5u\db\flashcards.db
+2025-05-28 15:17:31,559 - utils.default - INFO - cleanup:189 - flashcardストレージをクリーンアップ
+2025-05-28 15:17:31,560 - utils.default - INFO - cleanup:191 - StorageController クリーンアップ完了
+2025-05-28 15:17:31,575 - utils.default - INFO - _setup_directories:82 - ディレクトリセットアップ完了: C:\Users\renpe\AppData\Local\Temp\storage_test_43we4cwm
+2025-05-28 15:17:31,576 - utils.default - INFO - _setup_databases:92 - imageデータベースを作成: C:\Users\renpe\AppData\Local\Temp\storage_test_43we4cwm\db\images.db
+2025-05-28 15:17:31,577 - utils.default - INFO - __init__:14 - SQLite database connection established: C:\Users\renpe\AppData\Local\Temp\storage_test_43we4cwm\db\images.db
+2025-05-28 15:17:31,593 - utils.default - INFO - create_table:25 - Table 'image_metadata' created or verified successfully
+2025-05-28 15:17:31,595 - utils.default - INFO - close:103 - SQLite database connection closed: C:\Users\renpe\AppData\Local\Temp\storage_test_43we4cwm\db\images.db
+2025-05-28 15:17:31,596 - utils.default - INFO - _setup_databases:92 - flashcardデータベースを作成: C:\Users\renpe\AppData\Local\Temp\storage_test_43we4cwm\db\flashcards.db
+2025-05-28 15:17:31,597 - utils.default - INFO - __init__:14 - SQLite database connection established: C:\Users\renpe\AppData\Local\Temp\storage_test_43we4cwm\db\flashcards.db
+2025-05-28 15:17:31,616 - utils.default - INFO - create_table:25 - Table 'flashcard_metadata' created or verified successfully
+2025-05-28 15:17:31,617 - utils.default - INFO - close:103 - SQLite database connection closed: C:\Users\renpe\AppData\Local\Temp\storage_test_43we4cwm\db\flashcards.db
+2025-05-28 15:17:31,618 - utils.default - INFO - _setup_databases:98 - データベースセットアップ完了
+2025-05-28 15:17:31,621 - utils.default - INFO - __init__:14 - SQLite database connection established: C:\Users\renpe\AppData\Local\Temp\storage_test_43we4cwm\db\images.db
+2025-05-28 15:17:31,633 - utils.default - INFO - create_table:25 - Table 'images' created or verified successfully
+2025-05-28 15:17:31,666 - utils.default - INFO - close:103 - SQLite database connection closed: C:\Users\renpe\AppData\Local\Temp\storage_test_43we4cwm\db\images.db
+2025-05-28 15:17:31,668 - utils.default - INFO - cleanup:189 - imageストレージをクリーンアップ
+2025-05-28 15:17:31,669 - utils.default - INFO - cleanup:191 - StorageController クリーンアップ完了

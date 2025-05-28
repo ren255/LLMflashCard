@@ -9,46 +9,48 @@ from pathlib import Path
 
 from utils import log
 
+
 ##
 # @brief ファイル管理クラス
 # @details path辞書を受け取ってファイルの保存、削除、サムネイル作成などを行う。filetypeごとにインスタンス化される。
-class FileManager():
+class FileManager:
     """共通のファイル管理クラス,filetypeごとに作成される"""
-    def __init__(self, paths: Dict[str, str],thumbnail_size = (200,200)):
+
+    def __init__(self, paths: Dict[str, str], thumbnail_size=(200, 200)):
         """
         path辞書からFileManagerを初期化
         """
         self.paths = paths
         self.thumbnail_size = thumbnail_size
-        
+
         self.storage_dir = Path(paths["storage_path"])
         self.thumbnails_dir = Path(paths["thumbnails_path"])
         self.temp_dir = Path(paths["temp_path"])
         self.base_path = Path(paths["base_path"])
-        
+
         # ディレクトリが存在しない場合は作成
         self._ensure_directories()
-    
+
     def _ensure_directories(self):
         """必要なディレクトリが存在することを確保"""
         for dir_path in [self.storage_dir, self.thumbnails_dir, self.temp_dir]:
             dir_path.mkdir(parents=True, exist_ok=True)
-    
+
     def create_thumbnail(self, image_path: Path) -> Path | None:
         """サムネイル作成"""
         try:
             filename = image_path.name
             thumbnail_name = f"thumb_{filename}"
             thumbnail_path = self.thumbnails_dir / thumbnail_name
-            
+
             with Image.open(image_path) as img:
                 # RGB変換（RGBA対応）
-                if img.mode in ('RGBA', 'LA', 'P'):
-                    img = img.convert('RGB')
-                
+                if img.mode in ("RGBA", "LA", "P"):
+                    img = img.convert("RGB")
+
                 img.thumbnail(self.thumbnail_size, Image.Resampling.LANCZOS)
                 img.save(thumbnail_path, "JPEG", optimize=True, quality=85)
-            
+
             return thumbnail_path
         except Exception as e:
             log.error(f"サムネイル作成エラー: {e}")
@@ -93,9 +95,9 @@ class FileManager():
             new_filename = self.generate_filename(file_extension)
             save_path = self.storage_dir / new_filename
             shutil.copy2(source_path, save_path)
-            
+
             return save_path
-        
+
         except Exception as e:
             return None
 
@@ -107,14 +109,14 @@ class FileManager():
             temp_path = self.temp_dir / temp_filename
             if not temp_path.exists():
                 log.error(f"一時ファイルが見つかりません: {temp_path}")
-            
+
             file_extension = temp_path.suffix.lower()
             new_filename = self.generate_filename(file_extension)
             final_path = self.storage_dir / new_filename
-            
+
             shutil.move(str(temp_path), str(final_path))
             return str(final_path)
-        
+
         except Exception as e:
             log.error(f"一時ファイル移動エラー: {e}")
             return ""
@@ -127,10 +129,10 @@ class FileManager():
             source_file = Path(source_path)
             temp_filename = f"temp_{uuid.uuid4().hex}{source_file.suffix}"
             temp_path = self.temp_dir / temp_filename
-            
+
             shutil.copy2(source_path, temp_path)
             return str(temp_path)
-        
+
         except Exception as e:
             log.error(f"一時ファイル保存エラー: {e}")
             return ""

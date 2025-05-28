@@ -8,6 +8,7 @@ from db.sqlite_utils import SQLiteManager
 
 from .file_manager import FileManager
 from utils import log
+
 ##
 # @brief ストレージ管理の基底クラス
 # @details このクラスはストレージ管理の基本的な機能を提供し、サブクラスで具体的な実装を行う
@@ -33,14 +34,16 @@ class BaseStorage(ABC):
         pass
 
     @abstractmethod
-    def save(self, source_path: Path,  collection: str = "", **kwargs) -> int | None:
+    def save(self, source_path: Path, collection: str = "", **kwargs) -> int | None:
         """
         ファイルを保存（サブクラスで実装）
         Returns: (record_id, saved_path) - record_idはエラー時None
         """
         pass
 
-    def save_file(self, source_path: Path, collection: str = "", **kwargs) -> int | None:
+    def save_file(
+        self, source_path: Path, collection: str = "", **kwargs
+    ) -> int | None:
         """
         ファイルを保存（重複チェック付き）
         Returns: (record_id, saved_path) - record_idはエラー時None
@@ -66,7 +69,7 @@ class BaseStorage(ABC):
                 "hash": file_hash,
                 "collection": collection,
                 **metadata,
-                **kwargs  # 追加のメタデータ
+                **kwargs,  # 追加のメタデータ
             }
 
             record_id = self.metadataMgr.save_metadata(**save_data)
@@ -109,16 +112,14 @@ class BaseStorage(ABC):
         """全レコードを取得"""
         records = self.metadataMgr.get_all()
         for record in records:
-            record["full_path"] = self.fileMgr.get_file_path(
-                record["filename"])
+            record["full_path"] = self.fileMgr.get_file_path(record["filename"])
         return records
 
     def get_by_collection(self, collection: str) -> List[Dict]:
         """コレクション別に取得"""
         records = self.metadataMgr.get_by_collection(collection)
         for record in records:
-            record["full_path"] = self.fileMgr.get_file_path(
-                record["filename"])
+            record["full_path"] = self.fileMgr.get_file_path(record["filename"])
         return records
 
     def update_metadata(self, record_id: int, **kwargs):
@@ -129,8 +130,7 @@ class BaseStorage(ABC):
         """条件検索"""
         records = self.metadataMgr.search(condition, params)
         for record in records:
-            record["full_path"] = self.fileMgr.get_file_path(
-                record["filename"])
+            record["full_path"] = self.fileMgr.get_file_path(record["filename"])
         return records
 
     def get_collections(self) -> List[str]:
@@ -153,7 +153,7 @@ class BaseStorage(ABC):
             "total_files": len(all_records),
             "total_size": total_size,
             "collections": len(collections),
-            "collection_names": collections
+            "collection_names": collections,
         }
 
 
@@ -211,8 +211,7 @@ class BaseMetadataManager(ABC):
                 valid_updates[key] = value
 
         if valid_updates:
-            self.db.update(self.table_name, valid_updates,
-                           "id = ?", (record_id,))
+            self.db.update(self.table_name, valid_updates, "id = ?", (record_id,))
 
     def delete_metadata(self, record_id: int):
         """メタデータを削除"""

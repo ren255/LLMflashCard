@@ -529,7 +529,7 @@ class TreeApplication:
             if options.output_file:
                 out_file = Path(options.output_file)
             else:
-                out_file = Path("tests") / f"{options.path.name}_tree.txt"
+                out_file = Path("dev/tree") / f"{options.path.name}_tree.txt"
             printer.save_tree(out_file)
         
         if options.do_print:

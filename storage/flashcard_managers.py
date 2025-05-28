@@ -29,12 +29,7 @@ class FlashcardStorage(BaseStorage):
         # if columns_mapping:
         #     kwargs["columns"] = json.dumps(columns_mapping)
 
-        return self.save_file(
-            source_path=source_path,
-
-            collection=collection,
-            **kwargs
-        )
+        return self.save_file(source_path=source_path, collection=collection, **kwargs)
 
     def get_columns(self, record_id: int) -> List[str]:
         """CSVのカラム一覧を取得"""

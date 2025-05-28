@@ -1,0 +1,118 @@
+LLMflashCard
+├── .git
+├── .pytest_cache
+├── .venv
+├── .VSCodeCounter
+├── __pycache__
+├── db
+│   ├── __pycache__
+│   ├── __init__.py
+│   ├── flashcards.db
+│   ├── images.db
+│   ├── interface_utils.py
+│   ├── models.py
+│   └── sqlite_utils.py
+├── dev
+│   ├── document
+│   │   ├── explain.txt
+│   │   ├── prototype.txt
+│   │   └── StorageTest.txt
+│   ├── tree
+│   │   ├── docs_tree.txt
+│   │   ├── fixtures_tree.txt
+│   │   ├── LLMflashCard_tree.txt
+│   │   ├── test_tree.txt
+│   │   └── utils_tree.txt
+│   ├── calss.dio
+│   ├── db.try.py
+│   ├── path.py
+│   └── tree.py
+├── docs
+│   ├── _build
+│   ├── _static
+│   ├── _templates
+│   ├── source
+│   │   ├── build_docs.rst
+│   │   ├── db.interface_utils.rst
+│   │   ├── db.models.rst
+│   │   ├── db.rst
+│   │   ├── db.sqlite_utils.rst
+│   │   ├── gui.rst
+│   │   ├── image_processing.rst
+│   │   ├── llm.rst
+│   │   ├── logic.rst
+│   │   ├── main.rst
+│   │   ├── modules.rst
+│   │   ├── storage.base_managers.rst
+│   │   ├── storage.file_manager.rst
+│   │   ├── storage.flashcard_managers.rst
+│   │   ├── storage.image_managers.rst
+│   │   ├── storage.rst
+│   │   ├── storage.storage_controller.rst
+│   │   ├── utils.Logger.rst
+│   │   └── utils.rst
+│   ├── conf.py
+│   ├── index.rst
+│   ├── make.bat
+│   └── Makefile
+├── gui
+│   ├── __pycache__
+│   └── __init__.py
+├── image_processing
+│   ├── __pycache__
+│   └── __init__.py
+├── llm
+│   ├── __pycache__
+│   └── __init__.py
+├── logic
+│   ├── __pycache__
+│   └── __init__.py
+├── logs
+│   ├── test_module1.log
+│   ├── test_module2.log
+│   └── utils_default.log
+├── resources
+│   ├── db
+│   │   ├── flashcards.db
+│   │   └── images.db
+│   ├── flashcard
+│   ├── image
+│   │   └── 34f5f808a9f4442185a5d0696ffe0d52.png
+│   ├── temp
+│   │   ├── flashcard
+│   │   └── image
+│   ├── tempSave
+│   ├── thumbnails
+│   │   ├── flashcard
+│   │   └── image
+│   │       ├── thumb_0b95871b0d9d4a579359fe10246fce3c.png
+│   │       └── ... and 12 more items
+│   └── upload
+├── storage
+│   ├── __pycache__
+│   ├── __init__.py
+│   ├── base_managers.py
+│   ├── file_manager.py
+│   ├── flashcard_managers.py
+│   ├── image_managers.py
+│   └── storage_controller.py
+├── test
+│   ├── .pytest_cache
+│   ├── __pycache__
+│   ├── _fixtures
+│   ├── conftest.py
+│   ├── make_testdata.py
+│   ├── pytest.ini
+│   ├── test_data_definitions.py
+│   ├── test_db.py
+│   ├── test_storage_controller.py
+│   └── test_storage_intergration.py
+├── utils
+│   ├── __pycache__
+│   ├── __init__.py
+│   └── Logger.py
+├── .coverage
+├── .gitignore
+├── build_docs.py
+├── main.py
+└── requirements.txt

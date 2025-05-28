@@ -28,17 +28,12 @@ class ImageStorage(BaseStorage):
         return ImageMetadataManager(self.paths["db_path"], IMAGE_SCHEMA)
 
     # 画像固有の便利メソッド
-    def save(self, source_path: Path,  collection: str = "", **kwargs) -> int | None:
+    def save(self, source_path: Path, collection: str = "", **kwargs) -> int | None:
         """
         画像を保存（画像固有のパラメータ付き）
         record_idを返す。重複ファイルは保存しない。
         """
-        return self.save_file(
-            source_path=source_path,
-
-            collection=collection,
-            **kwargs
-        )
+        return self.save_file(source_path=source_path, collection=collection, **kwargs)
 
     # def get_children(self, parent_id: int) -> List[Dict]:
     #     """親画像の子画像を取得"""
@@ -47,7 +42,9 @@ class ImageStorage(BaseStorage):
     #         child["full_path"] = self.fileMgr.get_file_path(child["filename"])
     #     return children
 
-    def save_split_image(self, parent_id: int, maskid: int, region_index: int, **kwargs) -> int | None:
+    def save_split_image(
+        self, parent_id: int, maskid: int, region_index: int, **kwargs
+    ) -> int | None:
         """
         分割画像を保存
         """
@@ -62,7 +59,7 @@ class ImageStorage(BaseStorage):
             image_type="split",
             parent_image_id=parent_id,
             region_index=region_index,
-            **kwargs
+            **kwargs,
         )
 
     def get_thumbnail_path(self, record_id: int) -> Optional[str]:
@@ -129,12 +126,7 @@ class ImageStorage(BaseStorage):
             else:
                 sizes["large"] += 1
 
-        return {
-            **base_stats,
-            "formats": formats,
-            "types": types,
-            "sizes": sizes
-        }
+        return {**base_stats, "formats": formats, "types": types, "sizes": sizes}
 
     def search_by_content(self, search_term: str) -> List[Dict]:
         """
@@ -169,7 +161,7 @@ class ImageMetadataManager(BaseMetadataManager):
                 "image_type": record.get("image_type"),
                 "region_index": record.get("region_index"),
                 "parent_image_id": record.get("parent_image_id"),
-                "mask_image_id": record.get("mask_image_id")
+                "mask_image_id": record.get("mask_image_id"),
             }
         return None
 
@@ -181,7 +173,7 @@ class ImageMetadataManager(BaseMetadataManager):
                     "width": img.width,
                     "height": img.height,
                     "format": img.format,
-                    "file_size": file_path.stat().st_size
+                    "file_size": file_path.stat().st_size,
                 }
         except Exception as e:
             print(f"画像メタデータ取得エラー: {e}")
@@ -189,7 +181,7 @@ class ImageMetadataManager(BaseMetadataManager):
                 "width": None,
                 "height": None,
                 "format": None,
-                "file_size": file_path.stat().st_size
+                "file_size": file_path.stat().st_size,
             }
 
     def get_by_type(self, image_type: str) -> List[Dict]:
@@ -200,8 +192,13 @@ class ImageMetadataManager(BaseMetadataManager):
         """親画像IDで子画像を検索"""
         return self.search("parent_image_id = ?", (parent_id,))
 
-    def get_by_size_range(self, min_width: int = 0, max_width: int = 999999,
-                          min_height: int = 0, max_height: int = 999999) -> List[Dict]:
+    def get_by_size_range(
+        self,
+        min_width: int = 0,
+        max_width: int = 999999,
+        min_height: int = 0,
+        max_height: int = 999999,
+    ) -> List[Dict]:
         """サイズ範囲で画像を検索"""
         condition = "width BETWEEN ? AND ? AND height BETWEEN ? AND ?"
         params = (min_width, max_width, min_height, max_height)

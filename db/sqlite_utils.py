@@ -4,6 +4,7 @@ from .interface_utils import DBManagerInterface
 from utils import log
 from pathlib import Path
 
+
 class SQLiteManager(DBManagerInterface):
     def __init__(self, db_path: Path):
         self.db_path = db_path
@@ -37,7 +38,9 @@ class SQLiteManager(DBManagerInterface):
             self.conn.commit()
             return self.cursor.lastrowid
         except sqlite3.IntegrityError as e:
-            log.warning(f"Database integrity error for table '{table_name}' (duplicate or constraint violation): {e}")
+            log.warning(
+                f"Database integrity error for table '{table_name}' (duplicate or constraint violation): {e}"
+            )
             return None
         except Exception as e:
             log.error(f"Failed to insert data into table '{table_name}': {e}")
@@ -45,7 +48,7 @@ class SQLiteManager(DBManagerInterface):
             for key, value in data.items():
                 log.debug(f"    Data: {key} = {value}")
             log.debug("")
-            
+
             return None
 
     def fetch_all(self, table_name: str) -> List[Dict[str, Any]]:
@@ -67,7 +70,9 @@ class SQLiteManager(DBManagerInterface):
             rows = self.cursor.fetchall()
             return [dict(row) for row in rows]
         except Exception as e:
-            log.error(f"Failed to fetch data from table '{table_name}' with condition '{condition}': {e}")
+            log.error(
+                f"Failed to fetch data from table '{table_name}' with condition '{condition}': {e}"
+            )
             return []
 
     def update(
@@ -84,7 +89,9 @@ class SQLiteManager(DBManagerInterface):
             self.cursor.execute(sql, values)
             self.conn.commit()
         except Exception as e:
-            log.error(f"Failed to update table '{table_name}' with condition '{condition}': {e}")
+            log.error(
+                f"Failed to update table '{table_name}' with condition '{condition}': {e}"
+            )
             raise
 
     def delete(self, table_name: str, condition: str, params: Tuple[Any, ...]):
@@ -93,7 +100,9 @@ class SQLiteManager(DBManagerInterface):
             self.cursor.execute(sql, params)
             self.conn.commit()
         except Exception as e:
-            log.error(f"Failed to delete from table '{table_name}' with condition '{condition}': {e}")
+            log.error(
+                f"Failed to delete from table '{table_name}' with condition '{condition}': {e}"
+            )
             raise
 
     def close(self):

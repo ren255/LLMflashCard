@@ -1,8 +1,9 @@
 from abc import ABC, abstractmethod
 from typing import Any, List, Tuple, Dict
 
+
 ##
-#@brief データベース管理のインターフェース
+# @brief データベース管理のインターフェース
 class DBManagerInterface(ABC):
     @abstractmethod
     def create_table(self, table_name: str, columns: Dict[str, str]):
@@ -57,7 +58,7 @@ class DBManagerInterface(ABC):
         pass
 
     @abstractmethod
-    def delete(self, table_name: str, condition: str, params: Tuple[Any, ...]) :
+    def delete(self, table_name: str, condition: str, params: Tuple[Any, ...]):
         """
         条件に一致するレコードを削除する。
         """

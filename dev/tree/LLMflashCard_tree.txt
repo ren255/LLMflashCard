@@ -7,14 +7,13 @@ LLMflashCard
 ├── db
 │   ├── __pycache__
 │   ├── __init__.py
-│   ├── flashcards.db
-│   ├── images.db
 │   ├── interface_utils.py
 │   ├── models.py
 │   └── sqlite_utils.py
 ├── dev
 │   ├── document
 │   │   ├── explain.txt
+│   │   ├── gui.txt
 │   │   ├── prototype.txt
 │   │   └── StorageTest.txt
 │   ├── tree
@@ -86,6 +85,25 @@ LLMflashCard
 │   │   ├── flashcard
 │   │   └── image
 │   │       ├── thumb_0b95871b0d9d4a579359fe10246fce3c.png
+│   │       ├── thumb_25e7fca9ad7440c3aabfc5c829c47859.png
+│   │       ├── thumb_34f5f808a9f4442185a5d0696ffe0d52.png
+│   │       ├── thumb_36ccef3692924850bfa4e64411cec233.png
+│   │       ├── thumb_386fc5d6fa274e90bd125ec1e34d8198.png
+│   │       ├── thumb_3edf9b29f83e45d89c67eea2a091ccd7.png
+│   │       ├── thumb_477f563689e745089dad3e4798091bc0.png
+│   │       ├── thumb_49ddd201a2d24f37a8c53392deb4c10d.png
+│   │       ├── thumb_5e600cfe669d4403b419f31f5353e0bb.png
+│   │       ├── thumb_5f3d6674e75f4679b275fd69a80922f9.png
+│   │       ├── thumb_6611654fae4c4ec38a552a52b36616b3.png
+│   │       ├── thumb_7b967d840a204db39cdaf74f19f57960.png
+│   │       ├── thumb_7e5f04532cae46e4867caf11436dc469.png
+│   │       ├── thumb_7facde78bb5242e6931a559699d9c4fd.png
+│   │       ├── thumb_8a17a181920d441fb10c006ed6f5651c.png
+│   │       ├── thumb_8fdb3b7c3c5e4f5e91abb67aef067dfb.png
+│   │       ├── thumb_99c49c21ad4644da92188eeb1312f4e4.png
+│   │       ├── thumb_9aef8597513b4298bf172446eb180ce5.png
+│   │       ├── thumb_a0626ffcc8f244f98d28ca7cacb38a09.png
+│   │       ├── thumb_a09feebc0bd0475786eb3a8186167fa9.png
 │   │       └── ... and 12 more items
 │   └── upload
 ├── storage

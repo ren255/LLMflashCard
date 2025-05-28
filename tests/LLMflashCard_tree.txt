@@ -6,27 +6,32 @@ LLMflashCard
 ├── db
 │   ├── __pycache__
 │   ├── __init__.py
+│   ├── flashcards.db
+│   ├── images.db
 │   ├── interface_utils.py
 │   ├── models.py
 │   └── sqlite_utils.py
+├── flashcard
 ├── gui
 │   └── __init__.py
+├── image
 ├── image_processing
 │   └── __init__.py
 ├── llm
 │   └── __init__.py
 ├── logic
 │   └── __init__.py
+├── logs
+│   ├── test_module1.log
+│   ├── test_module2.log
+│   └── utils_default.log
 ├── resources
 │   ├── db
 │   │   ├── flashcards.db
-│   │   ├── images.db
-│   │   ├── my_database.db
-│   │   ├── test.db
-│   │   └── test.sqlite
+│   │   └── images.db
 │   ├── flashcard
 │   ├── image
-│   │   └── 477f563689e745089dad3e4798091bc0.png
+│   │   └── 34f5f808a9f4442185a5d0696ffe0d52.png
 │   ├── temp
 │   │   ├── flashcard
 │   │   └── image
@@ -34,7 +39,17 @@ LLMflashCard
 │   ├── thumbnails
 │   │   ├── flashcard
 │   │   └── image
-│   │       └── thumb_477f563689e745089dad3e4798091bc0.png
+│   │       ├── thumb_0b95871b0d9d4a579359fe10246fce3c.png
+│   │       ├── thumb_25e7fca9ad7440c3aabfc5c829c47859.png
+│   │       ├── thumb_34f5f808a9f4442185a5d0696ffe0d52.png
+│   │       ├── thumb_36ccef3692924850bfa4e64411cec233.png
+│   │       ├── thumb_386fc5d6fa274e90bd125ec1e34d8198.png
+│   │       ├── thumb_3edf9b29f83e45d89c67eea2a091ccd7.png
+│   │       ├── thumb_477f563689e745089dad3e4798091bc0.png
+│   │       ├── thumb_49ddd201a2d24f37a8c53392deb4c10d.png
+│   │       ├── thumb_5e600cfe669d4403b419f31f5353e0bb.png
+│   │       ├── thumb_5f3d6674e75f4679b275fd69a80922f9.png
+│   │       └── ... and 22 more items
 │   └── upload
 ├── storage
 │   ├── __pycache__
@@ -44,64 +59,38 @@ LLMflashCard
 │   ├── flashcard_managers.py
 │   ├── image_managers.py
 │   └── storage_controller.py
+├── temp
+│   ├── flashcard
+│   └── image
 ├── test
+│   ├── .pytest_cache
 │   ├── __pycache__
+│   ├── _fixtures
 │   ├── document
 │   │   ├── explain.txt
 │   │   ├── prototype.txt
 │   │   └── StorageTest.txt
-│   ├── fixtures
-│   │   ├── bulk
-│   │   │   ├── bulk_001.csv
-│   │   │   ├── bulk_001.jpg
-│   │   │   ├── bulk_001.png
-│   │   │   ├── bulk_001.tsv
-│   │   │   ├── bulk_002.csv
-│   │   │   ├── bulk_002.jpg
-│   │   │   ├── bulk_002.png
-│   │   │   ├── bulk_002.tsv
-│   │   │   ├── bulk_003.csv
-│   │   │   ├── bulk_003.jpg
-│   │   │   └── ... and 390 more items
-│   │   ├── test_csvs
-│   │   │   ├── basic_flashcards_utf8.csv
-│   │   │   ├── japanese_flashcards_cp932.csv
-│   │   │   ├── japanese_flashcards_sjis.csv
-│   │   │   ├── japanese_flashcards_utf8.csv
-│   │   │   ├── large_flashcards.csv
-│   │   │   ├── many_columns.csv
-│   │   │   ├── minimal_2columns.csv
-│   │   │   ├── special_chars_comma.csv
-│   │   │   ├── special_chars_semicolon.csv
-│   │   │   ├── special_chars_tab.tsv
-│   │   │   └── ... and 2 more items
-│   │   ├── test_databases
-│   │   └── test_images
-│   │       ├── corrupted.jpg
-│   │       ├── empty.png
-│   │       ├── large_banner.png
-│   │       ├── large_photo.jpg
-│   │       ├── medium_landscape.jpg
-│   │       ├── medium_portrait.png
-│   │       ├── medium_square.jpg
-│   │       ├── pattern_checker.png
-│   │       ├── pattern_gradient.jpg
-│   │       ├── small_blue.png
-│   │       └── ... and 4 more items
 │   ├── conftest.py
 │   ├── make_testdata.py
 │   ├── pytest.ini
 │   ├── test_data_definitions.py
 │   ├── test_db.py
 │   ├── test_storage_controller.py
-│   └── test_storage_integration.py
+│   └── ... and 1 more items
 ├── tests
-│   ├── __pycache__
 │   ├── calss.dio
 │   ├── db.try.py
+│   ├── fixtures_tree.txt
 │   ├── LLMflashCard_tree.txt
 │   ├── path.py
-│   └── tree.py
+│   ├── test_tree.txt
+│   ├── tree.py
+│   └── utils_tree.txt
+├── utils
+│   ├── __pycache__
+│   ├── __init__.py
+│   └── Logger.py
+├── .coverage
 ├── .gitignore
 ├── main.py
 ├── my_database.db

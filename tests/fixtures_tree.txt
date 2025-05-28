@@ -1,4 +1,36 @@
 fixtures
+├── bulk
+│   ├── bulk_001.csv
+│   ├── bulk_001.jpg
+│   ├── bulk_001.png
+│   ├── bulk_001.tsv
+│   ├── bulk_002.csv
+│   ├── bulk_002.jpg
+│   ├── bulk_002.png
+│   ├── bulk_002.tsv
+│   ├── bulk_003.csv
+│   ├── bulk_003.jpg
+│   ├── bulk_003.png
+│   ├── bulk_003.tsv
+│   ├── bulk_004.csv
+│   ├── bulk_004.jpg
+│   ├── bulk_004.png
+│   ├── bulk_004.tsv
+│   ├── bulk_005.csv
+│   ├── bulk_005.jpg
+│   ├── bulk_005.png
+│   ├── bulk_005.tsv
+│   ├── bulk_006.csv
+│   ├── bulk_006.jpg
+│   ├── bulk_006.png
+│   ├── bulk_006.tsv
+│   ├── bulk_007.csv
+│   ├── bulk_007.jpg
+│   ├── bulk_007.png
+│   ├── bulk_007.tsv
+│   ├── bulk_008.csv
+│   ├── bulk_008.jpg
+│   └── ... and 370 more items
 ├── test_csvs
 │   ├── basic_flashcards_utf8.csv
 │   ├── japanese_flashcards_cp932.csv

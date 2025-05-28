@@ -13,6 +13,7 @@ from typing import Dict, Any
 import sys
 from datetime import datetime
 import inspect
+import time
 
 class ColorLevelFormatter(logging.Formatter):
     COLORS = {
@@ -28,6 +29,25 @@ class ColorLevelFormatter(logging.Formatter):
         levelname = record.levelname
         color = self.COLORS.get(levelname, "")
         record.levelname = f"{color}{levelname}{self.RESET}"
+        return super().format(record)
+
+class logFormatter(logging.Formatter):
+    def formatTime(self, record, datefmt=None):
+        ct = self.converter(record.created)
+        t = time.strftime("%H:%M:%S", ct)
+        ms = int(record.msecs)
+        return f"{t}:{ms:03d}"
+    
+    def format(self, record):
+        # funcName:lineno を左詰め20桁
+        func_line = f"{record.funcName}:{record.lineno}"
+        func_line = f"{func_line:<20}"
+        record.func_line = func_line
+
+        # levelname を左詰め8桁
+        level = f"[{record.levelname}]"
+        record.level = f"{level:<10}"
+
         return super().format(record)
 
 class LoggerManager:
@@ -53,15 +73,9 @@ class LoggerManager:
         self.log_dir = Path("logs")
         self.log_dir.mkdir(exist_ok=True)
         
-        # デフォルトフォーマッターの設定
-        self.formatter = logging.Formatter(
-            '%(asctime)s - %(name)s - %(levelname)s - %(funcName)s:%(lineno)d - %(message)s'
+        self.formatter = logFormatter(
+            '%(asctime)s : %(level)s %(func_line)s : %(message)s'
         )
-        
-        # コンソール用フォーマッター（簡潔版）
-        # self.console_formatter = logging.Formatter(
-        #     '%(levelname)s - %(name)s - %(message)s'
-        # )
         
         self.console_formatter = ColorLevelFormatter(
             '[%(levelname)s] %(message)s'
@@ -257,6 +271,9 @@ if __name__ == "__main__":
     logger1.info("This is an info message from module1")
     logger1.warning("This is a warning from module1")
     logger1.error("This is an error from module1")
+    
+    logger1.critical("This is a critical message from module1")
+    logger1.debug("This is a debug message from module1")
     
     logger2.debug("This is a debug message from module2")
     logger2.info("This is an info message from module2")

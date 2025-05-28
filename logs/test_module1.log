@@ -1,3 +1,7 @@
 2025-05-27 21:39:23,326 - test.module1 - INFO - <module>:257 - This is an info message from module1
 2025-05-27 21:39:23,328 - test.module1 - WARNING - <module>:258 - This is a warning from module1
 2025-05-27 21:39:23,329 - test.module1 - ERROR - <module>:259 - This is an error from module1
+15:49:26:957 : [INFO]     <module>:271         : This is an info message from module1
+15:49:26:958 : [WARNING]  <module>:272         : This is a warning from module1
+15:49:26:958 : [ERROR]    <module>:273         : This is an error from module1
+15:49:26:958 : [CRITICAL] <module>:275         : This is a critical message from module1

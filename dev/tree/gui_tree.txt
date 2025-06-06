@@ -1,48 +1,48 @@
-gui
-├── __pycache__
-├── components
-│   ├── __pycache__
-│   ├── common
-│   │   ├── __pycache__
-│   │   ├── __init__.py
-│   │   ├── base_window.py
-│   │   ├── custom_widgets.py
-│   │   └── dialogs.py
-│   ├── flashcard
-│   │   ├── __pycache__
-│   │   ├── __init__.py
-│   │   ├── csv_import_dialog.py
-│   │   ├── flashcard_detail_view.py
-│   │   ├── flashcard_edit_dialog.py
-│   │   └── flashcard_list_view.py
-│   ├── image
-│   │   ├── __pycache__
-│   │   ├── __init__.py
-│   │   ├── image_edit_tools.py
-│   │   ├── image_gallery.py
-│   │   ├── image_viewer.py
-│   │   └── mask_editor.py
-│   └── __init__.py
-├── controllers
-│   ├── __pycache__
-│   ├── __init__.py
-│   ├── flashcard_controller.py
-│   ├── image_controller.py
-│   └── main_controller.py
-├── styles
-│   ├── __pycache__
-│   ├── __init__.py
-│   ├── colors.py
-│   └── themes.py
-├── utils
-│   ├── __pycache__
-│   ├── __init__.py
-│   ├── gui_helpers.py
-│   └── validators.py
-├── views
-│   ├── __pycache__
-│   ├── __init__.py
-│   ├── flashcard_manager.py
-│   ├── image_manager.py
-│   └── main_window.py
-└── __init__.py
+gui                                  [113.0KB]
+├── __pycache__                      [5.6KB]
+├── components                       [49.5KB]
+│   ├── __pycache__                  [864B]
+│   ├── common                       [46.0KB]
+│   │   ├── __pycache__              [27.6KB]
+│   │   ├── __init__.py              [0B]
+│   │   ├── base_window.py           [7.8KB]
+│   │   ├── custom_widgets.py        [10.7KB]
+│   │   └── dialogs.py               [0B]
+│   ├── flashcard                    [1001B]
+│   │   ├── __pycache__              [1001B]
+│   │   ├── __init__.py              [0B]
+│   │   ├── csv_import_dialog.py     [0B]
+│   │   ├── flashcard_detail_view.py [0B]
+│   │   ├── flashcard_edit_dialog.py [0B]
+│   │   └── flashcard_list_view.py   [0B]
+│   ├── image                        [955B]
+│   │   ├── __pycache__              [955B]
+│   │   ├── __init__.py              [0B]
+│   │   ├── image_edit_tools.py      [0B]
+│   │   ├── image_gallery.py         [0B]
+│   │   ├── image_viewer.py          [0B]
+│   │   └── mask_editor.py           [0B]
+│   └── __init__.py                  [740B]
+├── controllers                      [25.8KB]
+│   ├── __pycache__                  [15.5KB]
+│   ├── __init__.py                  [319B]
+│   ├── flashcard_controller.py      [0B]
+│   ├── image_controller.py          [0B]
+│   └── main_controller.py           [10.0KB]
+├── styles                           [527B]
+│   ├── __pycache__                  [527B]
+│   ├── __init__.py                  [0B]
+│   ├── colors.py                    [0B]
+│   └── themes.py                    [0B]
+├── utils                            [533B]
+│   ├── __pycache__                  [533B]
+│   ├── __init__.py                  [0B]
+│   ├── gui_helpers.py               [0B]
+│   └── validators.py                [0B]
+├── views                            [30.2KB]
+│   ├── __pycache__                  [18.0KB]
+│   ├── __init__.py                  [573B]
+│   ├── flashcard_manager.py         [0B]
+│   ├── image_manager.py             [0B]
+│   └── main_window.py               [11.6KB]
+└── __init__.py                      [932B]

@@ -1,0 +1,132 @@
+GUIにおける\*\*コントローラー（Controller）\*\*の抽象的な設計ドキュメントを以下にまとめます。これはMVC（Model-View-Controller）やMVVMのような設計パターンに基づいており、特定の実装ではなく汎用的な枠組みです。
+
+---
+
+# 🧭 GUI Controller: 抽象設計ドキュメント
+
+## 1. 目的と責務
+
+コントローラーは、**ユーザーの操作イベント（イベント）を受け取り、処理をハンドリングし、ビューとモデルを調停**する責務を担います。
+
+---
+
+## 2. コア構造と責務分離
+
+### 2.1. BaseController クラス（抽象基底クラス）
+
+```text
++----------------------------------+
+|        BaseController            |
++----------------------------------+
+| - view                           |
+| - event_callbacks                |
+|----------------------------------|
+| + bind_view(view)                |
+| + register_callback(event, fn)   |
+| + handle_event(event)            |
+| + update_view(data)              |
+| + create_child_controller(...)   |
++----------------------------------+
+```
+
+* **`bind_view(view)`**: Viewへの参照を保持。
+* **`register_callback(event, fn)`**: イベントに対して関数（callback）を登録。
+* **`handle_event(event)`**: 登録されたcallbackを実行。
+* **`update_view(data)`**: Viewを更新する抽象的な手段。
+* **`create_child_controller()`**: 子コントローラーを生成し、責務を分割。
+
+---
+
+## 3. コールバックとオブザーバーパターン
+
+* **イベント発行と購読**に、**オブザーバーパターン**が活用される。
+* コントローラーはイベントリスナーを保持し、イベントに応じた関数群を**callbackとして管理**する。
+* `event_callbacks` は以下のようなデータ構造が想定される：
+
+```python
+event_callbacks = {
+    "on_click": [callback_fn1, callback_fn2],
+    "on_submit": [callback_submit],
+}
+```
+
+* View側からイベントが発火すると、コントローラーは登録されたコールバックを順次呼び出す。
+
+---
+
+## 4. イベントとアクションの流れ
+
+```text
+[User Input]
+     ↓
+[View]
+     ↓ (event)
+[Controller]
+     ↓ (callback or logic)
+[Model or View update]
+```
+
+* ユーザーがボタンを押す（Viewでイベント発火）
+* Controllerがイベント名に応じて対応するコールバックを呼び出す
+* モデルの変更またはViewの再描画が行われる
+
+---
+
+## 5. View との関係
+
+* コントローラーはViewに対して**間接的な依存**を持つ（依存の注入などを通じて）。
+* ViewはイベントをControllerに通知するが、**ControllerからViewへの一方向アクセス**が基本。
+* Viewは状態を保持しない「受動的なコンポーネント」であり、状態やロジックはControllerまたはModelにあるべき。
+
+---
+
+## 6. 子コントローラー（Nested Controller）
+
+* GUIが複雑になると、**親子構造のコントローラー**が必要になる。
+* 各子コントローラーは、特定のViewコンポーネントや局所的な機能を担当。
+* BaseControllerの中で以下のようなパターンがよく用いられる：
+
+```python
+self.child_controllers = []
+self.child_controllers.append(SomeSubController(...))
+```
+
+* 親コントローラーが子コントローラーのライフサイクル管理を担う（初期化・更新・破棄など）。
+
+---
+
+## 7. イベントルーティングと階層
+
+* 複数のコントローラーが存在する場合、イベントルーティングが必要。
+* イベントは以下の2通りで処理される：
+
+  * **ローカル処理**: 自身のコールバックで完結
+  * **バブリング**: 親コントローラーに伝播
+
+```text
+[Child View] → [Child Controller] → [Parent Controller] → ...
+```
+
+---
+
+## 8. 拡張性と継承
+
+* 全てのコントローラーは`BaseController`を継承する。
+* 各派生クラスは具体的なイベント登録やビジネスロジックに特化。
+* 共通処理（ロギング、バリデーション、データ変換など）はBaseControllerに集約可能。
+
+---
+
+## まとめ
+
+| 要素       | 説明                               |
+| -------- | -------------------------------- |
+| コールバック   | イベント名と関数のペア。ユーザー操作に反応            |
+| オブザーバー   | 複数の関数がイベントに反応可能                  |
+| Viewとの関係 | ControllerはViewを更新。Viewはイベントを通知  |
+| 子コントローラー | UI構造に応じて分割。親子で連携                 |
+| 抽象化      | BaseControllerに共通機能を持たせ、拡張しやすく設計 |
+
+---
+
+他の構造（MVVMのViewModel、Redux的設計など）との比較も必要であれば言ってください。

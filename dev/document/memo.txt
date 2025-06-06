@@ -1,0 +1,26 @@
+# memo
+
+# curent file tree
+gui                                  [113.0KB]
+├── components                       [49.5KB]
+│   ├── common                       [46.0KB]
+│   │   ├── base_window.py           [7.8KB]
+│   │   ├── custom_widgets.py        [10.7KB]
+│   └── __init__.py                  [740B]
+├── controllers                      [25.8KB]
+│   ├── __init__.py                  [319B]
+│   └── main_controller.py           [10.0KB]
+├── views                            [30.2KB]
+│   ├── __init__.py                  [573B]
+│   └── main_window.py               [11.6KB]
+└── __init__.py                      [932B]
+
+## event
+
+[View] 
+   ↓ trigger_callback(event)
+[Event Dispatcher] 
+   ↓ 呼び出し
+[Controller (callback)] 
+   ↓ 必要な処理
+[View] ←（更新指示）

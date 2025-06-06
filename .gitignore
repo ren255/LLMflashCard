@@ -72,9 +72,11 @@ Thumbs.db
 /.VSCodeCounter
 /resources
 /test/_fixtures
-
-*.log
 /docs/_build
 /docs/_static
 /docs/_templates
 /docs/source
+
+*.log
+
+*.env

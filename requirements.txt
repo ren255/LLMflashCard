@@ -1,6 +1,20 @@
 # python -m pip install --upgrade pip && pip install -r requirements.txt
 # pip install -r requirements.txt
 
-# 画像処理
-pillow
-PyMuPDF==1.23.26
+aiohttp
+pyyaml 
+
+
+# LLM・LangChain
+langchain
+openai
+requests
+# llama-index
+# huggingface-hub
+# transformers
+# sentence-transformers
+# chromadb
+# faiss-cpu
+# pinecone-client
+# tiktoken
+# pydantic

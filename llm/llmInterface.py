@@ -8,6 +8,9 @@ from openai import AsyncOpenAI
 from dataclasses import dataclass
 from typing import List, Optional, Dict, Any
 import logging
+import base64
+from io import BytesIO
+from PIL import Image
 
 
 @dataclass
@@ -40,7 +43,7 @@ class GlobalConfig:
                     if line.startswith(f"{key}="):
                         return line.strip().split("=", 1)[1]
         else:
-            raise PermissionError(f".env not forund \n{env_file}")
+            raise PermissionError(".env not forund")
 
         return os.environ.get(key)
 
@@ -53,24 +56,39 @@ class ParallelLLMCaller:
             api_key=self.config.api_key,
         )
 
-    async def _single_call(self, model_name: str, prompt: str, image_path: Optional[str] = None) -> LLMResult:
+    def _pil_to_base64(self, pil_image: Image.Image, format: str = "PNG") -> str:
+        """PIL ImageをBase64文字列に変換"""
+        buffer = BytesIO()
+        pil_image.save(buffer, format=format)
+        img_bytes = buffer.getvalue()
+        return base64.b64encode(img_bytes).decode('utf-8')
+
+    async def single_call(self, model_name: str, prompt: str, pil_image: Optional[Image.Image] = None) -> LLMResult:
         """単一のLLM呼び出し（エラーハンドリング付き）"""
         result = LLMResult(prompt=prompt, model_name=model_name)
         start_time = time.perf_counter()
 
         try:
             model_cfg = self.config.models[model_name]
+
+            # メッセージの基本構造
+            message_content = prompt
+
+            # 画像がある場合はbase64エンコードして追加
+            if pil_image:
+                base64_image = self._pil_to_base64(pil_image)
+                message_content = [
+                    {"type": "text", "text": prompt},
+                    {"type": "image_url", "image_url": {
+                        "url": f"data:image/png;base64,{base64_image}"}}
+                ]
+
             params = {
                 "model": model_cfg["name"],
                 "temperature": model_cfg.get("temperature", 0.5),
                 "max_tokens": model_cfg.get("max_tokens", 4096),
-                "messages": [{"role": "user", "content": prompt}],
+                "messages": [{"role": "user", "content": message_content}],
             }
-
-            if image_path:
-                with open(image_path, "rb") as f:
-                    img_bytes = f.read()
-                params["messages"][0]["image"] = img_bytes
 
             completion = await self.client.chat.completions.create(**params)
             result.result = completion.choices[0].message.content
@@ -85,15 +103,63 @@ class ParallelLLMCaller:
 
         return result
 
-    async def batch_call(
+    async def _batch_call_base(
         self,
-        prompts: List[str],
+        tasks_data: List[Dict[str, Any]],
         model_name: str,
         max_concurrent: int = 5,
         show_progress: bool = True
     ) -> List[LLMResult]:
         """
-        プロンプトのリストを並列処理で実行
+        基底のバッチ処理関数
+
+        Args:
+            tasks_data: [{"prompt": str, "image": Optional[PIL.Image], "index": int}, ...]
+            model_name: 使用するモデル名
+            max_concurrent: 最大同時実行数
+            show_progress: 進捗表示するかどうか
+
+        Returns:
+            LLMResultのリスト（元の順序を保持）
+        """
+        semaphore = asyncio.Semaphore(max_concurrent)
+
+        async def limited_call(task_data: Dict[str, Any]) -> tuple[int, LLMResult]:
+            async with semaphore:
+                result = await self.single_call(
+                    model_name,
+                    task_data["prompt"],
+                    task_data.get("image")
+                )
+                if show_progress:
+                    status = "✓" if result.success else "✗"
+                    print(
+                        f"[{task_data['index']+1}/{len(tasks_data)}] {status} {result.prompt[:50]}...")
+                return task_data["index"], result
+
+        # 全てのタスクを作成
+        tasks = [asyncio.create_task(limited_call(task_data))
+                 for task_data in tasks_data]
+
+        # 全てのタスクを実行し、インデックス順に結果を並べ替え
+        indexed_results = await asyncio.gather(*tasks)
+
+        # インデックス順にソートして結果のリストを作成
+        results = [None] * len(tasks_data)
+        for index, result in indexed_results:
+            results[index] = result
+
+        return results
+
+    async def batch_call(
+        self,
+        prompts: List[str],
+        model_name: str,
+        max_concurrent: int = 10,
+        show_progress: bool = True
+    ) -> List[LLMResult]:
+        """
+        プロンプトのリストを並列処理で実行（画像なし）
 
         Args:
             prompts: プロンプトのリスト
@@ -104,34 +170,66 @@ class ParallelLLMCaller:
         Returns:
             LLMResultのリスト（元の順序を保持）
         """
-        semaphore = asyncio.Semaphore(max_concurrent)
+        tasks_data = [
+            {"prompt": prompt, "image": None, "index": i}
+            for i, prompt in enumerate(prompts)
+        ]
 
-        async def limited_call(prompt: str, index: int) -> tuple[int, LLMResult]:
-            async with semaphore:
-                result = await self._single_call(model_name, prompt)
-                if show_progress:
-                    status = "✓" if result.success else "✗"
-                    print(
-                        f"[{index+1}/{len(prompts)}] {status} {result.prompt[:50]}...")
-                return index, result
+        return await self._batch_call_base(tasks_data, model_name, max_concurrent, show_progress)
 
-        # 全てのタスクを作成（インデックス付き）
-        tasks = [asyncio.create_task(limited_call(prompt, i))
-                 for i, prompt in enumerate(prompts)]
+    async def batch_call_dict(
+        self,
+        prompt_image_dict: Dict[str, Optional[Image.Image]],
+        model_name: str,
+        max_concurrent: int = 10,
+        show_progress: bool = True
+    ) -> List[LLMResult]:
+        """
+        プロンプト + PIL Image の辞書を受け取って並列処理で実行
 
-        # 全てのタスクを実行し、インデックス順に結果を並べ替え
-        indexed_results = await asyncio.gather(*tasks)
+        Args:
+            prompt_image_dict: {prompt: PIL.Image or None} の辞書
+            model_name: 使用するモデル名
+            max_concurrent: 最大同時実行数
+            show_progress: 進捗表示するかどうか
 
-        # インデックス順にソートして結果のリストを作成
-        results = [None] * len(prompts)
-        for index, result in indexed_results:
-            results[index] = result
+        Returns:
+            LLMResultのリスト（辞書のキー順序を保持）
+        """
+        tasks_data = [
+            {"prompt": prompt, "image": image, "index": i}
+            for i, (prompt, image) in enumerate(prompt_image_dict.items())
+        ]
 
-        return results
+        return await self._batch_call_base(tasks_data, model_name, max_concurrent, show_progress)
 
-    async def _run_with_progress(self, tasks: List[asyncio.Task], prompts: List[str]) -> List[LLMResult]:
-        """この関数は不要になったので削除予定"""
-        pass
+    async def batch_call_listIMG(
+        self,
+        prompt: str,
+        images: List[Image.Image],
+        model_name: str,
+        max_concurrent: int = 10,
+        show_progress: bool = True
+    ) -> List[LLMResult]:
+        """
+        単一のプロンプトと複数の画像リストを受け取って並列処理で実行
+
+        Args:
+            prompt: 全画像に適用するプロンプト
+            images: PIL.Imageのリスト
+            model_name: 使用するモデル名
+            max_concurrent: 最大同時実行数
+            show_progress: 進捗表示するかどうか
+
+        Returns:
+            LLMResultのリスト（画像の順序を保持）
+        """
+        tasks_data = [
+            {"prompt": prompt, "image": image, "index": i}
+            for i, image in enumerate(images)
+        ]
+
+        return await self._batch_call_base(tasks_data, model_name, max_concurrent, show_progress)
 
     async def multi_model_call(
         self,

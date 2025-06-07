@@ -25,7 +25,7 @@ template:
 models:
   gem2f-ocr-ja:
     name: google/gemini-2.0-flash-001
-    temperature: 0.3
+    temperature: 1
     max_tokens: 2500
     features:
       -Cheap

@@ -231,40 +231,86 @@ class ParallelLLMCaller:
 
         return await self._batch_call_base(tasks_data, model_name, max_concurrent, show_progress)
 
-    async def multi_model_call(
+    # ========== 同期ラッパー関数 ==========
+    
+    def single_call_sync(self, model_name: str, prompt: str, pil_image: Optional[Image.Image] = None) -> LLMResult:
+        """
+        single_callの同期ラッパー関数
+        
+        Args:
+            model_name: 使用するモデル名
+            prompt: プロンプト
+            pil_image: PIL画像（オプション）
+            
+        Returns:
+            LLMResult: 呼び出し結果
+        """
+        return asyncio.run(self.single_call(model_name, prompt, pil_image))
+
+    def batch_call_sync(
         self,
         prompts: List[str],
-        model_names: List[str],
-        max_concurrent: int = 5
-    ) -> Dict[str, List[LLMResult]]:
+        model_name: str,
+        max_concurrent: int = 10,
+        show_progress: bool = True
+    ) -> List[LLMResult]:
         """
-        複数のモデルで同じプロンプトセットを実行
-
+        batch_callの同期ラッパー関数
+        
         Args:
             prompts: プロンプトのリスト
-            model_names: モデル名のリスト
+            model_name: 使用するモデル名
             max_concurrent: 最大同時実行数
-
+            show_progress: 進捗表示するかどうか
+            
         Returns:
-            {model_name: [LLMResult, ...]} の辞書
+            List[LLMResult]: 呼び出し結果のリスト
         """
-        results = {}
+        return asyncio.run(self.batch_call(prompts, model_name, max_concurrent, show_progress))
 
-        # 各モデルで並列実行
-        model_tasks = []
-        for model_name in model_names:
-            task = asyncio.create_task(
-                self.batch_call(prompts, model_name,
-                                max_concurrent, show_progress=False)
-            )
-            model_tasks.append((model_name, task))
+    def batch_call_dict_sync(
+        self,
+        prompt_image_dict: Dict[str, Optional[Image.Image]],
+        model_name: str,
+        max_concurrent: int = 10,
+        show_progress: bool = True
+    ) -> List[LLMResult]:
+        """
+        batch_call_dictの同期ラッパー関数
+        
+        Args:
+            prompt_image_dict: {prompt: PIL.Image or None} の辞書
+            model_name: 使用するモデル名
+            max_concurrent: 最大同時実行数
+            show_progress: 進捗表示するかどうか
+            
+        Returns:
+            List[LLMResult]: 呼び出し結果のリスト
+        """
+        return asyncio.run(self.batch_call_dict(prompt_image_dict, model_name, max_concurrent, show_progress))
 
-        # 全モデルの結果を待機
-        for model_name, task in model_tasks:
-            results[model_name] = await task
-            print(f"モデル {model_name} の処理完了")
-
-        return results
+    def batch_call_listIMG_sync(
+        self,
+        prompt: str,
+        images: List[Image.Image],
+        model_name: str,
+        max_concurrent: int = 10,
+        show_progress: bool = True
+    ) -> List[LLMResult]:
+        """
+        batch_call_listIMGの同期ラッパー関数
+        
+        Args:
+            prompt: 全画像に適用するプロンプト
+            images: PIL.Imageのリスト
+            model_name: 使用するモデル名
+            max_concurrent: 最大同時実行数
+            show_progress: 進捗表示するかどうか
+            
+        Returns:
+            List[LLMResult]: 呼び出し結果のリスト
+        """
+        return asyncio.run(self.batch_call_listIMG(prompt, images, model_name, max_concurrent, show_progress))
 
     def print_results(self, results: List[LLMResult], show_errors: bool = True):
         """結果を見やすく表示"""

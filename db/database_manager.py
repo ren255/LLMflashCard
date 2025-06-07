@@ -7,7 +7,7 @@ import shutil
 class DatabaseManager:
     """データベースファイル全体の管理を行うContext Manager"""
     
-    def __init__(self, db_path: Path):
+    def __init__(self, db_path: Path = Path("resources/db.db")):
         self.db_path = db_path
         self._connection: sqlite3.Connection | None = None
     

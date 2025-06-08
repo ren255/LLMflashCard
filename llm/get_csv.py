@@ -43,8 +43,8 @@ id,answer,memo
 
 images = []
 
-imgs_path = root / "R7SO/imgs"
-txt_savepath = root / "R7SO/txt"
+imgs_path = root / "R7SO/歴史"
+txt_savepath = root / "R7SO/answersTXT"
 
 # %%
 
@@ -64,7 +64,7 @@ for id, responce in enumerate(responces):
     if not responce.result:
         print(f"no result in {id}")
         continue
-    txtpath.write_text(responce.result,encoding="utf-8")
+    txtpath.write_text(responce.result, encoding="utf-8")
     print(f"wriote to {txtpath}")
 
 """
@@ -102,3 +102,22 @@ print("\n各リストインデックスごとの件数:")
 print(result_df['list_index'].value_counts().sort_index())
 
 """
+# %%
+from pathlib import Path 
+import re
+
+dirTx = Path("../resources/files/managed/R7SO/answersTXT")
+
+
+for file in reversed(list(dirTx.iterdir())):
+    # ファイル名から数字を抽出
+    matches = list(re.finditer(r"\d+", file.name))
+    if matches:
+        new_name = int(matches[-1].group()) + 2
+        new_name = str(new_name)
+        if file.suffix:
+            new_name += file.suffix
+        print(new_name)
+        new_path = file.parent / new_name
+        file.rename(new_path)
+# %%

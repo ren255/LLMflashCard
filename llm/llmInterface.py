@@ -67,39 +67,35 @@ class ParallelLLMCaller:
         """単一のLLM呼び出し（エラーハンドリング付き）"""
         result = LLMResult(prompt=prompt, model_name=model_name)
         start_time = time.perf_counter()
+        
+        completion = None
+        
+        model_cfg = self.config.models[model_name]
 
-        try:
-            model_cfg = self.config.models[model_name]
+        # メッセージの基本構造
+        message_content = prompt
 
-            # メッセージの基本構造
-            message_content = prompt
+        # 画像がある場合はbase64エンコードして追加
+        if pil_image:
+            base64_image = self._pil_to_base64(pil_image)
+            message_content = [
+                {"type": "text", "text": prompt},
+                {"type": "image_url", "image_url": {
+                    "url": f"data:image/png;base64,{base64_image}"}}
+            ]
 
-            # 画像がある場合はbase64エンコードして追加
-            if pil_image:
-                base64_image = self._pil_to_base64(pil_image)
-                message_content = [
-                    {"type": "text", "text": prompt},
-                    {"type": "image_url", "image_url": {
-                        "url": f"data:image/png;base64,{base64_image}"}}
-                ]
+        params = {
+            "model": model_cfg["name"],
+            "temperature": model_cfg.get("temperature", 0.5),
+            "max_tokens": model_cfg.get("max_tokens", 4096),
+            "messages": [{"role": "user", "content": message_content}],
+        }
 
-            params = {
-                "model": model_cfg["name"],
-                "temperature": model_cfg.get("temperature", 0.5),
-                "max_tokens": model_cfg.get("max_tokens", 4096),
-                "messages": [{"role": "user", "content": message_content}],
-            }
+        completion = await self.client.chat.completions.create(**params)
+        result.result = completion.choices[0].message.content
+        result.success = True
 
-            completion = await self.client.chat.completions.create(**params)
-            result.result = completion.choices[0].message.content
-            result.success = True
-
-        except Exception as e:
-            result.error = str(e)
-            result.success = False
-
-        finally:
-            result.duration = time.perf_counter() - start_time
+        result.duration = time.perf_counter() - start_time
 
         return result
 

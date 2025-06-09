@@ -6,3 +6,5 @@ pillow
 PyMuPDF==1.23.26
 pytesseract
 pdfminer.six
+tabulate     # pandas markdown?
+markdown-pdf # not good 

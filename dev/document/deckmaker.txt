@@ -1,0 +1,47 @@
+AnkiConnect
+pythonファイル一枚
+deckをcsvから自動生成する。
+オプションでyamlを渡し制御する。
+yamlで決めること
+csvfileがたくさん入ったfolderの場所
+使うnote typeとcard type
+note の fiild と csvの clumnのmap　(anki fild:csv column)
+Ankideckの場所
+CSV ファイルがたくさん入ったフォルダのパス一つ
+taglist
+
+
+program:
+pathはすべてPathlibで,またpandasを使用
+yamlを解読
+folderをroop、
+csvfileの名前のdeckをしていされたdeckの下に作成
+csvからnoteを作成、deckにnoteを入れる
+
+以下のように実行(2段実行を行うようにする。
+python script.py config.yaml
+
+実際の生成直前でとまり
+カード数合計、デッキ数合計
+csvのfild名リスト
+anki noteのfild名リスト
+anki note とcard typeを表示
+
+fild mapを綺麗にpadして 縦にそろえて
+dropされるcsvのidのlistを一行で
+使わないanki noteのfildのlistを一行
+
+をだし、yかnかを入力するように言う
+yで実行
+
+1 file
+| クラス名 | 責務 |
+|---------|------|
+| ConfigData | YAML設定データの保持（dataclass） |
+| YamlLoader | YAML設定ファイルの読み込み・解析/チェック |
+| AnkiConnector | AnkiConnect API通信・デッキ/ノート操作 |
+| CSVProcessor | CSV読み込み/columnの一致確認・フィールドマッピング・データ変換 |
+| AnkiDeckGenerator | 全体制御・実行フロー管理・ユーザー確認 |
+
+
+こーどを書いて

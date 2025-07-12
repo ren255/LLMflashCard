@@ -1,0 +1,188 @@
+# Storage Module Testing Guide
+
+## 概要
+
+このドキュメントでは、`storage/`モジュールの包括的なテストを実行する方法について説明します。ストレージモジュールは以下のコンポーネントで構成されています：
+
+- **StorageController**: 統合管理クラス
+- **BaseStorage/BaseMetadataManager**: 基底クラス
+- **ImageStorage/ImageMetadataManager**: 画像管理
+- **FlashcardStorage/FlashcardMetadataManager**: フラッシュカード管理
+- **FileManager**: ファイル操作
+
+## テスト戦略
+
+### 1. テスト構造
+
+```ini
+tests/
+├── test_storage_integration.py    # 統合テスト
+├── test_storage_controller.py     # StorageController
+├── test_file_manager.py          # FileManager
+├── test_image_managers.py        # 画像管理
+├── test_flashcard_managers.py    # フラッシュカード管理
+├── test_base_managers.py         # 基底クラス
+├── fixtures/                     # テストデータ
+│   ├── test_images/
+│   │   ├── sample.jpg
+│   │   ├── sample.png
+│   │   └── large_image.jpg
+│   ├── test_csvs/
+│   │   ├── sample.csv
+│   │   ├── utf8.csv
+│   │   └── shift_jis.csv
+│   └── test_databases/
+└── conftest.py                   # pytest設定・フィクスチャ
+
+```
+
+### 2. テスト環境セットアップ
+
+#### 必要なライブラリ
+
+```bash
+pip install pytest pytest-cov pytest-mock pillow pandas
+
+```
+
+#### テストデータ準備
+
+- **画像ファイル**: JPEG, PNG, 異なるサイズ
+- **CSVファイル**: UTF-8, Shift-JIS, 異なる区切り文字
+- **一時ディレクトリ**: テスト専用の隔離された環境 
+
+test/fixturesに用意されている
+具体的なfile構造は`_tree.txt`を参照
+
+また,Storageのrootは本番と違い `test/resources`に作成し、終了時に削除する。
+
+## テストケース詳細
+
+### 1. StorageController テスト
+
+#### 初期化・セットアップ
+
+- [ ] ディレクトリ構造の正しい作成
+- [ ] データベースファイルの作成
+- [ ] パス設定の検証
+- [ ] 権限エラーのハンドリング
+
+#### ストレージインスタンス管理
+
+- [ ] 遅延初期化の動作確認
+- [ ] プロパティアクセス（image_storage, flashcard_storage）
+- [ ] get_storage()メソッドの動作
+- [ ] 無効なファイルタイプの処理
+
+#### 統計・情報取得
+
+- [ ] get_paths_info()の正確性
+- [ ] get_storage_stats()の集計処理
+- [ ] 空のストレージでの統計
+
+#### クリーンアップ
+
+- [ ] cleanup()メソッドの動作
+- [ ] データベース接続の適切な閉じ処理
+
+### 2. FileManager テスト
+
+#### ファイル操作
+
+- [ ] save_file(): 正常保存、権限エラー、存在しないファイル
+- [ ] delete_file(): ファイル削除、サムネイル削除
+- [ ] move_from_temp(): 一時ファイルの移動
+- [ ] save_to_temp(): 一時保存
+
+#### ハッシュ・ファイル名生成
+
+- [ ] calculate_hash(): 同一ファイルの同一ハッシュ
+- [ ] generate_filename(): 一意性の確認
+- [ ] get_file_path(): パス構築の正確性
+
+#### サムネイル処理
+
+- [ ] create_thumbnail(): 画像形式別対応
+- [ ] サイズ調整の確認
+- [ ] 非画像ファイルのエラーハンドリング
+
+#### ディレクトリ管理
+
+- [ ] _ensure_directories(): ディレクトリ作成
+
+#### bulk
+fixtures/bulk/ディレクトリに各形式100個ずつ
+バルクファイル:
+bulk_001.csv ～ bulk_100.csv (CSV形式)
+bulk_001.tsv ～ bulk_100.tsv (TSV形式)
+bulk_001.png ～ bulk_100.png (PNG画像)
+bulk_001.jpg ～ bulk_100.jpg (JPEG画像)
+
+保存の時間、メモリなどを取得
+
+### 3. ImageStorage テスト
+
+#### 画像保存・取得
+
+- [ ] save(): 正常保存、重複チェック
+- [ ] get(): メタデータ取得
+- [ ] get_all(): 全画像取得
+- [ ] delete(): 画像削除
+
+#### 画像固有機能
+
+- [ ] save_split_image(): 分割画像保存
+- [ ] get_thumbnail_path(): サムネイルパス取得
+- [ ] get_image_info(): 画像詳細情報
+- [ ] link_mask(): マスク情報リンク
+
+#### 検索・フィルタ機能
+
+- [ ] get_by_collection(): コレクション別取得
+- [ ] search_by_content(): 内容検索
+- [ ] 条件検索（search()メソッド）
+
+#### 統計情報
+
+- [ ] get_image_stats(): フォーマット、サイズ統計
+- [ ] 空データでの統計処理
+
+### 4. FlashcardStorage テスト
+
+#### CSV保存・取得
+
+- [ ] save(): 正常保存、エンコーディング対応
+- [ ] get(): メタデータ取得
+- [ ] get_all(): 全フラッシュカード取得
+- [ ] delete(): ファイル削除
+
+#### CSV固有機能
+
+- [ ] get_columns(): カラム情報取得
+- [ ] get_csv_info(): CSV詳細情報
+- [ ] get_encoding_info(): エンコーディング情報
+- [ ] update_encoding(): エンコーディング更新
+- [ ] get_delimiter_info(): 区切り文字情報
+
+#### 検索・統計
+
+- [ ] search_by_content(): 内容検索
+- [ ] get_flashcard_stats(): CSV統計
+- [ ] エンコーディング・区切り文字の統計
+
+### 5. MetadataManager テスト
+
+#### データベース操作
+
+- [ ] save_metadata(): メタデータ保存
+- [ ] get_by_id(): ID検索
+- [ ] get_by_hash(): ハッシュ検索
+- [ ] update_metadata(): 更新処理
+- [ ] delete_metadata(): 削除処理
+
+#### 検索機能
+
+- [ ] get_by_collection(): コレクション検索
+- [ ] search(): 条件検索
+- [ ] get_all(): 全件取得
+

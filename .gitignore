@@ -79,4 +79,4 @@ Thumbs.db
 /docs/_templates
 /docs/source
 .env
-/projects
+/app/projects

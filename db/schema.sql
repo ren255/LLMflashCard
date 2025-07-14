@@ -1,3 +1,4 @@
+-- ファイル管理テーブル
 CREATE TABLE files (
     id            INTEGER PRIMARY KEY AUTOINCREMENT,
     filename      TEXT NOT NULL,
@@ -11,7 +12,7 @@ CREATE TABLE files (
     updated_at    TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-
+-- 画像固有情報テーブル
 CREATE TABLE images (
     file_id        INTEGER PRIMARY KEY, -- files.idと1対1
     image_type     TEXT,
@@ -22,27 +23,39 @@ CREATE TABLE images (
     height         INTEGER,
     format         TEXT,
     thumbnail_path TEXT,
-    FOREIGN KEY(file_id) REFERENCES files(id)
+    FOREIGN KEY(file_id) REFERENCES files(id) ON DELETE CASCADE
 );
 
-
+-- フラッシュカード固有情報テーブル
 CREATE TABLE flashcards (
     file_id    INTEGER PRIMARY KEY, -- files.idと1対1
-    columns    TEXT,                -- JSON
-    row_count  INTEGER,
     encoding   TEXT DEFAULT 'utf-8',
-    delimiter  TEXT DEFAULT ',',
-    FOREIGN KEY(file_id) REFERENCES files(id)
+    FOREIGN KEY(file_id) REFERENCES files(id) ON DELETE CASCADE
 );
 
-
-CREATE TABLE llm_outputs (
+-- LLM出力管理テーブル
+CREATE TABLE LLM_outputs (
     id          INTEGER PRIMARY KEY AUTOINCREMENT,
-    input_ref   INTEGER,     -- files.id（入力ファイルがある場合）
+    files_num   INTEGER,     -- LLM_filesで関連するfileの数
     prompt      TEXT,        -- プロンプト内容
     output      TEXT,        -- LLMの出力
     model_name  TEXT,        -- 使用モデル
     params      TEXT,        -- JSON形式でパラメータ
-    created_at  TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY(input_ref) REFERENCES files(id)
+    created_at  TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+-- LLM出力とファイルの関連テーブル（多対多）
+CREATE TABLE LLM_files (
+    LLM_output_id    INTEGER,  -- LLM_outputs.idへの参照
+    file_id          INTEGER,  -- files.idへの参照
+    PRIMARY KEY (LLM_output_id, file_id),
+    FOREIGN KEY(LLM_output_id) REFERENCES LLM_outputs(id) ON DELETE CASCADE,
+    FOREIGN KEY(file_id) REFERENCES files(id) ON DELETE CASCADE
+);
+
+-- インデックスの追加（パフォーマンス向上）
+CREATE INDEX idx_files_hash ON files(hash);
+CREATE INDEX idx_files_file_type ON files(file_type);
+CREATE INDEX idx_files_collection ON files(collection);
+CREATE INDEX idx_LLM_outputs_created_at ON LLM_outputs(created_at);
+CREATE INDEX idx_LLM_files_file_id ON LLM_files(file_id);

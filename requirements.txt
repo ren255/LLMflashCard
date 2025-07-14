@@ -4,3 +4,4 @@
 # 画像処理
 pillow
 PyMuPDF==1.23.26
+sqlite-migrate

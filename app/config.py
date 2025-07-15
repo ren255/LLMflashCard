@@ -1,12 +1,14 @@
 # not using?
 import os
 from pathlib import Path
+from dotenv import load_dotenv
+load_dotenv()
 
 # Base directory
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Database configuration
-DATABASE_URL = os.getenv("DATABASE_URL")
+DATABASE_URL = os.getenv("DATABASE_URL","NONE")
 
 # SQLAlchemy configuration
 SQLALCHEMY_DATABASE_URL = DATABASE_URL

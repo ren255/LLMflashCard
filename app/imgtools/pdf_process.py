@@ -98,12 +98,12 @@ class FileSystem:
     """ファイルシステム操作を管理するクラス"""
 
     def __init__(self):
-        self.base_path = Path(".")
-        self.input_dir = self.base_path / "resources" / "FileSystem" / "in"
+        self.base_path = Path("resources")
+        self.input_dir = self.base_path / "files" / "in"
         self.output_base_dir = self.base_path / \
-            "resources" / "FileSystem" / "save" / "pdf_img"
+            "files" / "managed" / "pdf_img"
         self.pdf_archive_dir = self.base_path / \
-            "resources" / "FileSystem" / "save" / "pdf"
+            "files" / "managed" / "pdf"
 
     def ensure_directories(self):
         """必要なディレクトリを作成"""

@@ -4,6 +4,10 @@
 # 画像処理関連
 pillow
 PyMuPDF==1.23.26
+pytesseract
+pdfminer.six
+tabulate     # pandas markdown?
+markdown-pdf # not good 
 
 # データベース関連
 SQLAlchemy==2.0.23

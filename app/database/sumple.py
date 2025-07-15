@@ -1,38 +1,26 @@
-import logging
-from datetime import datetime, timedelta
-from sqlalchemy.orm import sessionmaker
-from sqlalchemy import create_engine
+from app.config.logging_config import setup_logging
+from app.database import get_engine, get_session
 from sqlalchemy.exc import SQLAlchemyError
 
-from app.config import DATABASE_URL
 from app.models import *
+from datetime import datetime, timedelta
 
-# ログ設定
-logging.basicConfig(
-    level=logging.INFO,
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-    handlers=[
-        logging.FileHandler('database_operations.log'),
-        logging.StreamHandler()
-    ]
-)
-
-logger = logging.getLogger(__name__)
-
+logger = setup_logging()
 # データベース接続
-engine = create_engine(DATABASE_URL)
-Session = sessionmaker(bind=engine)
-session = Session()
+engine = get_engine()
+session = get_session()
 
 logger.info("Database connection established")
 
 # ========== 追加（CREATE） ==========
 
 # 簡潔：基本的なファイル追加
+
+
 def add_file_simple():
     """基本的なファイル追加"""
     logger.info("Starting simple file addition")
-    
+
     try:
         file = File(
             filename='sample.jpg',
@@ -42,10 +30,10 @@ def add_file_simple():
         )
         session.add(file)
         session.commit()
-        
+
         logger.info(f"File added successfully with ID: {file.id}")
         return file.id
-        
+
     except SQLAlchemyError as e:
         logger.error(f"Database error during file addition: {str(e)}")
         session.rollback()
@@ -56,10 +44,12 @@ def add_file_simple():
         raise
 
 # 応用：画像ファイルと関連情報を同時追加
+
+
 def add_image_with_details():
     """画像ファイルと関連情報を同時追加"""
     logger.info("Starting image addition with details")
-    
+
     try:
         # ファイル情報
         file = File(
@@ -73,7 +63,7 @@ def add_image_with_details():
         )
         session.add(file)
         session.flush()  # IDを取得するため
-        
+
         logger.debug(f"File record created with ID: {file.id}")
 
         # 画像詳細情報
@@ -87,10 +77,11 @@ def add_image_with_details():
         )
         session.add(image)
         session.commit()
-        
-        logger.info(f"Image with details added successfully. File ID: {file.id}, Size: {file.file_size} bytes")
+
+        logger.info(
+            f"Image with details added successfully. File ID: {file.id}, Size: {file.file_size} bytes")
         return file.id
-        
+
     except SQLAlchemyError as e:
         logger.error(f"Database error during image addition: {str(e)}")
         session.rollback()
@@ -103,23 +94,27 @@ def add_image_with_details():
 # ========== 更新（UPDATE） ==========
 
 # 簡潔：ファイル名変更
+
+
 def update_filename(file_id, new_filename):
     """ファイル名を更新"""
     logger.info(f"Updating filename for file ID: {file_id} to: {new_filename}")
-    
+
     try:
         file = session.query(File).filter(File.id == file_id).first()
         if file:
             old_filename = file.filename
             file.filename = new_filename
             session.commit()
-            
-            logger.info(f"Filename updated successfully: {old_filename} -> {new_filename}")
+
+            logger.info(
+                f"Filename updated successfully: {old_filename} -> {new_filename}")
             return True
         else:
-            logger.warning(f"File with ID {file_id} not found for filename update")
+            logger.warning(
+                f"File with ID {file_id} not found for filename update")
             return False
-            
+
     except SQLAlchemyError as e:
         logger.error(f"Database error during filename update: {str(e)}")
         session.rollback()
@@ -130,10 +125,13 @@ def update_filename(file_id, new_filename):
         raise
 
 # 応用：複数条件での一括更新
+
+
 def update_collection_files(old_collection, new_collection):
     """コレクション名を一括更新"""
-    logger.info(f"Bulk updating collection: {old_collection} -> {new_collection}")
-    
+    logger.info(
+        f"Bulk updating collection: {old_collection} -> {new_collection}")
+
     try:
         updated_count = session.query(File).filter(
             File.collection == old_collection,
@@ -142,10 +140,11 @@ def update_collection_files(old_collection, new_collection):
             File.collection: new_collection
         })
         session.commit()
-        
-        logger.info(f"Collection updated successfully. {updated_count} files affected")
+
+        logger.info(
+            f"Collection updated successfully. {updated_count} files affected")
         return updated_count
-        
+
     except SQLAlchemyError as e:
         logger.error(f"Database error during collection update: {str(e)}")
         session.rollback()
@@ -158,10 +157,12 @@ def update_collection_files(old_collection, new_collection):
 # ========== 検索（READ） ==========
 
 # 簡潔：ID検索
+
+
 def get_file_by_id(file_id):
     """IDでファイルを検索"""
     logger.debug(f"Searching for file with ID: {file_id}")
-    
+
     try:
         file = session.query(File).filter(File.id == file_id).first()
         if file:
@@ -169,7 +170,7 @@ def get_file_by_id(file_id):
         else:
             logger.warning(f"File with ID {file_id} not found")
         return file
-        
+
     except SQLAlchemyError as e:
         logger.error(f"Database error during file search: {str(e)}")
         raise
@@ -178,12 +179,16 @@ def get_file_by_id(file_id):
         raise
 
 # 応用：複雑な条件での検索とJOIN
+
+
 def search_images_with_details(collection=None, min_width=None):
     """複雑な条件での画像検索"""
-    logger.info(f"Searching images with conditions - collection: {collection}, min_width: {min_width}")
-    
+    logger.info(
+        f"Searching images with conditions - collection: {collection}, min_width: {min_width}")
+
     try:
-        query = session.query(File, Image).join(Image, File.id == Image.file_id)
+        query = session.query(File, Image).join(
+            Image, File.id == Image.file_id)
 
         if collection:
             query = query.filter(File.collection == collection)
@@ -209,7 +214,7 @@ def search_images_with_details(collection=None, min_width=None):
 
         logger.info(f"Image search completed. Found {len(results)} results")
         return results
-        
+
     except SQLAlchemyError as e:
         logger.error(f"Database error during image search: {str(e)}")
         raise
@@ -220,23 +225,26 @@ def search_images_with_details(collection=None, min_width=None):
 # ========== 削除（DELETE） ==========
 
 # 簡潔：ID指定削除
+
+
 def delete_file(file_id):
     """IDでファイルを削除"""
     logger.info(f"Deleting file with ID: {file_id}")
-    
+
     try:
         file = session.query(File).filter(File.id == file_id).first()
         if file:
             filename = file.filename
             session.delete(file)
             session.commit()
-            
-            logger.info(f"File deleted successfully: {filename} (ID: {file_id})")
+
+            logger.info(
+                f"File deleted successfully: {filename} (ID: {file_id})")
             return True
         else:
             logger.warning(f"File with ID {file_id} not found for deletion")
             return False
-            
+
     except SQLAlchemyError as e:
         logger.error(f"Database error during file deletion: {str(e)}")
         session.rollback()
@@ -247,10 +255,12 @@ def delete_file(file_id):
         raise
 
 # 応用：条件指定での一括削除
+
+
 def cleanup_old_temp_files(days_old=30):
     """古い一時ファイルのクリーンアップ"""
     logger.info(f"Starting cleanup of temp files older than {days_old} days")
-    
+
     try:
         cutoff_date = datetime.now() - timedelta(days=days_old)
         logger.debug(f"Cutoff date: {cutoff_date}")
@@ -262,10 +272,10 @@ def cleanup_old_temp_files(days_old=30):
         ).delete()
 
         session.commit()
-        
+
         logger.info(f"Cleanup completed. {deleted_count} temp files deleted")
         return deleted_count
-        
+
     except SQLAlchemyError as e:
         logger.error(f"Database error during cleanup: {str(e)}")
         session.rollback()
@@ -277,9 +287,10 @@ def cleanup_old_temp_files(days_old=30):
 
 # ========== 使用例 ==========
 
+
 if __name__ == "__main__":
     logger.info("Starting database operations example")
-    
+
     try:
         # 追加
         file_id = add_file_simple()

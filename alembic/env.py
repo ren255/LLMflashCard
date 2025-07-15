@@ -3,6 +3,13 @@ from sqlalchemy import engine_from_config, pool
 from alembic import context
 import os
 
+from app.models import Base
+from dotenv import load_dotenv
+
+load_dotenv()
+
+
+
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
 config = context.config
@@ -16,20 +23,14 @@ if config.config_file_name is not None:
 # for 'autogenerate' support
 # from myapp import mymodel
 # target_metadata = mymodel.Base.metadata
-target_metadata = None
+target_metadata = Base.metadata
+
 
 # other values from the config, defined by the needs of env.py,
 # can be acquired:
 # my_important_option = config.get_main_option("my_important_option")
 # ... etc.
 
-def get_url():
-    """データベースURLを取得"""
-    url = config.get_main_option("sqlalchemy.url")
-    if url is None:
-        # 環境変数からも取得可能
-        url = os.getenv("DATABASE_URL", "sqlite:///resources/file_sys.db")
-    return url
 
 def run_migrations_offline() -> None:
     """Run migrations in 'offline' mode.
@@ -43,7 +44,7 @@ def run_migrations_offline() -> None:
     script output.
 
     """
-    url = get_url()
+    url = os.getenv("DATABASE_URL")
     context.configure(
         url=url,
         target_metadata=target_metadata,
@@ -63,7 +64,7 @@ def run_migrations_online() -> None:
 
     """
     configuration = config.get_section(config.config_ini_section)
-    configuration["sqlalchemy.url"] = get_url()
+    configuration["sqlalchemy.url"] = os.getenv("DATABASE_URL")
     connectable = engine_from_config(
         configuration,
         prefix="sqlalchemy.",

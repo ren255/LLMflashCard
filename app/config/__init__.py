@@ -2,6 +2,7 @@
 Configuration module for application settings
 """
 
+from .logging_config import get_logger
 import os
 from pathlib import Path
 from dotenv import load_dotenv
@@ -40,5 +41,7 @@ __all__ = [
     'ALEMBIC_CONFIG',
     'DEBUG',
     'SECRET_KEY',
-    'LOG_LEVEL'
+    'LOG_LEVEL',
+    'get_logger',
 ]
+

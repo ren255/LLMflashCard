@@ -1,26 +1,11 @@
-import os
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, declarative_base
 from sqlalchemy.exc import SQLAlchemyError
-from pathlib import Path
-from dotenv import load_dotenv
 
-from app.config.logging_config import get_logger
+from app.config import get_logger, DATABASE_URL, SQLALCHEMY_ECHO
 
-# 環境変数の読み込み
-load_dotenv()
-
-# ログ設定
 logger = get_logger(__name__)
 
-# Base directory
-BASE_DIR = Path(__file__).resolve().parent.parent.parent
-
-# Database configuration
-DATABASE_URL = os.getenv("DATABASE_URL", "sqlite:///./app.db")
-SQLALCHEMY_ECHO = os.getenv("SQLALCHEMY_ECHO", "False").lower() == "true"
-
-# SQLAlchemy Base
 Base = declarative_base()
 
 # Database engine
@@ -39,6 +24,7 @@ SessionLocal = sessionmaker(
     autoflush=False
 )
 
+
 def get_db():
     """
     データベースセッションの取得
@@ -54,17 +40,20 @@ def get_db():
     finally:
         db.close()
 
+
 def get_engine():
     """
     データベースエンジンの取得
     """
     return engine
 
+
 def get_session():
     """
     データベースセッションの取得（直接使用）
     """
     return SessionLocal()
+
 
 # 初期化時にログ出力
 logger.info(f"Database configured with URL: {DATABASE_URL}")

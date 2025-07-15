@@ -18,7 +18,7 @@ def setup_logging():
     
     # SQLAlchemyのlogging設定
     sqlalchemy_logger = logging.getLogger('sqlalchemy.engine')
-    sqlalchemy_logger.setLevel(logging.INFO)
+    sqlalchemy_logger.setLevel(logging.ERROR)
     
     # アプリケーションのrootログ設定
     app_logger = logging.getLogger('app')

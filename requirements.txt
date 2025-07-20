@@ -9,6 +9,10 @@ pyyaml
 langchain
 openai
 requests
+jinja2
+litellm
+requests
+
 # llama-index
 # huggingface-hub
 # transformers

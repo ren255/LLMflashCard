@@ -1,0 +1,164 @@
+# ファイルシステム管理クラス構造設計
+
+## クラス階層
+
+```
+FileSystemManager (メインクラス)
+├── PathValidator (パス検証)
+├── FileHandler (ファイル操作)
+├── MetadataExtractor (メタデータ抽出)
+└── DatabaseIntegrator (DB連携)
+```
+
+## 各クラスの責務
+
+### 1. FileSystemManager
+**役割**: ファイルシステム操作の統合管理
+```python
+class FileSystemManager:
+    """ファイルシステム操作の統合管理クラス"""
+    
+    # 初期化・設定
+    __init__(database_manager, base_path="resource/files/")
+    
+    # メイン操作
+    save_file(file_data, target_path=None, original_name=None)
+    move_file(file_id, new_path)
+    delete_file(file_id)
+    get_file_info(file_id)
+    
+    # 管理機能
+    cleanup_orphaned_files()
+    get_storage_stats()
+    validate_integrity()
+```
+
+### 2. PathValidator
+**役割**: パス検証とセキュリティチェック
+```python
+class PathValidator:
+    """パス検証とセキュリティ管理"""
+    
+    # 検証機能
+    validate_relative_path(path)
+    is_managed_path_valid(path)
+    sanitize_filename(filename)
+    
+    # パス生成
+    generate_managed_path(relative_path, filename)
+    generate_storage_path(filename, hash_value)
+    
+    # セキュリティ
+    check_path_traversal(path)
+    validate_file_extension(filename)
+```
+
+### 3. FileHandler
+**役割**: 実際のファイル入出力操作
+```python
+class FileHandler:
+    """ファイル入出力操作"""
+    
+    # ファイル操作
+    write_file(file_data, full_path)
+    read_file(full_path)
+    copy_file(source, destination)
+    move_file(source, destination)
+    delete_file(full_path)
+    
+    # ディレクトリ操作
+    ensure_directory_exists(directory_path)
+    create_directory_structure(path)
+    
+    # ファイル情報
+    get_file_size(full_path)
+    file_exists(full_path)
+    calculate_hash(file_data)
+```
+
+### 4. MetadataExtractor
+**役割**: ファイルメタデータの抽出と処理
+```python
+class MetadataExtractor:
+    """ファイルメタデータ抽出"""
+    
+    # メタデータ抽出
+    extract_metadata(file_data, filename)
+    get_mime_type(filename)
+    detect_file_type(file_data, filename)
+    
+    # ハッシュ計算
+    calculate_file_hash(file_data, algorithm="sha256")
+    
+    # ファイル分析
+    analyze_file_content(file_data)
+    get_file_properties(file_path)
+```
+
+### 5. DatabaseIntegrator
+**役割**: データベースとの連携処理
+```python
+class DatabaseIntegrator:
+    """データベース連携処理"""
+    
+    # レコード操作
+    insert_file_record(file_info)
+    update_file_record(file_id, updates)
+    delete_file_record(file_id)
+    get_file_record(file_id)
+    
+    # 検索・集計
+    find_files_by_hash(hash_value)
+    find_duplicate_files()
+    get_files_by_path_pattern(pattern)
+    
+    # 整合性チェック
+    find_orphaned_records()
+    find_missing_files()
+    sync_file_system_with_db()
+```
+
+## 補助クラス
+
+### 6. FileInfo (データクラス)
+**役割**: ファイル情報の構造化
+```python
+@dataclass
+class FileInfo:
+    """ファイル情報データクラス"""
+    filename: str
+    original_name: str
+    file_path: str
+    file_size: int
+    hash: str
+    mime_type: str
+    created_at: datetime
+    updated_at: datetime
+```
+
+### 7. StorageConfig (設定クラス)
+**役割**: ストレージ設定管理
+```python
+class StorageConfig:
+    """ストレージ設定管理"""
+    
+    BASE_PATH = "resource/files/"
+    MANAGED_PATH = "managed/"
+    STORAGE_PATH = "storage/"
+    
+    # 制限設定
+    MAX_FILE_SIZE = 100 * 1024 * 1024  # 100MB
+    ALLOWED_EXTENSIONS = [...]
+    HASH_ALGORITHM = "sha256"
+```
+
+## 使用例の流れ
+
+1. **FileSystemManager** がリクエストを受ける
+2. **PathValidator** でパス検証
+3. **MetadataExtractor** でファイル情報抽出
+4. **FileHandler** で実際のファイル保存
+5. **DatabaseIntegrator** でDB記録
+6. 結果を **FileInfo** として返却
+
+この構造により、各クラスが単一責任を持ち、テスト可能で保守性の高いファイルシステム管理が実現できます。

@@ -23,3 +23,19 @@ pyyaml
 # pinecone-client
 # tiktoken
 # pydantic
+
+
+# 画像処理関連
+pillow
+PyMuPDF==1.23.26
+pytesseract
+pdfminer.six
+tabulate     # pandas markdown?
+markdown-pdf # not good 
+
+# データベース関連
+SQLAlchemy==2.0.23
+alembic==1.13.1
+
+# 環境変数管理
+python-dotenv==1.0.0

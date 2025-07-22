@@ -1,0 +1,63 @@
+@startuml
+package "controllers" {
+    class MainController {
+        + startApp()
+        + shutdownApp()
+    }
+    class FlashcardController {
+        + loadFlashcards()
+        + saveFlashcard()
+    }
+    class ImageController {
+        + loadImages()
+        + editImage()
+    }
+}
+
+package "views" {
+    class MainWindow
+    class FlashcardManagerView
+    class FlashcardDetailView
+    class ImageManagerView
+    class ImageViewerView
+}
+
+package "components" {
+    abstract class BaseWidget {
+        + render()
+        + update()
+    }
+    class CustomButton
+    class CustomDialog
+    class CustomTextField
+}
+
+' 継承関係
+CustomButton --|> BaseWidget
+CustomDialog --|> BaseWidget
+CustomTextField --|> BaseWidget
+
+' コントローラーとビューの依存関係
+MainController --> FlashcardController
+MainController --> ImageController
+
+FlashcardController --> FlashcardManagerView
+FlashcardController --> FlashcardDetailView
+
+ImageController --> ImageManagerView
+ImageController --> ImageViewerView
+
+' ビューとコンポーネントの依存
+FlashcardDetailView ..> CustomDialog
+FlashcardManagerView ..> CustomButton
+ImageViewerView ..> CustomButton
+ImageViewerView ..> CustomDialog
+
+' 集約（所有）関係
+MainWindow *-- FlashcardManagerView
+MainWindow *-- ImageManagerView
+
+FlashcardManagerView *-- FlashcardDetailView
+ImageManagerView *-- ImageViewerView
+
+@enduml

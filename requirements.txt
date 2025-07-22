@@ -12,6 +12,7 @@ requests
 jinja2
 litellm
 requests
+pyyaml
 
 # llama-index
 # huggingface-hub
